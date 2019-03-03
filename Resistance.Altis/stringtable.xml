@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="Resistance">
+    <Package name="Description">
+        <Container name="Mission information">
+            <Key ID="STR_onLoadName">
+                <Original>Resistance</Original>
+                <Russian>Сопротивление</Russian>
+            </Key>
+            <Key ID="STR_onLoadIntro">
+                <Original>YourMessage</Original>
+                <Russian>Моё сообщение</Russian>
+            </Key>>
+            <Key ID="STR_briefingName">
+                <Original>Briefing name</Original>
+                <Russian>Название брифинга</Russian>
+            </Key>>
+            <Key ID="STR_onLoadMission">
+                <Original>Resistance simulator mission</Original>
+                <Russian>Симулятор сопротивления</Russian>
+            </Key>
+            <Key ID="STR_overviewText">
+                <Original>Resistance simulator mission. Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world.</Original>
+                <Russian>Симулятор сопротивления. Станьте командиром сопротивления. Сражайтесь с превосходящими силами врага. Используйте партизанскую тактику в полностью динамическом мире.</Russian>
+            </Key>
+            <Key ID="STR_overviewTextLocked">
+                <Original>Server is locked</Original>
+                <Russian>Видимо сервер заблокирован</Russian>
+            </Key>>
+        </Container>
+    </Package>
+</Project>
