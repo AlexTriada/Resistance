@@ -1,0 +1,123 @@
+//Mission information
+class Header
+{
+gameType = CTI; minplayers=0; maxplayers=60;
+};
+
+onLoadMission = $STR_onLoadMission;
+onLoadIntro = $STR_onLoadIntro;
+onLoadMissionTime = 1;
+onLoadIntroTime = 1;
+loadScreen = "pic.paa";
+briefingName = $STR_briefingName;
+onLoadName = $STR_onLoadName; author="Triada";
+overviewPicture = "pic.paa";
+overviewText = $STR_overviewText;
+overviewTextLocked = $STR_overviewTextLocked;
+
+//Respawn/Revive
+respawn = "BASE";
+respawnDelay = 1;
+respawnVehicleDelay = 120;
+respawnDialog = 0;
+respawnOnStart = -1; //Run respawn script on start.
+respawnTemplatesEast[] = { "Counter","MenuInventory","MenuPosition" };
+//respawnWeaponsEast[] = { "arifle_Katiba_GL_F" };
+//respawnMagazinesEast[] = { "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green" };
+//enablePlayerAddRespawn = 1;
+
+class CfgRespawnInventory
+{
+    class Medic
+    {
+        displayName = "Медик";// Name visible in the menu
+        //icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\private_gs.paa";// Icon displayed next to the name
+        role = "Support";// Optional, see CfgRoles
+        items[] = {
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "Medikit"
+        };
+        linkedItems[] = {
+            "ItemWatch"
+        };
+        uniformClass = "U_OG_Guerilla2_1";
+        backpack = "B_AssaultPack_mcamo";
+    };
+    class Engineer
+    {
+        displayName = "Инженер";// Name visible in the menu
+        //icon = "\A3\Ui_f\data\GUI\Cfg\Ranks\private_gs.paa";// Icon displayed next to the name
+        role = "Support";// Optional, see CfgRoles
+
+        // Loadout definition, uses same entries as CfgVehicles classes
+        items[] = {
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit",
+            "Toolkit"
+        };
+        linkedItems[] = {
+            "ItemWatch"
+        };
+        uniformClass = "U_OG_Guerilla2_1";
+        backpack = "B_AssaultPack_mcamo";
+    };
+    class Assault1
+    {
+        displayName = "Ополченец1";
+        role = "Assault";
+        items[] = {
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit"
+        };
+        linkedItems[] = {
+            "ItemWatch"
+        };
+        uniformClass = "U_OG_Guerilla2_1";
+    };
+    class Assault2
+    {
+        displayName = "Ополченец2";
+        role = "Assault";
+        items[] = {
+            "FirstAidKit",
+            "FirstAidKit",
+            "FirstAidKit"
+        };
+        linkedItems[] = {
+            "ItemWatch"
+        };
+        uniformClass = "U_OG_Guerilla2_1";
+    };
+};
+
+class CfgRoles
+{
+    class Assault
+    {
+        displayName = $STR_A3_Role_Assault;
+        icon = "a3\Ui_f\data\GUI\Cfg\RespawnRoles\assault_ca.paa";
+    };
+    class Support
+    {
+        displayName = $STR_A3_Role_Support;
+        icon = "a3\Ui_f\data\GUI\Cfg\RespawnRoles\support_ca.paa";
+    };
+    class Recon
+    {
+        displayName = $STR_A3_Role_Recon;
+        icon = "a3\Ui_f\data\GUI\Cfg\RespawnRoles\recon_ca.paa";
+    };
+};
