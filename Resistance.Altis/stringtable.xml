@@ -9,11 +9,11 @@
             <Key ID="STR_onLoadIntro">
                 <Original>YourMessage</Original>
                 <Russian>Моё сообщение</Russian>
-            </Key>>
+            </Key>
             <Key ID="STR_briefingName">
                 <Original>Briefing name</Original>
                 <Russian>Название брифинга</Russian>
-            </Key>>
+            </Key>
             <Key ID="STR_onLoadMission">
                 <Original>Resistance simulator mission</Original>
                 <Russian>Симулятор сопротивления</Russian>
@@ -25,7 +25,17 @@
             <Key ID="STR_overviewTextLocked">
                 <Original>Server is locked</Original>
                 <Russian>Видимо сервер заблокирован</Russian>
-            </Key>>
+            </Key>
+        </Container>
+        <Container name="Respawn Revive">
+            <Key ID="STR_medic">
+                <Original>Medic</Original>
+                <Russian>Медик</Russian>
+            </Key>
+            <Key ID="STR_engineer">
+                <Original>Engineer</Original>
+                <Russian>Инженер</Russian>
+            </Key>
         </Container>
     </Package>
 </Project>
