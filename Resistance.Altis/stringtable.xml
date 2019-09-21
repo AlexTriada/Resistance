@@ -87,8 +87,8 @@
 				<Russian>Вы должны выбрать в меню управления отрядом или в меню управления группами, а не в обоих</Russian>
 			</Key>
 			<Key ID = "STR_RES_AI_management_R1_text">
-				<Original>Auto Rearm \ Loot</Original>
-				<Russian>Авто Снар. \ Лут</Russian>
+				<Original>Auto Rearm / Loot</Original>
+				<Russian>Авто Снар. / Лут</Russian>
 			</Key>
 			<Key ID = "STR_RES_AI_management_R1_tooltip">
 				<Original>AI will search for better weapons, vests, helmets etc. if they are in a vehicle, they will just store what they scavenge in the vehicle. if not, they will equip them</Original>
