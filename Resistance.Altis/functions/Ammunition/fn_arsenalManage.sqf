@@ -110,7 +110,7 @@ if (_x select 1 >= minWeaps) then
 
 if (_check) then
 	{
-	call A3A_fnc_checkRadiosUnlocked;
+	call RES_fnc_checkRadiosUnlocked;
 	};
 {
 if (_x select 1 >= minWeaps) then

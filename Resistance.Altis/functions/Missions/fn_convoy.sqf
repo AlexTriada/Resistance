@@ -45,7 +45,7 @@ private ["_tsk","_grpPOW","_pos"];
 if ((_destinationX in airportsX) or (_destinationX in outposts)) then
 	{
 	_typeConvoy = ["ammunition","Armor"];
-	if (_destinationX in outposts) then {if (((count (garrison getVariable [_destinationX,0]))/2) >= [_destinationX] call A3A_fnc_garrisonSize) then {_typeConvoy pushBack "reinforcementsX"}};
+	if (_destinationX in outposts) then {if (((count (garrison getVariable [_destinationX,0]))/2) >= [_destinationX] call RES_fnc_garrisonSize) then {_typeConvoy pushBack "reinforcementsX"}};
 	}
 else
 	{
@@ -56,7 +56,7 @@ else
 	else
 		{
 		if ((_destinationX in resourcesX) or (_destinationX in factories)) then {_typeConvoy = ["Money"]} else {_typeConvoy = ["Prisoners"]};
-		if (((count (garrison getVariable [_destinationX,0]))/2) >= [_destinationX] call A3A_fnc_garrisonSize) then {_typeConvoy pushBack "reinforcementsX"};
+		if (((count (garrison getVariable [_destinationX,0]))/2) >= [_destinationX] call RES_fnc_garrisonSize) then {_typeConvoy pushBack "reinforcementsX"};
 		};
 	};
 
@@ -66,11 +66,11 @@ _timeLimit = if (_difficultX) then {0} else {round random 10};// timeX for the c
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + _timeLimit];
 _dateLimitNum = dateToNumber _dateLimit;
 _dateLimit = numberToDate [date select 0, _dateLimitNum];//converts datenumber back to date array so that time formats correctly when put through the function
-_displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time portion of the date array to a string for clarity in hints
+_displayTime = [_dateLimit] call RES_fnc_dateToTimeString;//Converts the time portion of the date array to a string for clarity in hints
 
-_nameDest = [_destinationX] call A3A_fnc_localizar;
-_nameOrigin = [_base] call A3A_fnc_localizar;
-[_base,30] call A3A_fnc_addTimeForIdle;
+_nameDest = [_destinationX] call RES_fnc_localizar;
+_nameOrigin = [_base] call RES_fnc_localizar;
+[_base,30] call RES_fnc_addTimeForIdle;
 
 _textX = "";
 _taskState = "CREATED";
@@ -140,7 +140,7 @@ if (_base in airportsX) then
 }
 else
 {
-	_spawnPoint = [getMarkerPos _base] call A3A_fnc_findNearestGoodRoad;
+	_spawnPoint = [getMarkerPos _base] call RES_fnc_findNearestGoodRoad;
 	_posOrig = position _spawnPoint;
 	_dir = getDir _spawnPoint;
 };
@@ -160,21 +160,21 @@ if (count _pos == 0) then {_pos = _posOrig};
 _vehicle=[_pos,_dir,_typeVehX, _groupX] call bis_fnc_spawnvehicle;
 _vehLead = _vehicle select 0;
 _vehLead allowDamage false;
-[_vehLead,"Convoy Lead"] spawn A3A_fnc_inmuneConvoy;
+[_vehLead,"Convoy Lead"] spawn RES_fnc_inmuneConvoy;
 //_vehLead forceFollowRoad true;
 _vehCrew = _vehicle select 1;
-{[_x] call A3A_fnc_NATOinit;_x allowDamage false} forEach _vehCrew;
+{[_x] call RES_fnc_NATOinit;_x allowDamage false} forEach _vehCrew;
 //_groupVeh = _vehicle select 2;
 _soldiers = _soldiers + _vehCrew;
 //_groups pushBack _groupVeh;
 _vehiclesX pushBack _vehLead;
-[_vehLead] call A3A_fnc_AIVEHinit;
+[_vehLead] call RES_fnc_AIVEHinit;
 
 _vehLead limitSpeed 50;
 
 
 _countX = 1;
-if (_difficultX) then {_countX =3} else {if ([_destinationX] call A3A_fnc_isFrontline) then {_countX = (round random 2) + 1}};
+if (_difficultX) then {_countX =3} else {if ([_destinationX] call RES_fnc_isFrontline) then {_countX = (round random 2) + 1}};
 _vehPool = if (_sideX == Occupants) then {if (!_isFIA) then {vehNATOAttack} else {[vehFIAArmedCar,vehFIATruck,vehFIACar]}} else {vehCSATAttack};
 if (!_isFIA) then
 	{
@@ -199,7 +199,7 @@ for "_i" from 1 to _countX do
 	{
 	sleep 2;
 	_typeVehEsc = selectRandom _vehPool;
-	if (not([_typeVehEsc] call A3A_fnc_vehAvailable)) then
+	if (not([_typeVehEsc] call RES_fnc_vehAvailable)) then
 		{
 		_typeVehX = if (_sideX == Occupants) then {selectRandom vehNATOTrucks} else {selectRandom vehCSATTrucks};
 		_vehPool = _vehPool - [_typeVehX];
@@ -218,20 +218,20 @@ for "_i" from 1 to _countX do
 	_vehicle=[_pos, _dir,_typeVehEsc, _groupX] call bis_fnc_spawnvehicle;
 	_veh = _vehicle select 0;
 	_veh allowDamage false;
-	[_veh,"Convoy Escort"] spawn A3A_fnc_inmuneConvoy;
+	[_veh,"Convoy Escort"] spawn RES_fnc_inmuneConvoy;
 	_vehCrew = _vehicle select 1;
-	{[_x] call A3A_fnc_NATOinit;_x allowDamage false} forEach _vehCrew;
+	{[_x] call RES_fnc_NATOinit;_x allowDamage false} forEach _vehCrew;
 	_soldiers = _soldiers + _vehCrew;
 	_vehiclesX pushBack _veh;
-	[_veh] call A3A_fnc_AIVEHinit;
+	[_veh] call RES_fnc_AIVEHinit;
 	if (_i == 1) then {_veh setConvoySeparation 60} else {_veh setConvoySeparation 20};
 	if (!_isFIA) then
 		{
 		if (not(_typeVehEsc in vehTanks)) then
 			{
-			_typeGroup = [_typeVehEsc,_sideX] call A3A_fnc_cargoSeats;
-			_groupEsc = [_posbase,_sideX, _typeGroup] call A3A_fnc_spawnGroup;
-			{[_x] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
+			_typeGroup = [_typeVehEsc,_sideX] call RES_fnc_cargoSeats;
+			_groupEsc = [_posbase,_sideX, _typeGroup] call RES_fnc_spawnGroup;
+			{[_x] call RES_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
 			deleteGroup _groupEsc;
 			};
 		}
@@ -244,8 +244,8 @@ for "_i" from 1 to _countX do
 				{
 				_typeGroup = selectRandom groupsFIAMid;
 				};
-			_groupEsc = [_posbase,_sideX, _typeGroup] call A3A_fnc_spawnGroup;
-			{[_x] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
+			_groupEsc = [_posbase,_sideX, _typeGroup] call RES_fnc_spawnGroup;
+			{[_x] call RES_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
 			deleteGroup _groupEsc;
 			};
 		};
@@ -270,14 +270,14 @@ if (count _pos == 0) then {_pos = _posOrig};
 _vehicle=[_pos, _dir,_typeVehObj, _groupX] call bis_fnc_spawnvehicle;
 _vehObj = _vehicle select 0;
 _vehObj allowDamage false;
-if (_difficultX) then {[_vehObj," Convoy Objective"] spawn A3A_fnc_inmuneConvoy} else {[_vehObj,"Convoy Objective"] spawn A3A_fnc_inmuneConvoy};
+if (_difficultX) then {[_vehObj," Convoy Objective"] spawn RES_fnc_inmuneConvoy} else {[_vehObj,"Convoy Objective"] spawn RES_fnc_inmuneConvoy};
 _vehCrew = _vehicle select 1;
-{[_x] call A3A_fnc_NATOinit; _x allowDamage false} forEach _vehCrew;
+{[_x] call RES_fnc_NATOinit; _x allowDamage false} forEach _vehCrew;
 //_groupVeh = _vehicle select 2;
 _soldiers = _soldiers + _vehCrew;
 //_groups pushBack _groupVeh;
 _vehiclesX pushBack _vehObj;
-[_vehObj] call A3A_fnc_AIVEHinit;
+[_vehObj] call RES_fnc_AIVEHinit;
 //_vehObj forceFollowRoad true;
 _vehObj setConvoySeparation 50;
 
@@ -298,16 +298,16 @@ if (_typeConvoyX == "Prisoners") then
 		_unit moveInCargo [_vehObj, _i + 3];
 		removeAllWeapons _unit;
 		removeAllAssignedItems _unit;
-		[_unit,"refugee"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_unit];
+		[_unit,"refugee"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_unit];
 		_POWS pushBack _unit;
-		[_unit] call A3A_fnc_reDress;
+		[_unit] call RES_fnc_reDress;
 		};
 	};
 if (_typeConvoyX == "reinforcementsX") then
 	{
-	_typeGroup = [_typeVehObj,_sideX] call A3A_fnc_cargoSeats;
-	_groupEsc = [_posbase,_sideX,_typeGroup] call A3A_fnc_spawnGroup;
-	{[_x] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX;_reinforcementsX pushBack _x} forEach units _groupEsc;
+	_typeGroup = [_typeVehObj,_sideX] call RES_fnc_cargoSeats;
+	_groupEsc = [_posbase,_sideX,_typeGroup] call RES_fnc_spawnGroup;
+	{[_x] call RES_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX;_reinforcementsX pushBack _x} forEach units _groupEsc;
 	deleteGroup _groupEsc;
 	};
 if ((_typeConvoyX == "Money") or (_typeConvoyX == "Supplies")) then
@@ -319,7 +319,7 @@ if ((_typeConvoyX == "Money") or (_typeConvoyX == "Supplies")) then
 
 sleep 2;
 _typeVehEsc = selectRandom _vehPool;
-if (not([_typeVehEsc] call A3A_fnc_vehAvailable)) then
+if (not([_typeVehEsc] call RES_fnc_vehAvailable)) then
 	{
 	_typeVehX = if (_sideX == Occupants) then {selectRandom vehNATOTrucks} else {selectRandom vehCSATTrucks};
 	_vehPool = _vehPool - [_typeVehX];
@@ -340,12 +340,12 @@ if (count _pos == 0) then {_pos = _posOrig};
 _vehicle=[_pos,_dir,_typeVehEsc, _groupX] call bis_fnc_spawnvehicle;
 _veh = _vehicle select 0;
 _veh allowDamage false;
-[_veh,"Convoy Escort"] spawn A3A_fnc_inmuneConvoy;
+[_veh,"Convoy Escort"] spawn RES_fnc_inmuneConvoy;
 _vehCrew = _vehicle select 1;
-{[_x] call A3A_fnc_NATOinit; _x allowDamage false} forEach _vehCrew;
+{[_x] call RES_fnc_NATOinit; _x allowDamage false} forEach _vehCrew;
 _soldiers = _soldiers + _vehCrew;
 _vehiclesX pushBack _veh;
-[_veh] call A3A_fnc_AIVEHinit;
+[_veh] call RES_fnc_AIVEHinit;
 //_veh forceFollowRoad true;
 _veh setConvoySeparation 20;
 //_veh limitSpeed 50;
@@ -353,9 +353,9 @@ if (!_isFIA) then
 	{
 	if (not(_typeVehEsc in vehTanks)) then
 		{
-		_typeGroup = [_typeVehEsc,_sideX] call A3A_fnc_cargoSeats;
-		_groupEsc = [_posbase,_sideX, _typeGroup] call A3A_fnc_spawnGroup;
-		{[_x] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
+		_typeGroup = [_typeVehEsc,_sideX] call RES_fnc_cargoSeats;
+		_groupEsc = [_posbase,_sideX, _typeGroup] call RES_fnc_spawnGroup;
+		{[_x] call RES_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
 		deleteGroup _groupEsc;
 		};
 	}
@@ -368,8 +368,8 @@ else
 			{
 			_typeGroup = selectRandom groupsFIAMid;
 			};
-		_groupEsc = [_posbase,_sideX,_typeGroup] call A3A_fnc_spawnGroup;
-		{[_x] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
+		_groupEsc = [_posbase,_sideX,_typeGroup] call RES_fnc_spawnGroup;
+		{[_x] call RES_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x;[_x] joinSilent _groupX} forEach units _groupEsc;
 		deleteGroup _groupEsc;
 		};
 	};
@@ -386,7 +386,7 @@ _wp0 = _groupX addWaypoint [(position _vehLead),0];
 _wp0 setWaypointType "MOVE";
 _wp0 setWaypointFormation "COLUMN";
 _wp0 setWaypointBehaviour "SAFE";
-[_base,_posDestination,_groupX] call A3A_fnc_WPCreate;
+[_base,_posDestination,_groupX] call RES_fnc_WPCreate;
 _wp0 = _groupX addWaypoint [_posDestination, count waypoints _groupX];
 _wp0 setWaypointType "MOVE";
 
@@ -401,8 +401,8 @@ if (_typeConvoyX == "ammunition") then
 		{
 		_taskState = "FAILED";
 		_taskState1 = "SUCCEEDED";
-		[-1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-		[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+		[-1200*_bonus] remoteExec ["RES_fnc_timingCA",2];
+		[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 		clearMagazineCargoGlobal _vehObj;
 		clearWeaponCargoGlobal _vehObj;
 		clearItemCargoGlobal _vehObj;
@@ -412,12 +412,12 @@ if (_typeConvoyX == "ammunition") then
 		{
 		_taskState = "SUCCEEDED";
 		_taskState1 = "FAILED";
-		[0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-		[1800*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-		{if (isPlayer _x) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_vehObj,teamPlayer] call A3A_fnc_distanceUnits);
-		[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
-		[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
-		if (_sideX == Occupants) then {[3,0] remoteExec ["A3A_fnc_prestige",2]} else {[0,3] remoteExec ["A3A_fnc_prestige",2]};
+		[0,300*_bonus] remoteExec ["RES_fnc_resourcesFIA",2];
+		[1800*_bonus] remoteExec ["RES_fnc_timingCA",2];
+		{if (isPlayer _x) then {[10*_bonus,_x] call RES_fnc_playerScoreAdd}} forEach ([500,0,_vehObj,teamPlayer] call RES_fnc_distanceUnits);
+		[5*_bonus,theBoss] call RES_fnc_playerScoreAdd;
+		[getPosASL _vehObj,_sideX,"",false] spawn RES_fnc_patrolCA;
+		if (_sideX == Occupants) then {[3,0] remoteExec ["RES_fnc_prestige",2]} else {[0,3] remoteExec ["RES_fnc_prestige",2]};
 		if (!alive _vehObj) then
 			{
 			_killZones = killZones getVariable [_base,[]];
@@ -435,20 +435,20 @@ if (_typeConvoyX == "Armor") then
 		_taskState = "FAILED";
 		_taskState1 = "SUCCEEDED";
 		server setVariable [_destinationX,dateToNumber date,true];
-		[-1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-		[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+		[-1200*_bonus] remoteExec ["RES_fnc_timingCA",2];
+		[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 		}
 	else
 		{
 		_taskState = "SUCCEEDED";
 		_taskState1 = "FAILED";
-		[5,0] remoteExec ["A3A_fnc_prestige",2];
-		[0,5*_bonus,_posDestination] remoteExec ["A3A_fnc_citySupportChange",2];
-		[1800*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-		{if (isPlayer _x) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_vehObj,teamPlayer] call A3A_fnc_distanceUnits);
-		[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
-		[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
-		if (_sideX == Occupants) then {[3,0] remoteExec ["A3A_fnc_prestige",2]} else {[0,3] remoteExec ["A3A_fnc_prestige",2]};
+		[5,0] remoteExec ["RES_fnc_prestige",2];
+		[0,5*_bonus,_posDestination] remoteExec ["RES_fnc_citySupportChange",2];
+		[1800*_bonus] remoteExec ["RES_fnc_timingCA",2];
+		{if (isPlayer _x) then {[10*_bonus,_x] call RES_fnc_playerScoreAdd}} forEach ([500,0,_vehObj,teamPlayer] call RES_fnc_distanceUnits);
+		[5*_bonus,theBoss] call RES_fnc_playerScoreAdd;
+		[getPosASL _vehObj,_sideX,"",false] spawn RES_fnc_patrolCA;
+		if (_sideX == Occupants) then {[3,0] remoteExec ["RES_fnc_prestige",2]} else {[0,3] remoteExec ["RES_fnc_prestige",2]};
 		if (!alive _vehObj) then
 			{
 			_killZones = killZones getVariable [_base,[]];
@@ -467,12 +467,12 @@ if (_typeConvoyX == "Prisoners") then
 		_taskState1 = "SUCCEEDED";
 		{[_x,false] remoteExec ["setCaptive",0,_x]; _x setCaptive false} forEach _POWs;
 		//_countX = 2 * (count _POWs);
-		//[_countX,0] remoteExec ["A3A_fnc_prestige",2];
-		[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+		//[_countX,0] remoteExec ["RES_fnc_prestige",2];
+		[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 		};
 	if ((not alive driver _vehObj) or ((driver _vehObj getVariable ["spawner",false]) and (side group (driver _vehObj) == teamPlayer))) then
 		{
-		[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
+		[getPosASL _vehObj,_sideX,"",false] spawn RES_fnc_patrolCA;
 		{[_x,false] remoteExec ["setCaptive",0,_x]; _x setCaptive false; _x enableAI "MOVE"; [_x] orderGetin false} forEach _POWs;
 		waitUntil {sleep 2; ({alive _x} count _POWs == 0) or ({(alive _x) and (_x distance _posHQ < 50)} count _POWs > 0) or (dateToNumber date > _enddateNum)};
 		if (({alive _x} count _POWs == 0) or (dateToNumber date > _enddateNum)) then
@@ -480,8 +480,8 @@ if (_typeConvoyX == "Prisoners") then
 			_taskState = "FAILED";
 			_taskState1 = "FAILED";
 			_countX = 2 * (count _POWs);
-			//[0,- _countX, _posDestination] remoteExec ["A3A_fnc_citySupportChange",2];
-			[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+			//[0,- _countX, _posDestination] remoteExec ["RES_fnc_citySupportChange",2];
+			[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 			_killZones = killZones getVariable [_base,[]];
 			_killZones = _killZones + [_destinationX,_destinationX];
 			killZones setVariable [_base,_killZones,true];
@@ -493,12 +493,12 @@ if (_typeConvoyX == "Prisoners") then
 			_countX = {(alive _x) and (_x distance _posHQ < 150)} count _POWs;
 			_hr = _countX;
 			_resourcesFIA = 300 * _countX;
-			[_hr,_resourcesFIA*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-			[0,10*_bonus,_posbase] remoteExec ["A3A_fnc_citySupportChange",2];
-			if (_sideX == Occupants) then {[3,0] remoteExec ["A3A_fnc_prestige",2]} else {[-2*_countX,3] remoteExec ["A3A_fnc_prestige",2]};
+			[_hr,_resourcesFIA*_bonus] remoteExec ["RES_fnc_resourcesFIA",2];
+			[0,10*_bonus,_posbase] remoteExec ["RES_fnc_citySupportChange",2];
+			if (_sideX == Occupants) then {[3,0] remoteExec ["RES_fnc_prestige",2]} else {[-2*_countX,3] remoteExec ["RES_fnc_prestige",2]};
 			{[_x] join _grppow; [_x] orderGetin false} forEach _POWs;
-			{[_countX,_x] call A3A_fnc_playerScoreAdd} forEach (allPlayers - (entities "HeadlessClient_F"));
-			[(round (_countX/2))*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+			{[_countX,_x] call RES_fnc_playerScoreAdd} forEach (allPlayers - (entities "HeadlessClient_F"));
+			[(round (_countX/2))*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 			};
 		};
 	};
@@ -510,10 +510,10 @@ if (_typeConvoyX == "reinforcementsX") then
 		{
 		_taskState = "SUCCEEDED";
 		_taskState1 = "FAILED";
-		[0,10*_bonus,_posbase] remoteExec ["A3A_fnc_citySupportChange",2];
-		if (_sideX == Occupants) then {[3,0] remoteExec ["A3A_fnc_prestige",2]} else {[0,3] remoteExec ["A3A_fnc_prestige",2]};
-		{if (_x distance _vehObj < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-		[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+		[0,10*_bonus,_posbase] remoteExec ["RES_fnc_citySupportChange",2];
+		if (_sideX == Occupants) then {[3,0] remoteExec ["RES_fnc_prestige",2]} else {[0,3] remoteExec ["RES_fnc_prestige",2]};
+		{if (_x distance _vehObj < 500) then {[10*_bonus,_x] call RES_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
+		[5*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 		_killZones = killZones getVariable [_base,[]];
 		_killZones = _killZones + [_destinationX,_destinationX];
 		killZones setVariable [_base,_killZones,true];
@@ -523,14 +523,14 @@ if (_typeConvoyX == "reinforcementsX") then
 		_taskState = "FAILED";
 		_countX = {alive _x} count _reinforcementsX;
 		if (_countX > 8) then {_taskState1 = "SUCCEEDED"} else {_taskState = "FAILED"};
-		[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+		[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 		if (sidesX getVariable [_destinationX,sideUnknown] != teamPlayer) then
 			{
 			_typesX = [];
 			{_typesX pushBack (typeOf _x)} forEach (_reinforcementsX select {alive _x});
-			[_soldiers,_sideX,_destinationX,0] remoteExec ["A3A_fnc_garrisonUpdate",2];
+			[_soldiers,_sideX,_destinationX,0] remoteExec ["RES_fnc_garrisonUpdate",2];
 			};
-		if (_sideX == Occupants) then {[(-1*(0.25*_countX)),0] remoteExec ["A3A_fnc_prestige",2]} else {[0,(-1*(0.25*_countX))] remoteExec ["A3A_fnc_prestige",2]};
+		if (_sideX == Occupants) then {[(-1*(0.25*_countX)),0] remoteExec ["RES_fnc_prestige",2]} else {[0,(-1*(0.25*_countX))] remoteExec ["RES_fnc_prestige",2]};
 		};
 	};
 
@@ -542,14 +542,14 @@ if (_typeConvoyX == "Money") then
 		_taskState = "FAILED";
 		if ((dateToNumber date > _enddateNum) or (_vehObj distance _posDestination < _distanceFromTargetForArrival)) then
 			{
-			[-1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-			[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+			[-1200*_bonus] remoteExec ["RES_fnc_timingCA",2];
+			[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 			_taskState1 = "SUCCEEDED";
 			}
 		else
 			{
-			[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
-			[1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
+			[getPosASL _vehObj,_sideX,"",false] spawn RES_fnc_patrolCA;
+			[1200*_bonus] remoteExec ["RES_fnc_timingCA",2];
 			_taskState1 = "FAILED";
 			_killZones = killZones getVariable [_base,[]];
 			_killZones = _killZones + [_destinationX,_destinationX];
@@ -558,26 +558,26 @@ if (_typeConvoyX == "Money") then
 		};
 	if ((driver _vehObj getVariable ["spawner",false]) and (side group (driver _vehObj) == teamPlayer)) then
 		{
-		[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
+		[getPosASL _vehObj,_sideX,"",false] spawn RES_fnc_patrolCA;
 		waitUntil {sleep 2; (_vehObj distance _posHQ < 50) or (not alive _vehObj) or (dateToNumber date > _enddateNum)};
 		if ((not alive _vehObj) or (dateToNumber date > _enddateNum)) then
 			{
 			_taskState = "FAILED";
 			_taskState1 = "FAILED";
-			[1200*_bonus] remoteExec ["A3A_fnc_timingCA",2];
+			[1200*_bonus] remoteExec ["RES_fnc_timingCA",2];
 			};
 		if (_vehObj distance _posHQ < 50) then
 			{
 			_taskState = "SUCCEEDED";
 			_taskState1 = "FAILED";
-			[10*_bonus,-20*_bonus,_posDestination] remoteExec ["A3A_fnc_citySupportChange",2];
-			[3,0] remoteExec ["A3A_fnc_prestige",2];
-			[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-			[-120*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-			{if (_x distance _vehObj < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-			[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+			[10*_bonus,-20*_bonus,_posDestination] remoteExec ["RES_fnc_citySupportChange",2];
+			[3,0] remoteExec ["RES_fnc_prestige",2];
+			[0,5000*_bonus] remoteExec ["RES_fnc_resourcesFIA",2];
+			[-120*_bonus] remoteExec ["RES_fnc_timingCA",2];
+			{if (_x distance _vehObj < 500) then {[10*_bonus,_x] call RES_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
+			[5*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 			waitUntil {sleep 1; speed _vehObj < 1};
-			[_vehObj] call A3A_fnc_empty;
+			[_vehObj] call RES_fnc_empty;
 			deleteVehicle _vehObj;
 			};
 		};
@@ -590,11 +590,11 @@ if (_typeConvoyX == "Supplies") then
 	waitUntil {sleep 1; (dateToNumber date > _enddateNum) or (_vehObj distance _posDestination < _distanceFromTargetForArrival) or (not alive _vehObj) or ((driver _vehObj getVariable ["spawner",false]) and (side group (driver _vehObj) == teamPlayer))};
 	if (not alive _vehObj) then
 		{
-		[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
+		[getPosASL _vehObj,_sideX,"",false] spawn RES_fnc_patrolCA;
 		_taskState = "FAILED";
 		_taskState1 = "FAILED";
-		[3,0] remoteExec ["A3A_fnc_prestige",2];
-		[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+		[3,0] remoteExec ["RES_fnc_prestige",2];
+		[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 		_killZones = killZones getVariable [_base,[]];
 		_killZones = _killZones + [_destinationX,_destinationX];
 		killZones setVariable [_base,_killZones,true];
@@ -603,40 +603,40 @@ if (_typeConvoyX == "Supplies") then
 		{
 		if ((driver _vehObj getVariable ["spawner",false]) and (side group (driver _vehObj) == teamPlayer)) then
 			{
-			[getPosASL _vehObj,_sideX,"",false] spawn A3A_fnc_patrolCA;
+			[getPosASL _vehObj,_sideX,"",false] spawn RES_fnc_patrolCA;
 			waitUntil {sleep 1; (_vehObj distance _posDestination < 100) or (not alive _vehObj) or (dateToNumber date > _enddateNum)};
 			if (_vehObj distance _posDestination < 100) then
 				{
 				_taskState = "SUCCEEDED";
 				_taskState1 = "FAILED";
-				[0,15*_bonus,_destinationX] remoteExec ["A3A_fnc_citySupportChange",2];
-				{if (_x distance _vehObj < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-				[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+				[0,15*_bonus,_destinationX] remoteExec ["RES_fnc_citySupportChange",2];
+				{if (_x distance _vehObj < 500) then {[10*_bonus,_x] call RES_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
+				[5*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 				}
 			else
 				{
 				_taskState = "FAILED";
 				_taskState1 = "FAILED";
-				[5*_bonus,-10*_bonus,_destinationX] remoteExec ["A3A_fnc_citySupportChange",2];
-				[3,0] remoteExec ["A3A_fnc_prestige",2];
-				[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+				[5*_bonus,-10*_bonus,_destinationX] remoteExec ["RES_fnc_citySupportChange",2];
+				[3,0] remoteExec ["RES_fnc_prestige",2];
+				[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 				};
 			}
 		else
 			{
 			_taskState = "FAILED";
 			_taskState1 = "SUCCEEDED";
-			[-3,0] remoteExec ["A3A_fnc_prestige",2];
-			[15*_bonus,0,_destinationX] remoteExec ["A3A_fnc_citySupportChange",2];
-			[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+			[-3,0] remoteExec ["RES_fnc_prestige",2];
+			[15*_bonus,0,_destinationX] remoteExec ["RES_fnc_citySupportChange",2];
+			[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 			};
 		};
 	reportedVehs = reportedVehs - [_vehObj];
 	publicVariable "reportedVehs";
 	};
 
-["CONVOY",[_textX,_taskTitle,_destinationX],_posDestination,_taskState] call A3A_fnc_taskUpdate;
-["CONVOY1",[format ["A convoy from %1 to %3, it's about to depart at %2. Protect it from any possible attack.",_nameOrigin,_displayTime,_nameDest],"Protect Convoy",_destinationX],_posDestination,_taskState1] call A3A_fnc_taskUpdate;
+["CONVOY",[_textX,_taskTitle,_destinationX],_posDestination,_taskState] call RES_fnc_taskUpdate;
+["CONVOY1",[format ["A convoy from %1 to %3, it's about to depart at %2. Protect it from any possible attack.",_nameOrigin,_displayTime,_nameDest],"Protect Convoy",_destinationX],_posDestination,_taskState1] call RES_fnc_taskUpdate;
 _wp0 = _groupX addWaypoint [_posbase, 0];
 _wp0 setWaypointType "MOVE";
 _wp0 setWaypointBehaviour "SAFE";
@@ -650,19 +650,19 @@ if (_typeConvoyX == "Prisoners") then
 	} forEach _POWs;
 	};
 
-_nul = [600,"CONVOY"] spawn A3A_fnc_deleteTask;
-_nul = [0,"CONVOY1"] spawn A3A_fnc_deleteTask;
+_nul = [600,"CONVOY"] spawn RES_fnc_deleteTask;
+_nul = [0,"CONVOY1"] spawn RES_fnc_deleteTask;
 {
-if (!([distanceSPWN,1,_x,teamPlayer] call A3A_fnc_distanceUnits)) then {deleteVehicle _x}
+if (!([distanceSPWN,1,_x,teamPlayer] call RES_fnc_distanceUnits)) then {deleteVehicle _x}
 } forEach _vehiclesX;
 {
-if (!([distanceSPWN,1,_x,teamPlayer] call A3A_fnc_distanceUnits)) then {deleteVehicle _x; _soldiers = _soldiers - [_x]}
+if (!([distanceSPWN,1,_x,teamPlayer] call RES_fnc_distanceUnits)) then {deleteVehicle _x; _soldiers = _soldiers - [_x]}
 } forEach _soldiers;
 
 if (count _soldiers > 0) then
 	{
 	{
-	waitUntil {sleep 1; (!([distanceSPWN,1,_x,teamPlayer] call A3A_fnc_distanceUnits))};
+	waitUntil {sleep 1; (!([distanceSPWN,1,_x,teamPlayer] call RES_fnc_distanceUnits))};
 	deleteVehicle _x;
 	} forEach _soldiers;
 	};

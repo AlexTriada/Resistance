@@ -6,11 +6,11 @@ _puertas = [];
 
 switch (typeOf _veh) do
 	{
-	case "I_MRAP_03_F": {_puertas = ["Door_LF","Door_RF"]};
-	case "I_Heli_Transport_02_F": {_puertas = ["CargoRamp_Open","Door_Back_L","Door_Back_R"]};
-	case "B_Heli_Light_01_F": {_puertas = ["DoorL_Front_Open","DoorR_Front_Open","DoorL_Back_Open","DoorR_Back_Open"]};
-	case "B_Heli_Transport_01_camo_F": {_puertas = ["Door_L","Door_R"]};
-	case "B_Heli_Transport_03_F": {_puertas = ["Door_rear_source"]};
+	case "I_MRAP_03_F": {_puertas = ["DooRES_LF","DooRES_RF"]};
+	case "I_Heli_Transport_02_F": {_puertas = ["CargoRamp_Open","DooRES_Back_L","DooRES_Back_R"]};
+	case "B_Heli_Light_01_F": {_puertas = ["DoorL_Front_Open","DoorRES_Front_Open","DoorL_Back_Open","DoorRES_Back_Open"]};
+	case "B_Heli_Transport_01_camo_F": {_puertas = ["DooRES_L","DooRES_R"]};
+	case "B_Heli_Transport_03_F": {_puertas = ["DooRES_reaRES_source"]};
 	};
 if (count _puertas == 0) exitWith {};
 

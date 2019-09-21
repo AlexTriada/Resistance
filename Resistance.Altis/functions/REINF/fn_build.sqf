@@ -27,14 +27,14 @@ private _abortMessage = "";
 
 private _engineerIsBusy = {
 	private _engineer = param [0, objNull];
-	((_engineer getVariable ["helping",false]) 
-	or (_engineer getVariable ["rearming",false]) 
+	((_engineer getVariable ["helping",false])
+	or (_engineer getVariable ["rearming",false])
 	or (_engineer getVariable ["constructing",false]));
 };
 
 //Check if the player can build
 if (_playerIsEngineer) then {
-	if ([player] call A3A_fnc_canFight && !([player] call _engineerIsBusy)) then {
+	if ([player] call RES_fnc_canFight && !([player] call _engineerIsBusy)) then {
 		build_engineerSelected = player;
 	} else {
 		_abortMessage = _abortMessage + "You are an engineer, but not in a state to build: you may be unconscious or undercover.\n";
@@ -53,21 +53,21 @@ if (isNull build_engineerSelected) then {
 	if (count _aiEngineers > 0 && player != leader player) exitWith {
 		_abortMessage =	_abortMessage + "Only squad leaders can order AI to build";
 	};
-	
+
 	{
-		if ([_x] call A3A_fnc_canFight && !([_x] call _engineerIsBusy)) exitWith {
+		if ([_x] call RES_fnc_canFight && !([_x] call _engineerIsBusy)) exitWith {
 			build_engineerSelected = _x;
 			_abortMessage = _abortMessage + format ["Ordering %1 to build", _x];
 		};
 	} forEach _aiEngineers;
-	
+
 	if (isNull build_engineerSelected) exitWith {
 		_abortMessage =	_abortMessage + "You have no available engineers in your squad. They may be unconscious or busy.";
 	};
 };
 
 if (isNull build_engineerSelected ||
-   ((player != build_engineerSelected) and (isPlayer build_engineerSelected))) exitWith 
+   ((player != build_engineerSelected) and (isPlayer build_engineerSelected))) exitWith
 {
 	hint _abortMessage;
 };
@@ -132,13 +132,13 @@ switch build_type do
 	case "SB":
 		{
 		build_time = 60;
-		_classX = "Land_BagBunker_01_small_green_F";
+		_classX = "Land_BagBunkeRES_01_small_green_F";
 		build_cost = 100;
 		};
 	case "CB":
 		{
 		build_time = 120;
-		_classX = "Land_PillboxBunker_01_big_F";
+		_classX = "Land_PillboxBunkeRES_01_big_F";
 		build_cost = 300;
 		};
 	};
@@ -173,7 +173,7 @@ if (_leave) exitWith {hint format ["%1",_textX]};
 //garageVeh = _classX createVehicleLocal [0,0,0];
 //bought = 0;
 
-build_handleDamageHandler = player addEventHandler ["HandleDamage",{[] call A3A_fnc_vehPlacementCancel;}];
+build_handleDamageHandler = player addEventHandler ["HandleDamage",{[] call RES_fnc_vehPlacementCancel;}];
 
 //START PLACEMENT HERE
-[_classX, "BUILDSTRUCTURE", ""] call A3A_fnc_vehPlacementBegin;
+[_classX, "BUILDSTRUCTURE", ""] call RES_fnc_vehPlacementBegin;

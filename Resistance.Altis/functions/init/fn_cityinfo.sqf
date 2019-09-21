@@ -37,7 +37,7 @@ while {visibleMap} do
 		_nameFaction = if (sidesX getVariable [_siteX,sideUnknown] == teamPlayer) then {nameTeamPlayer} else {if (sidesX getVariable [_siteX,sideUnknown] == Occupants) then {nameOccupants} else {nameInvaders}};
 		if (_siteX == "Synd_HQ") then
 			{
-			_textX = format ["%2 HQ%1",[_siteX] call A3A_fnc_garrisonInfo,nameTeamPlayer];
+			_textX = format ["%2 HQ%1",[_siteX] call RES_fnc_garrisonInfo,nameTeamPlayer];
 			};
 		if (_siteX in citiesX) then
 			{
@@ -46,8 +46,8 @@ while {visibleMap} do
 			_numCiv = _dataX select 0;
 			_prestigeOPFOR = _dataX select 2;
 			_prestigeBLUFOR = _dataX select 3;
-			_power = [_siteX] call A3A_fnc_powerCheck;
-			_textX = format ["%1\n\nPop %2\n%6 Support: %3 %5\n%7 Support: %4 %5",[_siteX,false] call A3A_fnc_location,_numCiv,_prestigeOPFOR,_prestigeBLUFOR,"%",nameOccupants,nameTeamPlayer];
+			_power = [_siteX] call RES_fnc_powerCheck;
+			_textX = format ["%1\n\nPop %2\n%6 Support: %3 %5\n%7 Support: %4 %5",[_siteX,false] call RES_fnc_location,_numCiv,_prestigeOPFOR,_prestigeBLUFOR,"%",nameOccupants,nameTeamPlayer];
 			_positionX = getMarkerPos _siteX;
 			_result = "NONE";
 			switch (_power) do
@@ -77,21 +77,21 @@ while {visibleMap} do
 			*/
 			_textX = format ["%1\nInfluence: %2",_textX,_result];
 			if (_siteX in destroyedCities) then {_textX = format ["%1\nDESTROYED",_textX]};
-			if (sidesX getVariable [_siteX,sideUnknown] == teamPlayer) then {_textX = format ["%1\n%2",_textX,[_siteX] call A3A_fnc_garrisonInfo]};
+			if (sidesX getVariable [_siteX,sideUnknown] == teamPlayer) then {_textX = format ["%1\n%2",_textX,[_siteX] call RES_fnc_garrisonInfo]};
 			};
 		if (_siteX in airportsX) then
 			{
 			if (not(sidesX getVariable [_siteX,sideUnknown] == teamPlayer)) then
 				{
 				_textX = format ["%1 Airport",_nameFaction];
-				_busy = [_siteX,true] call A3A_fnc_airportCanAttack;
+				_busy = [_siteX,true] call RES_fnc_airportCanAttack;
 				if (_busy) then {_textX = format ["%1\nStatus: Idle",_textX]} else {_textX = format ["%1\nStatus: Busy",_textX]};
 				_garrison = count (garrison getVariable _siteX);
 				if (_garrison >= 40) then {_textX = format ["%1\nGarrison: Good",_textX]} else {if (_garrison >= 20) then {_textX = format ["%1\nGarrison: Weakened",_textX]} else {_textX = format ["%1\nGarrison: Decimated",_textX]}};
 				}
 			else
 				{
-				_textX = format ["%2 Airport%1",[_siteX] call A3A_fnc_garrisonInfo,_nameFaction];
+				_textX = format ["%2 Airport%1",[_siteX] call RES_fnc_garrisonInfo,_nameFaction];
 				};
 			};
 		if (_siteX in resourcesX) then
@@ -104,7 +104,7 @@ while {visibleMap} do
 				}
 			else
 				{
-				_textX = format ["%2 Resources%1",[_siteX] call A3A_fnc_garrisonInfo,_nameFaction];
+				_textX = format ["%2 Resources%1",[_siteX] call RES_fnc_garrisonInfo,_nameFaction];
 				};
 			if (_siteX in destroyedCities) then {_textX = format ["%1\nDESTROYED",_textX]};
 			};
@@ -118,7 +118,7 @@ while {visibleMap} do
 				}
 			else
 				{
-				_textX = format ["%2 Factory%1",[_siteX] call A3A_fnc_garrisonInfo,_nameFaction];
+				_textX = format ["%2 Factory%1",[_siteX] call RES_fnc_garrisonInfo,_nameFaction];
 				};
 			if (_siteX in destroyedCities) then {_textX = format ["%1\nDESTROYED",_textX]};
 			};
@@ -127,14 +127,14 @@ while {visibleMap} do
 			if (not(sidesX getVariable [_siteX,sideUnknown] == teamPlayer)) then
 				{
 				_textX = format ["%1 Grand Outpost",_nameFaction];
-				_busy = [_siteX,true] call A3A_fnc_airportCanAttack;
+				_busy = [_siteX,true] call RES_fnc_airportCanAttack;
 				if (_busy) then {_textX = format ["%1\nStatus: Idle",_textX]} else {_textX = format ["%1\nStatus: Busy",_textX]};
 				_garrison = count (garrison getVariable _siteX);
 				if (_garrison >= 16) then {_textX = format ["%1\nGarrison: Good",_textX]} else {if (_garrison >= 8) then {_textX = format ["%1\nGarrison: Weakened",_textX]} else {_textX = format ["%1\nGarrison: Decimated",_textX]}};
 				}
 			else
 				{
-				_textX = format ["%2 Grand Outpost%1",[_siteX] call A3A_fnc_garrisonInfo,_nameFaction];
+				_textX = format ["%2 Grand Outpost%1",[_siteX] call RES_fnc_garrisonInfo,_nameFaction];
 				};
 			};
 		if (_siteX in seaports) then
@@ -147,14 +147,14 @@ while {visibleMap} do
 				}
 			else
 				{
-				_textX = format ["%2 Seaport%1",[_siteX] call A3A_fnc_garrisonInfo,_nameFaction];
+				_textX = format ["%2 Seaport%1",[_siteX] call RES_fnc_garrisonInfo,_nameFaction];
 				};
 			};
 		if (_siteX in outpostsFIA) then
 			{
 			if (isOnRoad (getMarkerPos _siteX)) then
 				{
-				_textX = format ["%2 Roadblock%1",[_siteX] call A3A_fnc_garrisonInfo,_nameFaction];
+				_textX = format ["%2 Roadblock%1",[_siteX] call RES_fnc_garrisonInfo,_nameFaction];
 				}
 			else
 				{

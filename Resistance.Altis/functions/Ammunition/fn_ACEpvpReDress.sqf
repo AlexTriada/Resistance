@@ -10,7 +10,7 @@ if (hasACEMedical) then
 	{
 	player removeItems "FirstAidKit";
 	player removeItem "Medikit";
-	if !([player] call A3A_fnc_isMedic) then
+	if !([player] call RES_fnc_isMedic) then
 		{
 		{
 		_item = _x select 0;

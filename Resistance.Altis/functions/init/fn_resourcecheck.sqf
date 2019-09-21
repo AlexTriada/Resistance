@@ -30,7 +30,7 @@ while {true} do
 	//_roads = _dataX select 2;
 	_prestigeNATO = _dataX select 2;
 	_prestigeSDK = _dataX select 3;
-	_power = [_city] call A3A_fnc_powerCheck;
+	_power = [_city] call RES_fnc_powerCheck;
 	_popTotal = _popTotal + _numCiv;
 	_popFIA = _popFIA + (_numCiv * (_prestigeSDK / 100));
 	_popAAF = _popAAF + (_numCiv * (_prestigeNATO / 100));
@@ -49,9 +49,9 @@ while {true} do
 		_hrAddCity = (_numciv * (_prestigeSDK / 10000));///20000 originalmente
 		switch (_power) do
 			{
-			case teamPlayer: {[-1,_suppBoost,_city] spawn A3A_fnc_citySupportChange};
-			case Occupants: {[1,-1,_city] spawn A3A_fnc_citySupportChange};
-			case Invaders: {[-1,-1,_city] spawn A3A_fnc_citySupportChange};
+			case teamPlayer: {[-1,_suppBoost,_city] spawn RES_fnc_citySupportChange};
+			case Occupants: {[1,-1,_city] spawn RES_fnc_citySupportChange};
+			case Invaders: {[-1,-1,_city] spawn RES_fnc_citySupportChange};
 			};
 		if (sidesX getVariable [_city,sideUnknown] == Occupants) then
 			{
@@ -64,34 +64,34 @@ while {true} do
 	// revuelta civil!!
 	if ((_prestigeNATO < _prestigeSDK) and (sidesX getVariable [_city,sideUnknown] == Occupants)) then
 		{
-		["TaskSucceeded", ["", format ["%1 joined %2",[_city, false] call A3A_fnc_location,nameTeamPlayer]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+		["TaskSucceeded", ["", format ["%1 joined %2",[_city, false] call RES_fnc_location,nameTeamPlayer]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 		sidesX setVariable [_city,teamPlayer,true];
-		_nul = [5,0] remoteExec ["A3A_fnc_prestige",2];
+		_nul = [5,0] remoteExec ["RES_fnc_prestige",2];
 		_mrkD = format ["Dum%1",_city];
 		_mrkD setMarkerColor colorTeamPlayer;
 		garrison setVariable [_city,[],true];
 		sleep 5;
-		{_nul = [_city,_x] spawn A3A_fnc_deleteControls} forEach controlsX;
+		{_nul = [_city,_x] spawn RES_fnc_deleteControls} forEach controlsX;
 		if ((!(["CONVOY"] call BIS_fnc_taskExists)) and (!bigAttackInProgress)) then
 			{
-			_base = [_city] call A3A_fnc_findBasesForConvoy;
+			_base = [_city] call RES_fnc_findBasesForConvoy;
 			if (_base != "") then
 				{
-				[[_city,_base],"A3A_fnc_convoy"] call A3A_fnc_scheduler;
+				[[_city,_base],"RES_fnc_convoy"] call RES_fnc_scheduler;
 				};
 			};
-		[] call A3A_fnc_tierCheck;
+		[] call RES_fnc_tierCheck;
 		};
 	if ((_prestigeNATO > _prestigeSDK) and (sidesX getVariable [_city,sideUnknown] == teamPlayer)) then
 		{
-		["TaskFailed", ["", format ["%1 joined %2",[_city, false] call A3A_fnc_location,nameOccupants]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+		["TaskFailed", ["", format ["%1 joined %2",[_city, false] call RES_fnc_location,nameOccupants]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 		sidesX setVariable [_city,Occupants,true];
-		_nul = [-5,0] remoteExec ["A3A_fnc_prestige",2];
+		_nul = [-5,0] remoteExec ["RES_fnc_prestige",2];
 		_mrkD = format ["Dum%1",_city];
 		_mrkD setMarkerColor colorOccupants;
 		garrison setVariable [_city,[],true];
 		sleep 5;
-		[] call A3A_fnc_tierCheck;
+		[] call RES_fnc_tierCheck;
 		};
 	} forEach citiesX;
 	if (_popCSAT > (_popTotal / 3)) then {["destroyedCities",false,true] remoteExec ["BIS_fnc_endMission"]};
@@ -116,26 +116,26 @@ while {true} do
 	_recAddSDK = (round _recAddSDK);
 
 	_textX = format ["<t size='0.6' color='#C1C0BB'>Taxes Income.<br/> <t size='0.5' color='#C1C0BB'><br/>Manpower: +%1<br/>Money: +%2 €",_hrAddBLUFOR,_recAddSDK];
-	[] call A3A_fnc_FIAradio;
+	[] call RES_fnc_FIAradio;
 	//_updated = false;
-	_updated = [] call A3A_fnc_arsenalManage;
+	_updated = [] call RES_fnc_arsenalManage;
 	if (_updated != "") then {_textX = format ["%1<br/>Arsenal Updated<br/><br/>%2",_textX,_updated]};
-	[petros,"taxRep",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+	[petros,"taxRep",_textX] remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
 	_hrAddBLUFOR = _hrAddBLUFOR + (server getVariable "hr");
 	_recAddSDK = _recAddSDK + (server getVariable "resourcesFIA");
 	server setVariable ["hr",_hrAddBLUFOR,true];
 	server setVariable ["resourcesFIA",_recAddSDK,true];
 	bombRuns = bombRuns + (({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX) * 0.25);
-	[petros,"taxRep",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
-	[] call A3A_fnc_economicsAI;
+	[petros,"taxRep",_textX] remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
+	[] call RES_fnc_economicsAI;
 	if (isMultiplayer) then
 		{
-		[] spawn A3A_fnc_assigntheBoss;
+		[] spawn RES_fnc_assigntheBoss;
 		difficultyCoef = floor ((({side group _x == teamPlayer} count playableUnits) - ({side group _x != teamPlayer} count playableUnits)) / 5);
 		publicVariable "difficultyCoef";
 		};
-	if ((!bigAttackInProgress) and (random 100 < 50)) then {[] call A3A_fnc_missionRequestAUTO};
-	[[],"A3A_fnc_reinforcementsAI"] call A3A_fnc_scheduler;
+	if ((!bigAttackInProgress) and (random 100 < 50)) then {[] call RES_fnc_missionRequestAUTO};
+	[[],"RES_fnc_reinforcementsAI"] call RES_fnc_scheduler;
 	{
 	_veh = _x;
 	if ((_veh isKindOf "StaticWeapon") and ({isPlayer _x} count crew _veh == 0) and (alive _veh)) then
@@ -149,10 +149,10 @@ while {true} do
 	publicVariable "countCA";
 	if ((countCA == 0)/* and (diag_fps > minimoFPS)*/) then
 		{
-		[1200] remoteExec ["A3A_fnc_timingCA",2];
+		[1200] remoteExec ["RES_fnc_timingCA",2];
 		if (!bigAttackInProgress) then
 			{
-			_script = [] spawn A3A_fnc_attackAAF;
+			_script = [] spawn RES_fnc_attackAAF;
 			waitUntil {sleep 5; scriptDone _script};
 			};
 		};
@@ -173,7 +173,7 @@ while {true} do
 		if (count _potentials > 0) then
 			{
 			_potential = selectRandom _potentials;
-			[[_potential select 0,_potential select 1],"A3A_fnc_REP_Antenna"] call A3A_fnc_scheduler;
+			[[_potential select 0,_potential select 1],"RES_fnc_REP_Antenna"] call RES_fnc_scheduler;
 			};
 		}
 	else
@@ -186,7 +186,7 @@ while {true} do
 			{
 			_changingX = true;
 			destroyedCities = destroyedCities - [_x];
-			_nameX = [_x] call A3A_fnc_localizar;
+			_nameX = [_x] call RES_fnc_localizar;
 			["TaskSucceeded", ["", format ["%1 Rebuilt",_nameX]]] remoteExec ["BIS_fnc_showNotification",[teamPlayer,civilian]];
 			sleep 2;
 			};

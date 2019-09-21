@@ -40,4 +40,4 @@ if (isNull _oldUnit) then
 	{
 	[_oldUnit,[group _oldUnit]] remoteExec ["hcSetGroup",_oldUnit];
 	};
-[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];
+[] remoteExec ["RES_fnc_statistics",[teamPlayer,civilian]];

@@ -26,7 +26,7 @@ if (_part == "") then
 				};
 				_dam = 0.9;
 				if (isPlayer _unit) then {_unit allowDamage false};
-				if (!isNull _injurer) then {[_unit,side _injurer] spawn A3A_fnc_unconscious} else {[_unit,sideUnknown] spawn A3A_fnc_unconscious};
+				if (!isNull _injurer) then {[_unit,side _injurer] spawn RES_fnc_unconscious} else {[_unit,sideUnknown] spawn RES_fnc_unconscious};
 			}
 			else
 			{
@@ -36,7 +36,7 @@ if (_part == "") then
 					if (isPlayer _unit) then
 					{
 						_dam = 0;
-						[_unit] spawn A3A_fnc_respawn;
+						[_unit] spawn RES_fnc_respawn;
 					}
 					else
 					{
@@ -66,7 +66,7 @@ if (_part == "") then
 						_sideType = getNumber (configfile >> "CfgVehicles" >> _typeSoldier >> "side");
 						if ((_sideType != 1) and (_sideType != 0)) then
 						{
-							[_injurer, 20, 0.34] remoteExec ["A3A_fnc_punishment",_injurer];
+							[_injurer, 20, 0.34] remoteExec ["RES_fnc_punishment",_injurer];
 						};
 					};
 				};
@@ -80,13 +80,13 @@ if (_part == "") then
 				if (autoheal) then
 				{
 					_helped = _unit getVariable ["helped",objNull];
-					if (isNull _helped) then {[_unit] call A3A_fnc_askHelp;};
+					if (isNull _helped) then {[_unit] call RES_fnc_askHelp;};
 				};
 			}
 			else
 			{
-				//if (_dam > 0.6) then {[_unit,_unit,_injurer] spawn A3A_fnc_chargeWithSmoke};
-				if (_dam > 0.6) then {[_unit,_injurer] spawn A3A_fnc_unitGetToCover};
+				//if (_dam > 0.6) then {[_unit,_unit,_injurer] spawn RES_fnc_chargeWithSmoke};
+				if (_dam > 0.6) then {[_unit,_injurer] spawn RES_fnc_unitGetToCover};
 			};
 		};
 	};
@@ -116,7 +116,7 @@ else
 							moveOut _unit;
 						};
 						if (isPlayer _unit) then {_unit allowDamage false};
-						if (!isNull _injurer) then {[_unit,side _injurer] spawn A3A_fnc_unconscious} else {[_unit,sideUnknown] spawn A3A_fnc_unconscious};
+						if (!isNull _injurer) then {[_unit,side _injurer] spawn RES_fnc_unconscious} else {[_unit,sideUnknown] spawn RES_fnc_unconscious};
 					};
 				};
 			}
@@ -133,7 +133,7 @@ else
 							moveOut _unit;
 						};
 						if (isPlayer _unit) then {_unit allowDamage false};
-						if (!isNull _injurer) then {[_unit,side _injurer] spawn A3A_fnc_unconscious} else {[_unit,sideUnknown] spawn A3A_fnc_unconscious};
+						if (!isNull _injurer) then {[_unit,side _injurer] spawn RES_fnc_unconscious} else {[_unit,sideUnknown] spawn RES_fnc_unconscious};
 					};
 				};
 			};

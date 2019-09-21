@@ -44,7 +44,7 @@ if (_land) then
 	if (count _pos == 0) then {_pos = getMarkerPos _spawnPoint};
 	_veh = _typeVehX createVehicle _pos;
 	_veh setDir (markerDir _spawnPoint);
-	_groupX = [_pos,_sideX, _typeGroup] call A3A_fnc_spawnGroup;
+	_groupX = [_pos,_sideX, _typeGroup] call RES_fnc_spawnGroup;
 	_groupX addVehicle _veh;
 	{
 		if (_x == leader _x) then {_x assignAsDriver _veh;_x moveInDriver _veh} else {_x assignAsCargo _veh;_x moveInCargo _veh};
@@ -55,24 +55,24 @@ if (_land) then
 		}
 		else
 		{
-			[_x] call A3A_fnc_NATOinit;
+			[_x] call RES_fnc_NATOinit;
 		};
 	} forEach units _groupX;
-	[_veh] call A3A_fnc_AIVEHinit;
-	[_veh,"Inf Truck."] spawn A3A_fnc_inmuneConvoy;
-	_groupX spawn A3A_fnc_attackDrillAI;
-	[_mrkOrigin,_posDestination,_groupX] call A3A_fnc_WPCreate;
+	[_veh] call RES_fnc_AIVEHinit;
+	[_veh,"Inf Truck."] spawn RES_fnc_inmuneConvoy;
+	_groupX spawn RES_fnc_attackDrillAI;
+	[_mrkOrigin,_posDestination,_groupX] call RES_fnc_WPCreate;
 	_Vwp0 = (wayPoints _groupX) select 0;
 	_Vwp0 setWaypointBehaviour "SAFE";
 	_Vwp0 = _groupX addWaypoint [_posDestination, count (wayPoints _groupX)];
 	_Vwp0 setWaypointType "GETOUT";
-	_Vwp0 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""A3A_fnc_garrisonUpdate"",2];[group this] spawn A3A_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
+	_Vwp0 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""RES_fnc_garrisonUpdate"",2];[group this] spawn RES_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
 	}
 else
 {
 	_pos = _posOrigin;
 	_ang = 0;
-	_size = [_mrkOrigin] call A3A_fnc_sizeMarker;
+	_size = [_mrkOrigin] call RES_fnc_sizeMarker;
 	_buildings = nearestObjects [_posOrigin, ["Land_LandMark_F","Land_runway_edgelight"], _size / 2];
 	if (count _buildings > 1) then
 	{
@@ -88,12 +88,12 @@ else
 	_vehCrew = _vehicle select 1;
 	_groupVeh = _vehicle select 2;
 	{
-		[_x] call A3A_fnc_NATOinit;
+		[_x] call RES_fnc_NATOinit;
 		_x addEventHandler ["Killed",{deleteVehicle (group (_this select 0) getVariable ["myPad",objNull])}];
 	} forEach units _groupVeh;
-	[_veh] call A3A_fnc_AIVEHinit;
+	[_veh] call RES_fnc_AIVEHinit;
 
-	_groupX = [_posOrigin,_sideX,_typeGroup] call A3A_fnc_spawnGroup;
+	_groupX = [_posOrigin,_sideX,_typeGroup] call RES_fnc_spawnGroup;
 	{
 		_x assignAsCargo _veh;
 		_x moveInCargo _veh;
@@ -103,7 +103,7 @@ else
 		}
 		else
 		{
-			[_x] call A3A_fnc_NATOinit;
+			[_x] call RES_fnc_NATOinit;
 		};
 	} forEach units _groupX;
 	_landPos = if (_typeVehX isKindOf "Helicopter") then {[_posDestination, 0, 300, 10, 0, 0.20, 0,[],[[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos} else {[0,0,0]};
@@ -118,11 +118,11 @@ else
 		_wp0 setWaypointBehaviour "CARELESS";
 		_wp3 = _groupX addWaypoint [_landpos, 0];
 		_wp3 setWaypointType "GETOUT";
-		_wp3 setWaypointStatements ["true", "(group this) spawn A3A_fnc_attackDrillAI"];
+		_wp3 setWaypointStatements ["true", "(group this) spawn RES_fnc_attackDrillAI"];
 		_wp0 synchronizeWaypoint [_wp3];
 		_wp4 = _groupX addWaypoint [_posDestination, 1];
 		_wp4 setWaypointType "MOVE";
-		_wp4 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""A3A_fnc_garrisonUpdate"",2];[group this] spawn A3A_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
+		_wp4 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""RES_fnc_garrisonUpdate"",2];[group this] spawn RES_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
 		_wp2 = _groupVeh addWaypoint [_posOrigin, 1];
 		_wp2 setWaypointType "MOVE";
 		_wp2 setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} forEach thisList"];
@@ -132,11 +132,11 @@ else
 	{
 		if (_typeVehX in vehFastRope) then
 		{
-			[_veh,_groupX,_posDestination,_posOrigin,_groupVeh,true] spawn A3A_fnc_fastrope;
+			[_veh,_groupX,_posDestination,_posOrigin,_groupVeh,true] spawn RES_fnc_fastrope;
 		}
 		else
 		{
-			[_veh,_groupX,_posDestination,_mrkOrigin,true] spawn A3A_fnc_airdrop;
+			[_veh,_groupX,_posDestination,_mrkOrigin,true] spawn RES_fnc_airdrop;
 		};
 	};
 };

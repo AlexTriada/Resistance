@@ -9,7 +9,7 @@ if (hasInterface) then {
 };
 
 if (isMultiplayer && !isServer) exitwith {
-	[_playerId, _playerUnit] remoteExec ["A3A_fnc_savePlayer", 2];
+	[_playerId, _playerUnit] remoteExec ["RES_fnc_savePlayer", 2];
 };
 
 if (isNil "_playerId" || {_playerId == ""}) exitWith {
@@ -35,7 +35,7 @@ savingClient = true;
 diag_log format ["[Antistasi] Saving player %1 on side %2", _playerId, side group _playerUnit];
 
 private _shouldStripLoadout = false;
-if (hasACEMedical && {[_playerUnit] call ace_medical_fnc_getUnconsciousCondition}) then 
+if (hasACEMedical && {[_playerUnit] call ace_medical_fnc_getUnconsciousCondition}) then
 {
 	_shouldStripLoadout = true;
 	diag_log format ["[Antistasi] Stripping saved loadout of player %1 due to saving while being ACE unconscious", _playerId];
@@ -47,7 +47,7 @@ if !(lifeState _playerUnit == "HEALTHY" || lifeState _playerUnit == "INJURED") t
 };
 
 if (_shouldStripLoadout) then {
-	[_playerId, "loadoutPlayer", (getUnitLoadout _playerUnit) call A3A_fnc_stripGearFromLoadout] call fn_SavePlayerStat;
+	[_playerId, "loadoutPlayer", (getUnitLoadout _playerUnit) call RES_fnc_stripGearFromLoadout] call fn_SavePlayerStat;
 } else {
 	[_playerId, "loadoutPlayer", getUnitLoadout _playerUnit] call fn_SavePlayerStat;
 };
@@ -56,7 +56,7 @@ if (isMultiplayer) then
 	{
 	[_playerId, "scorePlayer", _playerUnit getVariable "score"] call fn_SavePlayerStat;
 	[_playerId, "rankPlayer", rank _playerUnit] call fn_SavePlayerStat;
-	[_playerId, "personalGarage",[_playerUnit] call A3A_fnc_getPersonalGarage] call fn_SavePlayerStat;
+	[_playerId, "personalGarage",[_playerUnit] call RES_fnc_getPersonalGarage] call fn_SavePlayerStat;
 	_resourcesBackground = _playerUnit getVariable ["moneyX", 0];
 	{
 	_friendX = _x;
@@ -75,17 +75,17 @@ if (isMultiplayer) then
 				{
 					if ((_veh isKindOf "StaticWeapon") or (driver _veh == _friendX)) then
 					{
-						private _vehPrice = ([_typeVehX] call A3A_fnc_vehiclePrice);
+						private _vehPrice = ([_typeVehX] call RES_fnc_vehiclePrice);
 						if (typeName _vehPrice == typeName _resourcesBackground) then {
 							_resourcesBackground = _resourcesBackground + _vehPrice;
 						};
 						if (count attachedObjects _veh != 0) then {
 							{
-								private _attachmentPrice = ([typeOf _x] call A3A_fnc_vehiclePrice);
+								private _attachmentPrice = ([typeOf _x] call RES_fnc_vehiclePrice);
 								if (typeName _vehPrice == typeName _resourcesBackground) then {
 									_resourcesBackground = _resourcesBackground + _attachmentPrice;
 								};
-							} 
+							}
 							forEach attachedObjects _veh;
 						};
 					};
@@ -95,6 +95,6 @@ if (isMultiplayer) then
 	} forEach (units group _playerUnit) - [_playerUnit]; //Can't have player unit in here, as it'll get nulled out if called on disconnect.
 	[_playerId, "moneyX",_resourcesBackground] call fn_SavePlayerStat;
 	};
-	
+
 savingClient = false;
 true;

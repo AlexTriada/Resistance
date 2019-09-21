@@ -3,8 +3,8 @@ params ["_newPosition"];
 respawnTeamPlayer setMarkerPos _newPosition;
 posHQ = _newPosition; publicVariable "posHQ";
 
-[respawnTeamPlayer, 1, teamPlayer] call A3A_fnc_setMarkerAlphaForSide;
-[respawnTeamPlayer, 1, civilian] call A3A_fnc_setMarkerAlphaForSide;
+[respawnTeamPlayer, 1, teamPlayer] call RES_fnc_setMarkerAlphaForSide;
+[respawnTeamPlayer, 1, civilian] call RES_fnc_setMarkerAlphaForSide;
 
 private _alignNormals = {
 	private _thing = _this;

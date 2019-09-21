@@ -27,11 +27,11 @@ petros disableAI "MOVE";
 petros disableAI "AUTOTARGET";
 
 if (petros == leader groupPetros) then {
-	[Petros,"mission"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],petros]
+	[Petros,"mission"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],petros]
 } else {
-	[Petros,"buildHQ"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],petros]
+	[Petros,"buildHQ"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],petros]
 };
 
-[] spawn A3A_fnc_initPetros;
+[] spawn RES_fnc_initPetros;
 
 deleteVehicle _oldPetros;

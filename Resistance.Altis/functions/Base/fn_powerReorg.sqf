@@ -13,7 +13,7 @@ if (_power == _markerX) then
 	if (_markerX in destroyedCities) then
 		{
 		_powered = false;
-		//[-10,-10,_pos] remoteExec ["A3A_fnc_citySupportChange",2];
+		//[-10,-10,_pos] remoteExec ["RES_fnc_citySupportChange",2];
 		}
 	else
 		{
@@ -23,14 +23,14 @@ if (_power == _markerX) then
 			if (sidesX getVariable [_city,sideUnknown] == teamPlayer) then
 				{
 				//hint format ["You achieved to bring power to %1, more people there supports our cause",_city];
-				//[-10,10,_pos] remoteExec ["A3A_fnc_citySupportChange",2];
-				_nul = [5,0] remoteExec ["A3A_fnc_prestige",2];
+				//[-10,10,_pos] remoteExec ["RES_fnc_citySupportChange",2];
+				_nul = [5,0] remoteExec ["RES_fnc_prestige",2];
 				}
 			else
 				{
 				//hint format ["You cutted off power to %1, less people support AAF there",_city];
-				//[-10,0,_pos] remoteExec ["A3A_fnc_citySupportChange",2];
-				_nul = [-5,0] remoteExec ["A3A_fnc_prestige",2];
+				//[-10,0,_pos] remoteExec ["RES_fnc_citySupportChange",2];
+				_nul = [-5,0] remoteExec ["RES_fnc_prestige",2];
 				_powered = false;
 				};
 			}
@@ -39,13 +39,13 @@ if (_power == _markerX) then
 			if (sidesX getVariable [_city,sideUnknown] == teamPlayer) then
 				{
 				//hint format ["AAF has cut off power to %1, less people there supports our cause",_city];
-				//[0,-10,_pos] remoteExec ["A3A_fnc_citySupportChange",2];
-				_nul = [5,0] remoteExec ["A3A_fnc_prestige",2];
+				//[0,-10,_pos] remoteExec ["RES_fnc_citySupportChange",2];
+				_nul = [5,0] remoteExec ["RES_fnc_prestige",2];
 				_powered = false;
 				};
 			};
 		};
-	[_city,_powered] spawn A3A_fnc_blackout;
+	[_city,_powered] spawn RES_fnc_blackout;
 	};
 } forEach citiesX;
 
@@ -60,7 +60,7 @@ if (_power == _markerX) then
 	if (_markerX in destroyedCities) then
 		{
 		_powered = false;
-		//[-10,-10,_pos] remoteExec ["A3A_fnc_citySupportChange",2];
+		//[-10,-10,_pos] remoteExec ["RES_fnc_citySupportChange",2];
 		}
 	else
 		{
@@ -83,6 +83,6 @@ if (_power == _markerX) then
 				};
 			};
 		};
-	[_siteX,_powered] spawn A3A_fnc_blackout;
+	[_siteX,_powered] spawn RES_fnc_blackout;
 	};
 } forEach _markersX;

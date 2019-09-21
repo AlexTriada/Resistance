@@ -5,7 +5,7 @@ _reinfPlaces = [];
 {
 	_airportX = _x;
 	_numberX = 8;
-	_numGarr = [_airportX] call A3A_fnc_garrisonSize;
+	_numGarr = [_airportX] call RES_fnc_garrisonSize;
 	_numReal = count (garrison getVariable _airportX);
 	_sideX = sidesX getVariable [_airportX,sideUnknown];
 
@@ -14,12 +14,12 @@ _reinfPlaces = [];
 	{
 		if (_numReal + 8 <= _numGarr) then
 		{
-			if (_sideX == Occupants) then {[selectRandom groupsNATOSquad,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]} else {[selectRandom groupsCSATSquad,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]};
+			if (_sideX == Occupants) then {[selectRandom groupsNATOSquad,_sideX,_airportX,0] remoteExec ["RES_fnc_garrisonUpdate",2]} else {[selectRandom groupsCSATSquad,_sideX,_airportX,0] remoteExec ["RES_fnc_garrisonUpdate",2]};
 			_numberX = 0;
 		}
 		else
 		{
-			if (_sideX == Occupants) then {[selectRandom groupsNATOmid,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]} else {[selectRandom groupsCSATmid,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]};
+			if (_sideX == Occupants) then {[selectRandom groupsNATOmid,_sideX,_airportX,0] remoteExec ["RES_fnc_garrisonUpdate",2]} else {[selectRandom groupsCSATmid,_sideX,_airportX,0] remoteExec ["RES_fnc_garrisonUpdate",2]};
 			_numberX = 4;
 		};
 	};
@@ -40,7 +40,7 @@ _reinfPlaces = [];
 			_countX = 0;
 			_siteX = "";
 			{
-				_numGarr = [_x] call A3A_fnc_garrisonSize;
+				_numGarr = [_x] call RES_fnc_garrisonSize;
 				_numReal = count (garrison getVariable _x);
 				if (_numGarr - _numReal > _countX) then
 				{
@@ -55,17 +55,17 @@ _reinfPlaces = [];
 					if ({(_x distance2D _positionX < (2*distanceSPWN)) or (_x distance2D (getMarkerPos _siteX) < (2*distanceSPWN))} count allPlayers == 0) then
 					{
 						_typeGroup = if (_sideX == Occupants) then {if (_numberX == 4) then {selectRandom groupsNATOmid} else {selectRandom groupsNATOSquad}} else {if (_numberX == 4) then {selectRandom groupsCSATmid} else {selectRandom groupsCSATSquad}};
-						[_typeGroup,_sideX,_siteX,2] remoteExec ["A3A_fnc_garrisonUpdate",2];
+						[_typeGroup,_sideX,_siteX,2] remoteExec ["RES_fnc_garrisonUpdate",2];
 
 						//This line send a virtual convoy, execute [] execVM "Convoy\convoyDebug.sqf" as admin to see it
 						//If it breaks, it doesn't change anything
 						//If it works, it will not add any troups
-						[_siteX, "Reinforce", _sideX, [(_numberX == 4)]] remoteExec ["A3A_fnc_createAIAction", 2];
+						[_siteX, "Reinforce", _sideX, [(_numberX == 4)]] remoteExec ["RES_fnc_createAIAction", 2];
 					}
 					else
 					{
 						_reinfPlaces pushBack _siteX;
-						[[_siteX,_airportX,_numberX,_sideX],"A3A_fnc_patrolReinf"] call A3A_fnc_scheduler;
+						[[_siteX,_airportX,_numberX,_sideX],"RES_fnc_patrolReinf"] call RES_fnc_scheduler;
 					};
 				};
 			};
@@ -74,4 +74,4 @@ _reinfPlaces = [];
 	if (count _reinfPlaces > 3) exitWith {};
 } forEach _airportsX;
 
-if ((count _reinfPlaces == 0) and (AAFpatrols <= 3)) then {[] spawn A3A_fnc_AAFroadPatrol};
+if ((count _reinfPlaces == 0) and (AAFpatrols <= 3)) then {[] spawn RES_fnc_AAFroadPatrol};

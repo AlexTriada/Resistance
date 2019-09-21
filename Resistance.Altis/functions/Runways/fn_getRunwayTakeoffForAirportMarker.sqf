@@ -3,7 +3,7 @@
 params ["_marker"];
 
 private _markerPos = getMarkerPos _marker;
-private _runways = call A3A_fnc_runwayInfo;
+private _runways = call RES_fnc_runwayInfo;
 
 //This is a fairly arbitrary number, but usually, the airport marker is the closest thing to the runway in 700m.
 //The only case where this might fuck up is if it's called on some the weird airports which have bases in them near the ends of the runway.

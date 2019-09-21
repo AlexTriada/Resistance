@@ -12,7 +12,7 @@ _groups = [];
 _soldiers = [];
 _vehiclesX = [];
 
-_size = [_markerX] call A3A_fnc_sizeMarker;
+_size = [_markerX] call RES_fnc_sizeMarker;
 
 _divisor = 50;
 
@@ -31,11 +31,11 @@ while {(_size > 0)} do
 	{
 	if (random 20 <= skillFIA) then {_formatX pushBack (_x select 1)} else {_formatX pushBack (_x select 0)};
 	} forEach _typeGroup;
-	_groupX = [_originX, teamPlayer, _formatX,false,true] call A3A_fnc_spawnGroup;
+	_groupX = [_originX, teamPlayer, _formatX,false,true] call RES_fnc_spawnGroup;
 	if !(isNull _groupX) then
 		{
 		_groups pushBack _groupX;
-		{[_x] spawn A3A_fnc_FIAinit; _soldiers pushBack _x} forEach units _groupX;
+		{[_x] spawn RES_fnc_FIAinit; _soldiers pushBack _x} forEach units _groupX;
 		_Vwp1 = _groupX addWaypoint [_destinationX, 0];
 		_Vwp1 setWaypointType "MOVE";
 		_Vwp1 setWaypointBehaviour "AWARE";

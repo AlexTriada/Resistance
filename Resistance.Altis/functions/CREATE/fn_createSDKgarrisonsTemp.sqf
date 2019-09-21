@@ -14,14 +14,14 @@ if (_typeX isEqualType "") then
 		};
 	_unit = _groupX createUnit [_typeX, _positionX, [], 0, "NONE"];
 	//if (_typeX in SDKSL) then {_groupX selectLeader _unit};
-	[_unit,_markerX] call A3A_fnc_FIAinitBases;
+	[_unit,_markerX] call RES_fnc_FIAinitBases;
 	if (_typeX == staticCrewTeamPlayer) then
 		{
 		private _veh = SDKMortar createVehicle _positionX;
 		_nul=[_veh] execVM "scripts\UPSMON\MON_artillery_add.sqf";//TODO need delete UPSMON link
 		_unit assignAsGunner _veh;
 		_unit moveInGunner _veh;
-		[_veh] call A3A_fnc_AIVEHinit;
+		[_veh] call RES_fnc_AIVEHinit;
 		};
 	if (_groups isEqualTo []) then
 		{

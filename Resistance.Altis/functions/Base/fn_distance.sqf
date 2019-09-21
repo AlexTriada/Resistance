@@ -74,18 +74,18 @@ if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then
 				spawner setVariable [_markerX,0,true];
 				if (_markerX in citiesX) then
 					{
-					if (({if (_x distance2D _positionMRK < distanceSPWN) exitWith {1}} count _greenfor > 0) or ({if ((isPlayer _x) and (_x distance2D _positionMRK < distanceSPWN2)) exitWith {1}} count _blufor > 0) or (_markerX in forcedSpawn)) then {[[_markerX],"A3A_fnc_createAICities"] call A3A_fnc_scheduler};
+					if (({if (_x distance2D _positionMRK < distanceSPWN) exitWith {1}} count _greenfor > 0) or ({if ((isPlayer _x) and (_x distance2D _positionMRK < distanceSPWN2)) exitWith {1}} count _blufor > 0) or (_markerX in forcedSpawn)) then {[[_markerX],"RES_fnc_createAICities"] call RES_fnc_scheduler};
 					if (not(_markerX in destroyedCities)) then
 						{
-						if (({if ((isPlayer _x) and (_x distance2D _positionMRK < distanceSPWN)) exitWith {1};false} count allUnits > 0) or (_markerX in forcedSpawn)) then {[[_markerX],"A3A_fnc_createCIV"] call A3A_fnc_scheduler};
+						if (({if ((isPlayer _x) and (_x distance2D _positionMRK < distanceSPWN)) exitWith {1};false} count allUnits > 0) or (_markerX in forcedSpawn)) then {[[_markerX],"RES_fnc_createCIV"] call RES_fnc_scheduler};
 						};
 					}
 				else
 					{
-					if (_markerX in controlsX) then {[[_markerX],"A3A_fnc_createAIcontrols"] call A3A_fnc_scheduler} else {
-					if (_markerX in airportsX) then {[[_markerX],"A3A_fnc_createAIAirplane"] call A3A_fnc_scheduler} else {
-					if (((_markerX in resourcesX) or (_markerX in factories))) then {[[_markerX],"A3A_fnc_createAIResources"] call A3A_fnc_scheduler} else {
-					if ((_markerX in outposts) or (_markerX in seaports)) then {[[_markerX],"A3A_fnc_createAIOutposts"] call A3A_fnc_scheduler};};};};
+					if (_markerX in controlsX) then {[[_markerX],"RES_fnc_createAIcontrols"] call RES_fnc_scheduler} else {
+					if (_markerX in airportsX) then {[[_markerX],"RES_fnc_createAIAirplane"] call RES_fnc_scheduler} else {
+					if (((_markerX in resourcesX) or (_markerX in factories))) then {[[_markerX],"RES_fnc_createAIResources"] call RES_fnc_scheduler} else {
+					if ((_markerX in outposts) or (_markerX in seaports)) then {[[_markerX],"RES_fnc_createAIOutposts"] call RES_fnc_scheduler};};};};
 					};
 				};
 			}
@@ -141,13 +141,13 @@ else
 					spawner setVariable [_markerX,0,true];
 					if (_markerX in citiesX) then
 						{
-						//[_markerX] remoteExec ["A3A_fnc_createAICities",HCGarrisons];
+						//[_markerX] remoteExec ["RES_fnc_createAICities",HCGarrisons];
 						if (not(_markerX in destroyedCities)) then
 							{
-							if (({if ((isPlayer _x) and (_x distance2D _positionMRK < distanceSPWN)) exitWith {1};false} count allUnits > 0) or (_markerX in forcedSpawn)) then {[[_markerX],"A3A_fnc_createCIV"] call A3A_fnc_scheduler};
+							if (({if ((isPlayer _x) and (_x distance2D _positionMRK < distanceSPWN)) exitWith {1};false} count allUnits > 0) or (_markerX in forcedSpawn)) then {[[_markerX],"RES_fnc_createCIV"] call RES_fnc_scheduler};
 							};
 						};
-					if (_markerX in outpostsFIA) then {[[_markerX],"A3A_fnc_createFIAOutposts2"] call A3A_fnc_scheduler} else {if (not(_markerX in controlsX)) then {[[_markerX],"A3A_fnc_createSDKGarrisons"] call A3A_fnc_scheduler}};
+					if (_markerX in outpostsFIA) then {[[_markerX],"RES_fnc_createFIAOutposts2"] call RES_fnc_scheduler} else {if (not(_markerX in controlsX)) then {[[_markerX],"RES_fnc_createSDKGarrisons"] call RES_fnc_scheduler}};
 					};
 				}
 			else
@@ -198,10 +198,10 @@ else
 				if (({if (_x distance2D _positionMRK < distanceSPWN) exitWith {1}} count _greenfor > 0) or ({if (_x distance2D _positionMRK < distanceSPWN2) exitWith {1}} count _blufor > 0) or (_markerX in forcedSpawn)) then
 					{
 					spawner setVariable [_markerX,0,true];
-					if (_markerX in controlsX) then {[[_markerX],"A3A_fnc_createAIcontrols"] call A3A_fnc_scheduler} else {
-					if (_markerX in airportsX) then {[[_markerX],"A3A_fnc_createAIAirplane"] call A3A_fnc_scheduler} else {
-					if (((_markerX in resourcesX) or (_markerX in factories))) then {[[_markerX],"A3A_fnc_createAIResources"] call A3A_fnc_scheduler} else {
-					if ((_markerX in outposts) or (_markerX in seaports)) then {[[_markerX],"A3A_fnc_createAIOutposts"] call A3A_fnc_scheduler};};};};
+					if (_markerX in controlsX) then {[[_markerX],"RES_fnc_createAIcontrols"] call RES_fnc_scheduler} else {
+					if (_markerX in airportsX) then {[[_markerX],"RES_fnc_createAIAirplane"] call RES_fnc_scheduler} else {
+					if (((_markerX in resourcesX) or (_markerX in factories))) then {[[_markerX],"RES_fnc_createAIResources"] call RES_fnc_scheduler} else {
+					if ((_markerX in outposts) or (_markerX in seaports)) then {[[_markerX],"RES_fnc_createAIOutposts"] call RES_fnc_scheduler};};};};
 					};
 				}
 			else

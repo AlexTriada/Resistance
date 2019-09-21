@@ -20,8 +20,8 @@ if (isMultiplayer) exitWith
 		if (_pointsX > 1) then
 			{
 			_textX = format ["<br/><br/><br/><br/><br/><br/>Money +%1 €",_pointsX*10];
-			[petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",_playerX];
-			//[] remoteExec ["A3A_fnc_statistics",_playerX];
+			[petros,"income",_textX] remoteExec ["RES_fnc_commsMP",_playerX];
+			//[] remoteExec ["RES_fnc_statistics",_playerX];
 			};
 		};
 	_pointsX = _pointsX + _pointsXJ;
@@ -30,6 +30,5 @@ if (isMultiplayer) exitWith
 
 if (_pointsX > 0) then
 	{
-	if (_pointsX != 1) then {[0,(_pointsX * 5)] remoteExec ["A3A_fnc_resourcesFIA",2]} else {[0,20-(tierWar * 2)] remoteExec ["A3A_fnc_resourcesFIA",2]};
+	if (_pointsX != 1) then {[0,(_pointsX * 5)] remoteExec ["RES_fnc_resourcesFIA",2]} else {[0,20-(tierWar * 2)] remoteExec ["RES_fnc_resourcesFIA",2]};
 	};
-

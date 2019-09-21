@@ -20,7 +20,7 @@ while {alive _veh} do
 		if ((teamPlayer knowsAbout _veh > 1.4) or revealX or _convoy) then
 			{
 			_veh setVariable ["revealed",true,true];
-			[_veh,_text] remoteExec  ["A3A_fnc_vehicleMarkers",[teamPlayer,civilian]];
+			[_veh,_text] remoteExec  ["RES_fnc_vehicleMarkers",[teamPlayer,civilian]];
 			};
 		}
 	else
@@ -54,7 +54,7 @@ while {alive _veh} do
 				{
 				if ({_x distance _newPos < 500} count (allPlayers - (entities "HeadlessClient_F")) == 0) then
 					{
-					_puentes = nearestObjects [_newPos, ["Land_Bridge_01_PathLod_F","Land_Bridge_Asphalt_PathLod_F","Land_Bridge_Concrete_PathLod_F","Land_Bridge_HighWay_PathLod_F","Land_BridgeSea_01_pillar_F","Land_BridgeWooden_01_pillar_F"], 50];
+					_puentes = nearestObjects [_newPos, ["Land_Bridge_01_PathLod_F","Land_Bridge_Asphalt_PathLod_F","Land_Bridge_Concrete_PathLod_F","Land_Bridge_HighWay_PathLod_F","Land_BridgeSea_01_pillaRES_F","Land_BridgeWooden_01_pillaRES_F"], 50];
 					if !(_puentes isEqualTo []) then
 						{
 						_nextWaypoint = currentWaypoint (group _driverX);

@@ -5,14 +5,14 @@ _objectsX = [];
 _todo = [];
 _proceed = false;
 
-[driver _truckX,"remove"] remoteExec ["A3A_fnc_flagaction",driver _truckX];
+[driver _truckX,"remove"] remoteExec ["RES_fnc_flagaction",driver _truckX];
 
 _objectsX = nearestObjects [_truckX, ["ReammoBox_F"], 20];
 
 if (count _objectsX == 0) exitWith {};
 _boxX = _objectsX select 0;
 
-if ((_boxX == boxX) and (player!=theBoss)) exitWith {hint "Only the Commander can transfer this ammobox content to any truck"; [driver _truckX,"truckX"] remoteExec ["A3A_fnc_flagaction",driver _truckX]};
+if ((_boxX == boxX) and (player!=theBoss)) exitWith {hint "Only the Commander can transfer this ammobox content to any truck"; [driver _truckX,"truckX"] remoteExec ["RES_fnc_flagaction",driver _truckX]};
 
 
 _weaponsX = weaponCargo _boxX;
@@ -42,7 +42,7 @@ if (count weaponsItemsCargo _truckX > 0) then
 if (count backpackCargo _boxX > 0) then
 	{
 	{
-	_backpcks pushBack (_x call A3A_fnc_basicBackpack);
+	_backpcks pushBack (_x call RES_fnc_basicBackpack);
 	} forEach backpackCargo _boxX;
 	};
 _containers = everyContainer _boxX;
@@ -83,7 +83,7 @@ if (_countX > 0) then
 		sleep 1;
 		if (_countX == 0) then
 			{
-			[_boxX,_truckX] remoteExec ["A3A_fnc_ammunitionTransfer",2];
+			[_boxX,_truckX] remoteExec ["RES_fnc_ammunitionTransfer",2];
 			_proceed = true;
 			};
 		if ((_truckX != vehicle player) or (speed _truckX != 0)) then
@@ -94,4 +94,4 @@ if (_countX > 0) then
 		};
 	};
 
-if (_proceed) then {[driver _truckX,"truckX"] remoteExec ["A3A_fnc_flagaction",driver _truckX]};
+if (_proceed) then {[driver _truckX,"truckX"] remoteExec ["RES_fnc_flagaction",driver _truckX]};

@@ -39,16 +39,16 @@ else
 if (_leave) exitWith {zoneCheckInProgress = false};
 _leave = true;
 
-if ({((_x getVariable ["spawner",false]) and ((side group _x) in [_enemy1,_enemy2])) and ([_x,_markerX] call A3A_fnc_canConquer)} count allUnits > 3*({([_x,_markerX] call A3A_fnc_canConquer) and (_x getVariable ["markerX",""] == _markerX)} count allUnits)) then
+if ({((_x getVariable ["spawner",false]) and ((side group _x) in [_enemy1,_enemy2])) and ([_x,_markerX] call RES_fnc_canConquer)} count allUnits > 3*({([_x,_markerX] call RES_fnc_canConquer) and (_x getVariable ["markerX",""] == _markerX)} count allUnits)) then
 	{
 	_leave = false;
 	};
 if (_leave) exitWith {zoneCheckInProgress = false};
 
 _winner = _enemy1;
-if ({(_x getVariable ["spawner",false]) and (side group _x == _enemy1) and ([_x,_markerX] call A3A_fnc_canConquer)} count allUnits <= {(_x getVariable ["spawner",false]) and (side group _x == _enemy2) and ([_x,_markerX] call A3A_fnc_canConquer)} count allUnits) then {_winner = _enemy2};
+if ({(_x getVariable ["spawner",false]) and (side group _x == _enemy1) and ([_x,_markerX] call RES_fnc_canConquer)} count allUnits <= {(_x getVariable ["spawner",false]) and (side group _x == _enemy2) and ([_x,_markerX] call RES_fnc_canConquer)} count allUnits) then {_winner = _enemy2};
 
-[_winner,_markerX] remoteExec ["A3A_fnc_markerChange",2];
+[_winner,_markerX] remoteExec ["RES_fnc_markerChange",2];
 
 waitUntil {sleep 1; sidesX getVariable [_markerX,sideUnknown] == _winner};
 zoneCheckInProgress = false;

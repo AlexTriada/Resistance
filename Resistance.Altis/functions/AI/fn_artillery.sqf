@@ -10,7 +10,7 @@ _sidesOccupants = _sideX call BIS_fnc_enemySides;
 _posDestination = getMarkerPos _mrkDestination;
 _typeVehX = if (_sideX == Occupants) then {vehNATOMRLS} else {vehCSATMRLS};
 
-if !([_typeVehX] call A3A_fnc_vehAvailable) exitWith {};
+if !([_typeVehX] call RES_fnc_vehAvailable) exitWith {};
 
 _typeAmmunition = if (_sideX == Occupants) then {vehNATOMRLSMags} else {vehCSATMRLSMags};
 
@@ -19,10 +19,10 @@ _pos = [_posOrigin, 50,100, 10, 0, 0.3, 0] call BIS_Fnc_findSafePos;
 _vehicle=[_pos, random 360,_typeVehX, _sideX] call bis_fnc_spawnvehicle;
 _veh = _vehicle select 0;
 _vehCrew = _vehicle select 1;
-{[_x] call A3A_fnc_NATOinit} forEach _vehCrew;
-[_veh] call A3A_fnc_AIVEHinit;
+{[_x] call RES_fnc_NATOinit} forEach _vehCrew;
+[_veh] call RES_fnc_AIVEHinit;
 _groupVeh = _vehicle select 2;
-_size = [_mrkDestination] call A3A_fnc_sizeMarker;
+_size = [_mrkDestination] call RES_fnc_sizeMarker;
 
 if (_posDestination inRangeOfArtillery [[_veh], ((getArtilleryAmmo [_veh]) select 0)]) then
 	{
@@ -72,11 +72,11 @@ if (_posDestination inRangeOfArtillery [[_veh], ((getArtilleryAmmo [_veh]) selec
 		};
 	};
 
-if (!([distanceSPWN,1,_veh,teamPlayer] call A3A_fnc_distanceUnits) and (({_x distance _veh <= distanceSPWN} count (allPlayers - (entities "HeadlessClient_F"))) == 0)) then {deleteVehicle _veh};
+if (!([distanceSPWN,1,_veh,teamPlayer] call RES_fnc_distanceUnits) and (({_x distance _veh <= distanceSPWN} count (allPlayers - (entities "HeadlessClient_F"))) == 0)) then {deleteVehicle _veh};
 
 {
 _veh = _x;
-waitUntil {sleep 1; !([distanceSPWN,1,_veh,teamPlayer] call A3A_fnc_distanceUnits) and (({_x distance _veh <= distanceSPWN} count (allPlayers - (entities "HeadlessClient_F"))) == 0)};
+waitUntil {sleep 1; !([distanceSPWN,1,_veh,teamPlayer] call RES_fnc_distanceUnits) and (({_x distance _veh <= distanceSPWN} count (allPlayers - (entities "HeadlessClient_F"))) == 0)};
 deleteVehicle _veh;
 } forEach _vehCrew;
 

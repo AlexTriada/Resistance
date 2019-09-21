@@ -110,7 +110,7 @@ publicVariable "unlockedAT";
 publicVariable "unlockedAA";
 if ("NVGoggles" in unlockedItems) then {haveNV = true; publicVariable "haveNV"};
 //Check if we have radios unlocked and update haveRadio.
-call A3A_fnc_checkRadiosUnlocked;
+call RES_fnc_checkRadiosUnlocked;
 
 {
 if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then
@@ -130,10 +130,10 @@ if (sidesX getVariable [_x,sideUnknown] == sideUnknown) then
 	};
 } forEach markersX;
 
-{[_x] call A3A_fnc_mrkUpdate} forEach (markersX - controlsX);
+{[_x] call RES_fnc_mrkUpdate} forEach (markersX - controlsX);
 if (count outpostsFIA > 0) then {markersX = markersX + outpostsFIA; publicVariable "markersX"};
 
-{if (_x in destroyedCities) then {[_x] call A3A_fnc_destroyCity}} forEach citiesX;
+{if (_x in destroyedCities) then {[_x] call RES_fnc_destroyCity}} forEach citiesX;
 
 ["chopForest"] call fn_LoadStat;
 // ["destroyedBuildings"] call fn_LoadStat;
@@ -159,7 +159,7 @@ clearWeaponCargoGlobal boxX;
 clearItemCargoGlobal boxX;
 clearBackpackCargoGlobal boxX;
 
-[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];
+[] remoteExec ["RES_fnc_statistics",[teamPlayer,civilian]];
 diag_log format ["%1: [Antistasi] | INFO | Persistent Load Completed.",servertime];
 diag_log format ["%1: [Antistasi] | INFO | Generating Map Markers.",servertime];
 ["tasks"] call fn_LoadStat;
@@ -169,10 +169,10 @@ if !(isMultiplayer) then
 	_pos = getMarkerPos _x;
 	_dmrk = createMarker [format ["Dum%1",_x], _pos];
 	_dmrk setMarkerShape "ICON";
-	[_x] call A3A_fnc_mrkUpdate;
+	[_x] call RES_fnc_mrkUpdate;
 	if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then
 		{
-		_nul = [_x] call A3A_fnc_createControls;
+		_nul = [_x] call RES_fnc_createControls;
 		};
 	} forEach airportsX;
 
@@ -182,10 +182,10 @@ if !(isMultiplayer) then
 	_dmrk setMarkerShape "ICON";
 	_dmrk setMarkerType "loc_rock";
 	_dmrk setMarkerText "Resources";
-	[_x] call A3A_fnc_mrkUpdate;
+	[_x] call RES_fnc_mrkUpdate;
 	if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then
 		{
-		_nul = [_x] call A3A_fnc_createControls;
+		_nul = [_x] call RES_fnc_createControls;
 		};
 	} forEach resourcesX;
 
@@ -195,10 +195,10 @@ if !(isMultiplayer) then
 	_dmrk setMarkerShape "ICON";
 	_dmrk setMarkerType "u_installation";
 	_dmrk setMarkerText "Factory";
-	[_x] call A3A_fnc_mrkUpdate;
+	[_x] call RES_fnc_mrkUpdate;
 	if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then
 		{
-		_nul = [_x] call A3A_fnc_createControls;
+		_nul = [_x] call RES_fnc_createControls;
 		};
 	} forEach factories;
 
@@ -207,10 +207,10 @@ if !(isMultiplayer) then
 	_dmrk = createMarker [format ["Dum%1",_x], _pos];
 	_dmrk setMarkerShape "ICON";
 	_dmrk setMarkerType "loc_bunker";
-	[_x] call A3A_fnc_mrkUpdate;
+	[_x] call RES_fnc_mrkUpdate;
 	if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then
 		{
-		_nul = [_x] call A3A_fnc_createControls;
+		_nul = [_x] call RES_fnc_createControls;
 		};
 	} forEach outposts;
 
@@ -220,10 +220,10 @@ if !(isMultiplayer) then
 	_dmrk setMarkerShape "ICON";
 	_dmrk setMarkerType "b_naval";
 	_dmrk setMarkerText "Sea Port";
-	[_x] call A3A_fnc_mrkUpdate;
+	[_x] call RES_fnc_mrkUpdate;
 	if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then
 		{
-		_nul = [_x] call A3A_fnc_createControls;
+		_nul = [_x] call RES_fnc_createControls;
 		};
 	} forEach seaports;
 	sidesX setVariable ["NATO_carrier",Occupants,true];

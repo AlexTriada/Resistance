@@ -27,7 +27,7 @@ if (_typeX == "income") then
 	//[_textX,0.8,0.5,5,0,0,2] spawn bis_fnc_dynamicText;
 	[_textX, [safeZoneX + (0.8 * safeZoneW), (0.2 * safeZoneW)], 0.5, 5, 0, 0, 2] spawn bis_fnc_dynamicText;
 	incomeRep = false;
-	[] spawn A3A_fnc_statistics;
+	[] spawn RES_fnc_statistics;
 	};
 
 if (_typeX == "countdown") then
@@ -45,7 +45,7 @@ if (_typeX == "taxRep") then
 	[_textX, [safeZoneX + (0.8 * safeZoneW), (0.2 * safeZoneW)], 0.5, 5, 0, 0, 2] spawn bis_fnc_dynamicText;
 	sleep 10;
 	incomeRep = false;
-	[] spawn A3A_fnc_statistics;
+	[] spawn RES_fnc_statistics;
 	};
 if (_typeX == "tier") then
 	{
@@ -57,5 +57,5 @@ if (_typeX == "tier") then
 	_textX = format ["War Level Changed<br/><br/>Current Level: %1",tierWar];
 	[_textX, [safeZoneX + (0.8 * safeZoneW), (0.2 * safeZoneW)], 0.5, 5, 0, 0, 2] spawn bis_fnc_dynamicText;
 	incomeRep = false;
-	[] spawn A3A_fnc_statistics;
+	[] spawn RES_fnc_statistics;
 	};

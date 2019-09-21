@@ -27,7 +27,7 @@ if ((_veh != _soldierX) and (not(_veh in _artyArray))) then
 		if ((canFire _veh) and (alive _veh) and (isNil "typeAmmunition")) then
 			{
 			_areAlive = true;
-			_nul = createDialog "mortar_type";
+			_nul = createDialog "mortaRES_type";
 			waitUntil {!dialog or !(isNil "typeAmmunition")};
 			if !(isNil "typeAmmunition") then
 				{
@@ -168,7 +168,7 @@ else
 	};
 
 _markerX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
-_size = [_markerX] call A3A_fnc_sizeMarker;
+_size = [_markerX] call RES_fnc_sizeMarker;
 _forcedX = false;
 
 if ((not(_markerX in forcedSpawn)) and (_positionTel distance (getMarkerPos _markerX) < _size) and ((spawner getVariable _markerX != 0))) then
@@ -179,7 +179,7 @@ if ((not(_markerX in forcedSpawn)) and (_positionTel distance (getMarkerPos _mar
 	};
 
 _textX = format ["Requesting fire support on Grid %1. %2 Rounds", mapGridPosition _positionTel, round _rounds];
-[theBoss,"sideChat",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+[theBoss,"sideChat",_textX] remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
 
 if (_typeArty == "BARRAGE") then
 	{
@@ -193,13 +193,13 @@ if (_typeArty == "BARRAGE") then
 	_eta = (_artyArrayDef1 select 0) getArtilleryETA [_positionTel, ((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0)];
 	_timeX = time + _eta;
 	_textX = format ["Acknowledged. Fire mission is inbound. ETA %1 secs for the first impact",round _eta];
-	[petros,"sideChat",_textX]remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+	[petros,"sideChat",_textX]remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
 	[_timeX] spawn
 		{
 		private ["_timeX"];
 		_timeX = _this select 0;
 		waitUntil {sleep 1; time > _timeX};
-		[petros,"sideChat","Splash. Out"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+		[petros,"sideChat","Splash. Out"] remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
 		};
 	};
 
@@ -258,13 +258,13 @@ if (_typeArty != "BARRAGE") then
 		diag_log format ["%1: [Antistasi] | ERROR | ArtySupport.sqf | Params: %2,%3,%4,%5",servertime,_artyArrayDef1 select 0,_positionTel,((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0),(_artyArrayDef1 select 0) getArtilleryETA [_positionTel, ((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0)]];
 		};
 	_textX = format ["Acknowledged. Fire mission is inbound. %2 Rounds fired. ETA %1 secs",round _eta,_roundsMax - _rounds];
-	[petros,"sideChat",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+	[petros,"sideChat",_textX] remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
 	};
 
 if (_typeArty != "BARRAGE") then
 	{
 	waitUntil {sleep 1; time > _timeX};
-	[petros,"sideChat","Splash. Out"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+	[petros,"sideChat","Splash. Out"] remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
 	};
 sleep 10;
 deleteMarkerLocal _mrkFinal;

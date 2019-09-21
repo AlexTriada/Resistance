@@ -2,7 +2,7 @@ _unit = _this select 0;
 _truckX = _this select 1;
 
 if ((isPlayer _unit) or (player != leader group player)) exitWith {};
-if !([_unit] call A3A_fnc_canFight) exitWith {};
+if !([_unit] call RES_fnc_canFight) exitWith {};
 //_helping = _unit getVariable "helping";
 if (_unit getVariable ["helping",false]) exitWith {_unit groupChat "I cannot rearm right now. I'm healing a comrade"};
 _rearming = _unit getVariable "rearming";
@@ -68,7 +68,7 @@ _unit action ["GetOut",_truckX];
 
 _continuar = true;
 
-while {_continuar and ([_unit] call A3A_fnc_canFight) and (_unit getVariable "rearming") and (alive _truckX) and (_bigTimeout > time)} do
+while {_continuar and ([_unit] call RES_fnc_canFight) and (_unit getVariable "rearming") and (alive _truckX) and (_bigTimeout > time)} do
 	{
 	if (isNull _target) exitWith {_continuar = false};
 	_target setVariable ["busy",true];
@@ -103,13 +103,13 @@ while {_continuar and ([_unit] call A3A_fnc_canFight) and (_unit getVariable "re
 			_target setVariable ["busy",true];
 			_unit doMove (getPosATL _target);
 			_timeOut = time + 60;
-			waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+			waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
 			if (_unit distance _target < 3) then
 				{
 				{if (!(_x in unlockedMagazines) and !(_x in unlockedItems)) then {_unit addItemToUniform _x}} forEach (uniformItems _target);
 				if (backPack _target != "") then
 					{
-					_unit addBackpack ((backpack _target) call A3A_fnc_basicBackpack);
+					_unit addBackpack ((backpack _target) call RES_fnc_basicBackpack);
 					{if (!(_x in unlockedMagazines) and !(_x in unlockedItems)) then {_unit addItemToBackpack _x}} forEach backpackItems _target;
 					removeBackpack _target;
 					};
@@ -136,8 +136,8 @@ while {_continuar and ([_unit] call A3A_fnc_canFight) and (_unit getVariable "re
 
 	_unit doMove (getPosATL _truckX);
 	_timeOut = time + 60;
-	waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (!alive _truckX) or (_unit distance _truckX < 8) or (_timeOut < time)};
-	if ((alive _truckX) and ([_unit] call A3A_fnc_canFight)) then
+	waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (!alive _truckX) or (_unit distance _truckX < 8) or (_timeOut < time)};
+	if ((alive _truckX) and ([_unit] call RES_fnc_canFight)) then
 		{
 		if (_tempPrimary != "") then
 			{

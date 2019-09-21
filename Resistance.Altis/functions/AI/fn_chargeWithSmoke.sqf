@@ -1,7 +1,7 @@
 private ["_unit","_muzzle","_enemy","_return"];
 
 _unit = _this select 0;
-if !([_unit] call A3A_fnc_canFight) exitWith {};
+if !([_unit] call RES_fnc_canFight) exitWith {};
 _helped = _this select 1;
 _return = false;
 if (time < _unit getVariable ["smokeUsed",time - 1]) exitWith {_return};
@@ -10,7 +10,7 @@ if (vehicle _unit != _unit) exitWith {};
 
 _unit setVariable ["smokeUsed",time + 60];
 
-_muzzle = [_unit] call A3A_fnc_returnMuzzle;
+_muzzle = [_unit] call RES_fnc_returnMuzzle;
 _enemy = if (count _this > 2) then {_this select 2} else {_unit findNearestEnemy _unit};
 if (_muzzle !="") then
 	{
@@ -37,7 +37,7 @@ else
 	{
 	if (side _unit != teamPlayer) then
 		{
-		if (fleeing _unit) then {[_unit,_enemy] call A3A_fnc_suppressingFire};
+		if (fleeing _unit) then {[_unit,_enemy] call RES_fnc_suppressingFire};
 		};
 	};
 _return

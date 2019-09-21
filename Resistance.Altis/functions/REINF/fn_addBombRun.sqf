@@ -32,4 +32,4 @@ deleteVehicle _veh;
 hint format ["Air Support increased in %1 points",_pointsX];
 bombRuns = bombRuns + _pointsX;
 publicVariable "bombRuns";
-[] remoteExec ["A3A_fnc_statistics",theBoss];
+[] remoteExec ["RES_fnc_statistics",theBoss];

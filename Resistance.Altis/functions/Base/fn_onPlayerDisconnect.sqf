@@ -33,11 +33,11 @@ if (_unit == theBoss) then
 					_typeVehX = typeOf _veh;
 					if ((_veh isKindOf "StaticWeapon") and (not(_veh in staticsToSave))) then
 						{
-						_resourcesX = _resourcesX + ([_typeVehX] call A3A_fnc_vehiclePrice) + ([typeOf (vehicle leader _x)] call A3A_fnc_vehiclePrice);
+						_resourcesX = _resourcesX + ([_typeVehX] call RES_fnc_vehiclePrice) + ([typeOf (vehicle leader _x)] call RES_fnc_vehiclePrice);
 						}
 					else
 						{
-						if (_typeVehX in vehFIA) then {_resourcesX = _resourcesX + ([_typeVehX] call A3A_fnc_vehiclePrice);};
+						if (_typeVehX in vehFIA) then {_resourcesX = _resourcesX + ([_typeVehX] call RES_fnc_vehiclePrice);};
 						/*
 						if (_typeVehX in vehAAFnormal) then {_resourcesX = _resourcesX + 300};
 						if (_typeVehX in vehAAFAT) then
@@ -48,7 +48,7 @@ if (_unit == theBoss) then
 						if (count attachedObjects _veh > 0) then
 							{
 							_subVeh = (attachedObjects _veh) select 0;
-							_resourcesX = _resourcesX + ([(typeOf _subVeh)] call A3A_fnc_vehiclePrice);
+							_resourcesX = _resourcesX + ([(typeOf _subVeh)] call RES_fnc_vehiclePrice);
 							deleteVehicle _subVeh;
 							};
 						};
@@ -65,22 +65,22 @@ if (_unit == theBoss) then
 	publicVariable "theBoss";
 	if (((count playableUnits > 0) and (!membershipEnabled)) or ({(getPlayerUID _x) in membersX} count playableUnits > 0)) then
 		{
-		[] spawn A3A_fnc_assigntheBoss;
+		[] spawn RES_fnc_assigntheBoss;
 		};
-	if (group petros == group _unit) then {[] spawn A3A_fnc_buildHQ};
+	if (group petros == group _unit) then {[] spawn RES_fnc_buildHQ};
 	};
 
 //Need to check the group's side, as player may be a civ. Unknown is in case they've been moved out of their group.
 if (side group _unit == teamPlayer || side group _unit == sideUnknown) then
 	{
-	if ((_hr > 0) or (_resourcesX > 0)) then {[_hr,_resourcesX] spawn A3A_fnc_resourcesFIA};
+	if ((_hr > 0) or (_resourcesX > 0)) then {[_hr,_resourcesX] spawn RES_fnc_resourcesFIA};
 	if (membershipEnabled and pvpEnabled) then
 		{
 		if (_uid in membersX) then {playerHasBeenPvP pushBack [_uid,time]};
 		};
 	};
-	
-[_uid, _unit] call A3A_fnc_savePlayer;
+
+[_uid, _unit] call RES_fnc_savePlayer;
 
 _pos = getPosATL _unit;
 _wholder = nearestObjects [_pos, ["weaponHolderSimulated", "weaponHolder"], 2];

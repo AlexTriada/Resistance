@@ -21,7 +21,7 @@ if (_csatT > 25*(tierWar + difficultyCoef)) then {_csatT = 25*tierWar};
 
 if (_nato != 0) then {prestigeNATO = _natoT; publicVariable "prestigeNATO"};
 if (_csat != 0) then {prestigeCSAT = _csatT; publicVariable "prestigeCSAT"};
-//if ((_natoT == floor _natoT) or (_csatT == floor _csatT)) then {[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]]};
+//if ((_natoT == floor _natoT) or (_csatT == floor _csatT)) then {[] remoteExec ["RES_fnc_statistics",[teamPlayer,civilian]]};
 prestigeIsChanging = false;
 _textX = "";
 _natoSim = "";
@@ -38,4 +38,4 @@ else
 	if (_nato > 0.25) then {_textX = format ["<t size='0.6' color='#C1C0BB'>Prestige Change.<br/> <t size='0.5' color='#C1C0BB'><br/>%2: %3%1",_nato,nameOccupants,_natoSim]} else {if (_csat > 0.25) then {_textX = format ["<t size='0.6' color='#C1C0BB'>Prestige Change.<br/> <t size='0.5' color='#C1C0BB'><br/>%1: %4%2",nameInvaders,_csat,_natoSim,_csatSim]}};
 	};
 
-if (_textX != "") then {[petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",theBoss]};
+if (_textX != "") then {[petros,"income",_textX] remoteExec ["RES_fnc_commsMP",theBoss]};

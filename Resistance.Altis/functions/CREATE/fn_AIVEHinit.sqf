@@ -3,7 +3,7 @@ private ["_veh","_typeX"];
 _veh = _this select 0;
 if (isNil "_veh") exitWith {};
 if ((_veh isKindOf "FlagCarrier") or (_veh isKindOf "Building") or (_veh isKindOf "ReammoBox_F")) exitWith {};
-//if (_veh isKindOf "ReammoBox_F") exitWith {[_veh] call A3A_fnc_NATOcrate};
+//if (_veh isKindOf "ReammoBox_F") exitWith {[_veh] call RES_fnc_NATOcrate};
 
 _typeX = typeOf _veh;
 
@@ -12,14 +12,14 @@ if ((_typeX in vehNormal) or (_typeX in vehAttack) or (_typeX in vehBoats)) then
 	_veh addEventHandler ["Killed",
 		{
 		private _veh = _this select 0;
-		(typeOf _veh) call A3A_fnc_removeVehFromPool;
+		(typeOf _veh) call RES_fnc_removeVehFromPool;
 		_veh removeAllEventHandlers "HandleDamage";
 		}];
 	if !(_typeX in vehAttack) then
 		{
 		if (_typeX in vehAmmoTrucks) then
 			{
-			if (_veh distance getMarkerPos respawnTeamPlayer > 50) then {if (_typeX == vehNatoAmmoTruck) then {_nul = [_veh] call A3A_fnc_NATOcrate} else {_nul = [_veh] call A3A_fnc_CSATcrate}};
+			if (_veh distance getMarkerPos respawnTeamPlayer > 50) then {if (_typeX == vehNatoAmmoTruck) then {_nul = [_veh] call RES_fnc_NATOcrate} else {_nul = [_veh] call RES_fnc_CSATcrate}};
 			};
 		if (_veh isKindOf "Car") then
 			{
@@ -27,7 +27,7 @@ if ((_typeX in vehNormal) or (_typeX in vehAttack) or (_typeX in vehBoats)) then
 			if ({"SmokeLauncher" in (_veh weaponsTurret _x)} count (allTurrets _veh) > 0) then
 				{
 				_veh setVariable ["within",true];
-				_veh addEventHandler ["GetOut", {private ["_veh"]; _veh = _this select 0; if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false]; [_veh] call A3A_fnc_smokeCoverAuto}}}];
+				_veh addEventHandler ["GetOut", {private ["_veh"]; _veh = _this select 0; if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false]; [_veh] call RES_fnc_smokeCoverAuto}}}];
 				_veh addEventHandler ["GetIn", {private ["_veh"]; _veh = _this select 0; if (side (_this select 2) != teamPlayer) then {_veh setVariable ["within",true]}}];
 				};
 			};
@@ -43,12 +43,12 @@ if ((_typeX in vehNormal) or (_typeX in vehAttack) or (_typeX in vehBoats)) then
 				_typeX = typeOf _veh;
 				if (side (_this select 1) == teamPlayer) then
 					{
-					if (_typeX in vehNATOAPC) then {[-2,2,position (_veh)] remoteExec ["A3A_fnc_citySupportChange",2]};
+					if (_typeX in vehNATOAPC) then {[-2,2,position (_veh)] remoteExec ["RES_fnc_citySupportChange",2]};
 					};
 				}];
-			_veh addEventHandler ["HandleDamage",{private ["_veh"]; _veh = _this select 0; if (!canFire _veh) then {[_veh] call A3A_fnc_smokeCoverAuto; _veh removeEventHandler ["HandleDamage",_thisEventHandler]};if (((_this select 1) find "wheel" != -1) and (_this select 4=="") and (!isPlayer driver (_veh))) then {0;} else {(_this select 2);}}];
+			_veh addEventHandler ["HandleDamage",{private ["_veh"]; _veh = _this select 0; if (!canFire _veh) then {[_veh] call RES_fnc_smokeCoverAuto; _veh removeEventHandler ["HandleDamage",_thisEventHandler]};if (((_this select 1) find "wheel" != -1) and (_this select 4=="") and (!isPlayer driver (_veh))) then {0;} else {(_this select 2);}}];
 			_veh setVariable ["within",true];
-			_veh addEventHandler ["GetOut", {private ["_veh"];  _veh = _this select 0; if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false];[_veh] call A3A_fnc_smokeCoverAuto}}}];
+			_veh addEventHandler ["GetOut", {private ["_veh"];  _veh = _this select 0; if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false];[_veh] call RES_fnc_smokeCoverAuto}}}];
 			_veh addEventHandler ["GetIn", {private ["_veh"];_veh = _this select 0; if (side (_this select 2) != teamPlayer) then {_veh setVariable ["within",true]}}];
 			}
 		else
@@ -62,10 +62,10 @@ if ((_typeX in vehNormal) or (_typeX in vehAttack) or (_typeX in vehBoats)) then
 					_typeX = typeOf _veh;
 					if (side (_this select 1) == teamPlayer) then
 						{
-						if (_typeX == vehNATOTank) then {[-5,5,position (_veh)] remoteExec ["A3A_fnc_citySupportChange",2]};
+						if (_typeX == vehNATOTank) then {[-5,5,position (_veh)] remoteExec ["RES_fnc_citySupportChange",2]};
 						};
 					}];
-				_veh addEventHandler ["HandleDamage",{private ["_veh"]; _veh = _this select 0; if (!canFire _veh) then {[_veh] call A3A_fnc_smokeCoverAuto;  _veh removeEventHandler ["HandleDamage",_thisEventHandler]}}];
+				_veh addEventHandler ["HandleDamage",{private ["_veh"]; _veh = _this select 0; if (!canFire _veh) then {[_veh] call RES_fnc_smokeCoverAuto;  _veh removeEventHandler ["HandleDamage",_thisEventHandler]}}];
 				}
 			else
 				{
@@ -82,7 +82,7 @@ else
 			{
 			private ["_veh","_typeX"];
 			_veh = _this select 0;
-			(typeOf _veh) call A3A_fnc_removeVehFromPool;
+			(typeOf _veh) call RES_fnc_removeVehFromPool;
 			}];
 		_veh addEventHandler ["GetIn",
 			{
@@ -102,7 +102,7 @@ else
 			if (_typeX in vehTransportAir) then
 				{
 				_veh setVariable ["within",true];
-				_veh addEventHandler ["GetOut", {private ["_veh"];_veh = _this select 0; if ((isTouchingGround _veh) and (isEngineOn _veh)) then {if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false]; [_veh] call A3A_fnc_smokeCoverAuto}}}}];
+				_veh addEventHandler ["GetOut", {private ["_veh"];_veh = _this select 0; if ((isTouchingGround _veh) and (isEngineOn _veh)) then {if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false]; [_veh] call RES_fnc_smokeCoverAuto}}}}];
 				_veh addEventHandler ["GetIn", {private ["_veh"];_veh = _this select 0; if (side (_this select 2) != teamPlayer) then {_veh setVariable ["within",true]}}];
 				}
 			else
@@ -114,7 +114,7 @@ else
 					_typeX = typeOf _veh;
 					if (side (_this select 1) == teamPlayer) then
 						{
-						if (_typeX in vehNATOAttackHelis) then {[-5,5,position (_veh)] remoteExec ["A3A_fnc_citySupportChange",2]};
+						if (_typeX in vehNATOAttackHelis) then {[-5,5,position (_veh)] remoteExec ["RES_fnc_citySupportChange",2]};
 						};
 					}];
 				};
@@ -128,7 +128,7 @@ else
 				_typeX = typeOf _veh;
 				if (side (_this select 1) == teamPlayer) then
 					{
-					if ((_typeX == vehNATOPlane) or (_typeX == vehNATOPlaneAA)) then {[-8,8,position (_veh)] remoteExec ["A3A_fnc_citySupportChange",2]};
+					if ((_typeX == vehNATOPlane) or (_typeX == vehNATOPlaneAA)) then {[-8,8,position (_veh)] remoteExec ["RES_fnc_citySupportChange",2]};
 					};
 				}];
 			};
@@ -140,13 +140,13 @@ else
 			_veh setCenterOfMass [(getCenterOfMass _veh) vectorAdd [0, 0, -1], 0];
 			if ((not (_veh in staticsToSave)) and (side gunner _veh != teamPlayer)) then
 				{
-				if (activeGREF and ((_typeX == staticATteamPlayer) or (_typeX == staticAAteamPlayer))) then {[_veh,"moveS"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_veh]} else {[_veh,"steal"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_veh]};
+				if (activeGREF and ((_typeX == staticATteamPlayer) or (_typeX == staticAAteamPlayer))) then {[_veh,"moveS"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_veh]} else {[_veh,"steal"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_veh]};
 				};
 			if (_typeX == SDKMortar) then
 				{
 				if (!isNull gunner _veh) then
 					{
-					[_veh,"steal"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_veh];
+					[_veh,"steal"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_veh];
 					};
 				_veh addEventHandler ["Fired",
 					{
@@ -172,22 +172,22 @@ else
 								_LeaderX = leader (gunner _mortarX);
 								if (!isPlayer _LeaderX) then
 									{
-									[[],"A3A_fnc_attackHQ"] remoteExec ["A3A_fnc_scheduler",2];
+									[[],"RES_fnc_attackHQ"] remoteExec ["RES_fnc_scheduler",2];
 									}
 								else
 									{
-									if ([_LeaderX] call A3A_fnc_isMember) then {[[],"A3A_fnc_attackHQ"] remoteExec ["A3A_fnc_scheduler",2]};
+									if ([_LeaderX] call RES_fnc_isMember) then {[[],"RES_fnc_attackHQ"] remoteExec ["RES_fnc_scheduler",2]};
 									};
 								};
 							}
 						else
 							{
-							_bases = airportsX select {(getMarkerPos _x distance _mortarX < distanceForAirAttack) and ([_x,true] call A3A_fnc_airportCanAttack) and (sidesX getVariable [_x,sideUnknown] != teamPlayer)};
+							_bases = airportsX select {(getMarkerPos _x distance _mortarX < distanceForAirAttack) and ([_x,true] call RES_fnc_airportCanAttack) and (sidesX getVariable [_x,sideUnknown] != teamPlayer)};
 							if (count _bases > 0) then
 								{
 								_base = [_bases,_positionX] call BIS_fnc_nearestPosition;
 								_sideX = sidesX getVariable [_base,sideUnknown];
-								[[getPosASL _mortarX,_sideX,"Normal",false],"A3A_fnc_patrolCA"] remoteExec ["A3A_fnc_scheduler",2];
+								[[getPosASL _mortarX,_sideX,"Normal",false],"RES_fnc_patrolCA"] remoteExec ["RES_fnc_scheduler",2];
 								};
 							};
 						};
@@ -200,7 +200,7 @@ else
 					{
 					private ["_veh","_typeX"];
 					_veh = _this select 0;
-					(typeOf _veh) call A3A_fnc_removeVehFromPool;
+					(typeOf _veh) call RES_fnc_removeVehFromPool;
 					}];
 				};
 			}
@@ -215,31 +215,31 @@ else
 					_typeX = typeOf _veh;
 					if (side (_this select 1) == teamPlayer) then
 						{
-						if (_typeX == vehNATOAA) then {[-5,5,position (_veh)] remoteExec ["A3A_fnc_citySupportChange",2]};
+						if (_typeX == vehNATOAA) then {[-5,5,position (_veh)] remoteExec ["RES_fnc_citySupportChange",2]};
 						};
-					_typeX call A3A_fnc_removeVehFromPool;
+					_typeX call RES_fnc_removeVehFromPool;
 					}];
 				};
 			};
 		};
 	};
 
-[_veh] spawn A3A_fnc_cleanserVeh;
+[_veh] spawn RES_fnc_cleanserVeh;
 
-_veh addEventHandler ["Killed",{[_this select 0] spawn A3A_fnc_postmortem}];
+_veh addEventHandler ["Killed",{[_this select 0] spawn RES_fnc_postmortem}];
 
 if (not(_veh in staticsToSave)) then
 	{
 	if (((count crew _veh) > 0) and (not (_typeX in vehAA)) and (not (_typeX in vehMRLS) and !(_veh isKindOf "StaticWeapon"))) then
 		{
-		[_veh] spawn A3A_fnc_VEHdespawner
+		[_veh] spawn RES_fnc_VEHdespawner
 		}
 	else
 		{
 		_veh addEventHandler ["GetIn",
 			{
 			_unit = _this select 2;
-			if ((side _unit == teamPlayer) or (isPlayer _unit)) then {[_this select 0] spawn A3A_fnc_VEHdespawner};
+			if ((side _unit == teamPlayer) or (isPlayer _unit)) then {[_this select 0] spawn RES_fnc_VEHdespawner};
 			}
 			];
 		};

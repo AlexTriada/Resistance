@@ -16,7 +16,7 @@ if (random 100 < _chance) then
 			{
 			["TaskSucceeded", ["", "Enemy Comms Intercepted"]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 			revealX = true; publicVariable "revealX";
-			[] remoteExec ["A3A_fnc_revealToPlayer",teamPlayer];
+			[] remoteExec ["RES_fnc_revealToPlayer",teamPlayer];
 			};
 		}
 	else

@@ -5,7 +5,7 @@ if ((count weaponCargo boxX >0) or (count magazineCargo boxX >0) or (count itemC
 petros enableAI "MOVE";
 petros enableAI "AUTOTARGET";
 
-[petros,"remove"] remoteExec ["A3A_fnc_flagaction",0,petros];
+[petros,"remove"] remoteExec ["RES_fnc_flagaction",0,petros];
 //removeAllActions petros;
 [petros] join theBoss;
 petros setBehaviour "AWARE";
@@ -28,8 +28,8 @@ else
 
 fireX inflame false;
 
-[respawnTeamPlayer, 0, teamPlayer] call A3A_fnc_setMarkerAlphaForSide;
-[respawnTeamPlayer, 0, civilian] call A3A_fnc_setMarkerAlphaForSide;
+[respawnTeamPlayer, 0, teamPlayer] call RES_fnc_setMarkerAlphaForSide;
+[respawnTeamPlayer, 0, civilian] call RES_fnc_setMarkerAlphaForSide;
 
 _garrison = garrison getVariable ["Synd_HQ", []];
 _positionX = getMarkerPos "Synd_HQ";
@@ -43,7 +43,7 @@ if (count _garrison > 0) then
 		}
 	else
 		{
-		_size = ["Synd_HQ"] call A3A_fnc_sizeMarker;
+		_size = ["Synd_HQ"] call RES_fnc_sizeMarker;
 		{
 		if ((side group _x == teamPlayer) and (not(_x getVariable ["spawner",false])) and (_x distance _positionX < _size) and (_x != petros)) then
 			{
@@ -51,7 +51,7 @@ if (count _garrison > 0) then
 				{
 				if (typeOf _x in soldiersSDK) then
 					{
-					if (typeOf _x == staticCrewTeamPlayer) then {_costs = _costs - ([SDKMortar] call A3A_fnc_vehiclePrice)};
+					if (typeOf _x == staticCrewTeamPlayer) then {_costs = _costs - ([SDKMortar] call RES_fnc_vehiclePrice)};
 					_hr = _hr - 1;
 					_costs = _costs - (server getVariable (typeOf _x));
 					};
@@ -62,15 +62,15 @@ if (count _garrison > 0) then
 		} forEach allUnits;
 		};
 	{
-	if (_x == staticCrewTeamPlayer) then {_costs = _costs + ([SDKMortar] call A3A_fnc_vehiclePrice)};
+	if (_x == staticCrewTeamPlayer) then {_costs = _costs + ([SDKMortar] call RES_fnc_vehiclePrice)};
 	_hr = _hr + 1;
 	_costs = _costs + (server getVariable _x);
 	} forEach _garrison;
-	[_hr,_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
+	[_hr,_costs] remoteExec ["RES_fnc_resourcesFIA",2];
 	garrison setVariable ["Synd_HQ",[],true];
 	hint format ["Garrison removed\n\nRecovered Money: %1 €\nRecovered HR: %2",_costs,_hr];
 	};
 
 sleep 5;
 
-petros addAction ["Build HQ here", A3A_fnc_buildHQ,nil,0,false,true];
+petros addAction ["Build HQ here", RES_fnc_buildHQ,nil,0,false,true];

@@ -3,4 +3,4 @@ _playerX = _playerX getVariable ["owner",_playerX];
 //if ((!isServer) and (player != _playerX)) exitWith {};
 _rank = _this select 1;
 _playerX setRank _rank;
-[] spawn A3A_fnc_statistics;
+[] spawn RES_fnc_statistics;

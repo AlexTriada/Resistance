@@ -1,5 +1,5 @@
 private ["_display","_childControl","_costs","_costHR","_unitsX","_formatX"];
-if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(hasIFA) then {hint "You need a radio in your inventory to be able to give orders to other squads"} else {hint "You need a Radio Man in your group to be able to give orders to other squads"}};
+if (!([player] call RES_fnc_hasRadio)) exitWith {if !(hasIFA) then {hint "You need a radio in your inventory to be able to give orders to other squads"} else {hint "You need a Radio Man in your group to be able to give orders to other squads"}};
 _nul = createDialog "squad_recruit";
 
 sleep 1;
@@ -44,25 +44,25 @@ if (str (_display) != "no display") then
 	_costs = (2*(server getVariable staticCrewTeamPlayer));
 	_costHR = 2;
 	//_unitsX = [SDKGL,SDKRifleman];
-	_costs = _costs + ([SDKMGStatic] call A3A_fnc_vehiclePrice);
+	_costs = _costs + ([SDKMGStatic] call RES_fnc_vehiclePrice);
 	_ChildControl  ctrlSetTooltip format ["Cost: %1 €. HR: %2",_costs,_costHR];
 
 
 	_ChildControl = _display displayCtrl 109;
 	_costs = (2*(server getVariable staticCrewTeamPlayer));
 	_costHR = 2;
-	_costs = _costs + ([vehSDKAT] call A3A_fnc_vehiclePrice);
+	_costs = _costs + ([vehSDKAT] call RES_fnc_vehiclePrice);
 	_ChildControl  ctrlSetTooltip format ["Cost: %1 €. HR: %2",_costs,_costHR];
 
 	_ChildControl = _display displayCtrl 110;
 	_costs = (2*(server getVariable staticCrewTeamPlayer));
 	_costHR = 2;
-	_costs = _costs + ([vehSDKTruck] call A3A_fnc_vehiclePrice) + ([staticAAteamPlayer] call A3A_fnc_vehiclePrice);
+	_costs = _costs + ([vehSDKTruck] call RES_fnc_vehiclePrice) + ([staticAAteamPlayer] call RES_fnc_vehiclePrice);
 	_ChildControl  ctrlSetTooltip format ["Cost: %1 €. HR: %2",_costs,_costHR];
 
 	_ChildControl = _display displayCtrl 111;
 	_costs = (2*(server getVariable staticCrewTeamPlayer));
 	_costHR = 2;
-	_costs = _costs + ([SDKMortar] call A3A_fnc_vehiclePrice);
+	_costs = _costs + ([SDKMortar] call RES_fnc_vehiclePrice);
 	_ChildControl  ctrlSetTooltip format ["Cost: %1 €. HR: %2",_costs,_costHR];
 };

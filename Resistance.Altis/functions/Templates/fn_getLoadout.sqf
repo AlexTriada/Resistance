@@ -48,7 +48,7 @@ private _medicSupplies =
 
 			["ACE_Tourniquet",3]
 		]
-		+ ([[["ACE_PersonalAidKit", 2]], [["adv_aceCPR_AED", 1]]] select hasADVCPR)
+		+ ([[["ACE_PersonalAidKit", 2]], [["adv_aceCPRES_AED", 1]]] select hasADVCPR)
 		+ ([[], [["adv_aceSplint_splint", 4]]] select hasADVSplint);
 	} else {
 		[

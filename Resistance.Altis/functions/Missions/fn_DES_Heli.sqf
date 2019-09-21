@@ -40,7 +40,7 @@ if (count _posCrash == 0) then
 	_posCrash = _posCrashOrig;
 	};
 diag_log format ["%1: [Antistasi] | INFO | DES_Heli | Crash Location: %2, Air Vehicle: %3",servertime,_posCrash,_typeVehX];
-_nameXbase = [_markerX] call A3A_fnc_localizar;
+_nameXbase = [_markerX] call RES_fnc_localizar;
 
 _vehiclesX = [];
 _soldiers = [];
@@ -76,10 +76,10 @@ _road = _roads select 0;
 _typeVehX = if (_sideX == Occupants) then {selectRandom vehNATOLightUnarmed} else {selectRandom vehCSATLightUnarmed};
 _vehicle = [position _road, 0,_typeVehX, _sideX] call bis_fnc_spawnvehicle;
 _veh = _vehicle select 0;
-[_veh] call A3A_fnc_AIVEHinit;
-//[_veh,"Escort"] spawn A3A_fnc_inmuneConvoy;
+[_veh] call RES_fnc_AIVEHinit;
+//[_veh,"Escort"] spawn RES_fnc_inmuneConvoy;
 _vehCrew = _vehicle select 1;
-{[_x] call A3A_fnc_NATOinit} forEach _vehCrew;
+{[_x] call RES_fnc_NATOinit} forEach _vehCrew;
 _groupVeh = _vehicle select 2;
 _soldiers append _vehCrew;
 _groups pushBack _groupVeh;
@@ -87,9 +87,9 @@ _vehiclesX pushBack _veh;
 diag_log format ["%1: [Antistasi] | INFO | DES_Heli | Crash Location: %2, Lite Vehicle: %3",servertime,_posCrash,_typeVehX];
 sleep 1;
 _typeGroup = if (_sideX == Occupants) then {groupsNATOSentry} else {groupsCSATSentry};
-_groupX = [_positionX, _sideX, _typeGroup] call A3A_fnc_spawnGroup;
+_groupX = [_positionX, _sideX, _typeGroup] call RES_fnc_spawnGroup;
 
-{_x assignAsCargo _veh; _x moveInCargo _veh; _soldiers pushBack _x; [_x] join _groupVeh; [_x] call A3A_fnc_NATOinit} forEach units _groupX;
+{_x assignAsCargo _veh; _x moveInCargo _veh; _soldiers pushBack _x; [_x] join _groupVeh; [_x] call RES_fnc_NATOinit} forEach units _groupX;
 deleteGroup _groupX;
 
 _Vwp0 = _groupVeh addWaypoint [_posCrash, 0];
@@ -105,10 +105,10 @@ sleep 15;
 _typeVehX = if (_sideX == Occupants) then {vehNATOCargoTrucks select 1} else {vehCSATTrucks select 0};
 _vehicleT = [position _road, 0,_typeVehX, _sideX] call bis_fnc_spawnvehicle;
 _vehT = _vehicleT select 0;
-[_vehT] call A3A_fnc_AIVEHinit;
-//[_vehT,"Recover Truck"] spawn A3A_fnc_inmuneConvoy;
+[_vehT] call RES_fnc_AIVEHinit;
+//[_vehT,"Recover Truck"] spawn RES_fnc_inmuneConvoy;
 _vehCrewT = _vehicle select 1;
-{[_x] call A3A_fnc_NATOinit} forEach _vehCrewT;
+{[_x] call RES_fnc_NATOinit} forEach _vehCrewT;
 _groupVehT = _vehicleT select 2;
 _soldiers = _soldiers + _vehCrewT;
 _groups pushBack _groupVehT;
@@ -160,21 +160,21 @@ _bonus = if (_difficultX) then {2} else {1};
 if (not alive _heli) then
 	{
 	diag_log format ["%1: [Antistasi] | INFO | DES_Heli | Air Vehicle was destroyed, mission completing",servertime];
-	["DES",[format ["We have downed air vehicle. It is a good chance to destroy it before it is recovered. Do it before a recovery team from the %1 reaches the place. MOVE QUICKLY",_nameXbase],"Destroy Air",_mrkFinal],_posCrashMrk,"SUCCEEDED","Destroy"] call A3A_fnc_taskUpdate;
-	[0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-	if (typeOf _heli in vehCSATAir) then {[0,3] remoteExec ["A3A_fnc_prestige",2]} else {[3,0] remoteExec ["A3A_fnc_prestige",2]};
-	[1800*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-	{if (_x distance _heli < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-	[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
-	["DES1",[format ["The rebels managed to shot down a helicopter. A recovery team departing from the %1 is inbound to recover it. Cover them while they perform the whole operation",_nameXbase],"Helicopter Down",_mrkFinal],_posCrash,"FAILED","Defend"] call A3A_fnc_taskUpdate;
+	["DES",[format ["We have downed air vehicle. It is a good chance to destroy it before it is recovered. Do it before a recovery team from the %1 reaches the place. MOVE QUICKLY",_nameXbase],"Destroy Air",_mrkFinal],_posCrashMrk,"SUCCEEDED","Destroy"] call RES_fnc_taskUpdate;
+	[0,300*_bonus] remoteExec ["RES_fnc_resourcesFIA",2];
+	if (typeOf _heli in vehCSATAir) then {[0,3] remoteExec ["RES_fnc_prestige",2]} else {[3,0] remoteExec ["RES_fnc_prestige",2]};
+	[1800*_bonus] remoteExec ["RES_fnc_timingCA",2];
+	{if (_x distance _heli < 500) then {[10*_bonus,_x] call RES_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
+	[5*_bonus,theBoss] call RES_fnc_playerScoreAdd;
+	["DES1",[format ["The rebels managed to shot down a helicopter. A recovery team departing from the %1 is inbound to recover it. Cover them while they perform the whole operation",_nameXbase],"Helicopter Down",_mrkFinal],_posCrash,"FAILED","Defend"] call RES_fnc_taskUpdate;
 	}
 else
 	{
 	diag_log format ["%1: [Antistasi] | INFO | DES_Heli | Air Vehicle was successfully recovered, mission completing",servertime];
-	["DES",[format ["We have downed air vehicle. It is a good chance to destroy it before it is recovered. Do it before a recovery team from the %1 reaches the place. MOVE QUICKLY",_nameXbase],"Destroy Air",_mrkFinal],_posCrashMrk,"FAILED","Destroy"] call A3A_fnc_taskUpdate;
-	["DES1",[format ["The rebels managed to shot down a helicopter. A recovery team departing from the %1 is inbound to recover it. Cover them while they perform the whole operation",_nameXbase],"Helicopter Down",_mrkFinal],_posCrash,"SUCCEEDED","Defend"] call A3A_fnc_taskUpdate;
-	[-600*_bonus] remoteExec ["A3A_fnc_timingCA",2];
-	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+	["DES",[format ["We have downed air vehicle. It is a good chance to destroy it before it is recovered. Do it before a recovery team from the %1 reaches the place. MOVE QUICKLY",_nameXbase],"Destroy Air",_mrkFinal],_posCrashMrk,"FAILED","Destroy"] call RES_fnc_taskUpdate;
+	["DES1",[format ["The rebels managed to shot down a helicopter. A recovery team departing from the %1 is inbound to recover it. Cover them while they perform the whole operation",_nameXbase],"Helicopter Down",_mrkFinal],_posCrash,"SUCCEEDED","Defend"] call RES_fnc_taskUpdate;
+	[-600*_bonus] remoteExec ["RES_fnc_timingCA",2];
+	[-10*_bonus,theBoss] call RES_fnc_playerScoreAdd;
 	};
 
 if (!isNull _smokeX) then
@@ -184,11 +184,11 @@ if (!isNull _smokeX) then
 	deleteVehicle _smokeX;
 	};
 
-_nul = [1200,"DES"] spawn A3A_fnc_deleteTask;
-_nul = [0,"DES1"] spawn A3A_fnc_deleteTask;
+_nul = [1200,"DES"] spawn RES_fnc_deleteTask;
+_nul = [0,"DES1"] spawn RES_fnc_deleteTask;
 deleteMarker _mrkFinal;
 {
-waitUntil {sleep 1;(!([distanceSPWN,1,_x,teamPlayer] call A3A_fnc_distanceUnits))};
+waitUntil {sleep 1;(!([distanceSPWN,1,_x,teamPlayer] call RES_fnc_distanceUnits))};
 deleteVehicle _x} forEach _vehiclesX;
 {deleteVehicle _x} forEach _soldiers;
 {deleteGroup _x} forEach _groups;

@@ -27,7 +27,7 @@ while {_attempts < 37} do
 		_nearX = [markersX,_pos] call BIS_fnc_nearestPosition;
 		if (spawner getVariable _nearX == 2) then
 			{
-			_size = [_nearX] call A3A_fnc_sizeMarker;
+			_size = [_nearX] call RES_fnc_sizeMarker;
 			if ((_pos distance (getMarkerPos _nearX)) > (_size + 100)) then
 				{
 				_road = [_pos,101] call BIS_fnc_nearestRoad;

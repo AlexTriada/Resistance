@@ -26,7 +26,7 @@ addMissionEventHandler ["Draw3D", {
 
 waitUntil {sleep 1;(time > _timeOut) or (build_engineerSelected distance _positionX < 3)};
 
-if (time > _timeOut) exitWith 
+if (time > _timeOut) exitWith
 {
 	build_cancelBuild = true;
 	hint "You didn't move to the position, construction has timed out.";
@@ -40,11 +40,11 @@ if (build_cost > 0) then
 	{
 	if (!isMultiPlayer) then
 		{
-		_nul = [0, - build_cost] remoteExec ["A3A_fnc_resourcesFIA",2];
+		_nul = [0, - build_cost] remoteExec ["RES_fnc_resourcesFIA",2];
 		}
 	else
 		{
-		[-build_cost] call A3A_fnc_resourcesPlayer;
+		[-build_cost] call RES_fnc_resourcesPlayer;
 		["moneyX",player getVariable ["moneyX",0]] call fn_SaveStat;
 		};
 	};
@@ -63,7 +63,7 @@ build_engineerSelected playMoveNow selectRandom medicAnims;
 build_engineerSelected addEventHandler ["AnimDone",
 	{
 	private _engineer = _this select 0;
-	if (([_engineer] call A3A_fnc_canFight) and !(_engineer getVariable ["helping",false]) and !(_engineer getVariable ["rearming",false]) and (_engineer getVariable ["constructing",false])) then
+	if (([_engineer] call RES_fnc_canFight) and !(_engineer getVariable ["helping",false]) and !(_engineer getVariable ["rearming",false]) and (_engineer getVariable ["constructing",false])) then
 		{
 		_engineer playMoveNow selectRandom medicAnims;
 		}
@@ -73,7 +73,7 @@ build_engineerSelected addEventHandler ["AnimDone",
 		};
 	}];
 
-waitUntil  {sleep 5; !([build_engineerSelected] call A3A_fnc_canFight) or (build_engineerSelected getVariable ["helping",false]) or (build_engineerSelected getVariable ["rearming",false]) or (build_engineerSelected distance _positionX > 4) or (time > _timeOut)};
+waitUntil  {sleep 5; !([build_engineerSelected] call RES_fnc_canFight) or (build_engineerSelected getVariable ["helping",false]) or (build_engineerSelected getVariable ["rearming",false]) or (build_engineerSelected distance _positionX > 4) or (time > _timeOut)};
 
 build_engineerSelected setVariable ["constructing",false];
 if (!_isPlayer) then {{build_engineerSelected enableAI _x} forEach ["ANIM","AUTOTARGET","FSM","MOVE","TARGET"]};
@@ -120,10 +120,10 @@ if (build_type == "RB") then
 
 build_nearestFriendlyMarker = nil;
 build_engineerSelected = nil;
-	
+
 while {alive _veh} do
 	{
-	if ((not([distanceSPWN,1,_veh,teamPlayer] call A3A_fnc_distanceUnits)) and (_veh distance getMarkerPos respawnTeamPlayer > 100)) then
+	if ((not([distanceSPWN,1,_veh,teamPlayer] call RES_fnc_distanceUnits)) and (_veh distance getMarkerPos respawnTeamPlayer > 100)) then
 		{
 		deleteVehicle _veh
 		};

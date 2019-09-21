@@ -10,7 +10,7 @@ if (haveRadio) then
 	}
 else
 	{
-	if (_unit call A3A_fnc_getRadio != "") then
+	if (_unit call RES_fnc_getRadio != "") then
 		{
 		_result = true
 		}

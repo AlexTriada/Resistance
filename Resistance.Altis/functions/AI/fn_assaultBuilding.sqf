@@ -12,9 +12,9 @@ _unit doMove _targetPos;
 while {true} do
 	{
 	if (time > _timeOut) exitWith {};
-	if (!([_unit] call A3A_fnc_canFight) or !([_nearX] call A3A_fnc_canFight)) exitWith {};
+	if (!([_unit] call RES_fnc_canFight) or !([_nearX] call RES_fnc_canFight)) exitWith {};
 	sleep 5;
 	};
 _building setVariable ["assaulted",false];
 _unit setVariable ["maneuvering",false];
-_unit call A3A_fnc_recallGroup;
+_unit call RES_fnc_recallGroup;

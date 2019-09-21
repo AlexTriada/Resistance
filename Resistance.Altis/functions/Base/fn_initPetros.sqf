@@ -1,7 +1,7 @@
 diag_log format ["%1: [Antistasi] | INFO | initPetros Started.",servertime];
 removeHeadgear petros;
 
-petros forceAddUniform "U_I_L_Uniform_01_deserter_F";
+petros forceAddUniform "U_I_L_Uniform_01_deserteRES_F";
 petros addVest "V_CarrierRigKBT_01_light_EAF_F";
 petros addHeadgear "H_Hat_Safari_olive_F";
 petros addGoggles "G_Aviator";
@@ -11,7 +11,7 @@ petros setVariable ["respawning",false];
 petros allowDamage false;
 [petros, sniperRifle, 8, 0] call BIS_fnc_addWeapon;
 petros selectWeapon (primaryWeapon petros);
-petros addEventHandler 
+petros addEventHandler
 [
     "HandleDamage",
     {
@@ -23,7 +23,7 @@ petros addEventHandler
     _instigator = _this select 6;
     if(!isNull _instigator && isPlayer _instigator && _victim != _instigator && side _instigator == teamPlayer && _damage > 0.1) then
     {
-        [_instigator, 60, 1] remoteExec ["A3A_fnc_punishment",_instigator];
+        [_instigator, 60, 1] remoteExec ["RES_fnc_punishment",_instigator];
     };
     if (isPlayer _injurer) then
     {
@@ -38,7 +38,7 @@ petros addEventHandler
                 {
                     petros setVariable ["INCAPACITATED",true,true];
                     _damage = 0.9;
-                    if (!isNull _injurer) then {[petros,side _injurer] spawn A3A_fnc_unconscious} else {[petros,sideUnknown] spawn A3A_fnc_unconscious};
+                    if (!isNull _injurer) then {[petros,side _injurer] spawn RES_fnc_unconscious} else {[petros,sideUnknown] spawn RES_fnc_unconscious};
                 }
                 else
                 {
@@ -72,9 +72,9 @@ petros addMPEventHandler ["mpkilled",
                 garrison setVariable ["Synd_HQ",[],true];
                 _hrT = server getVariable "hr";
                 _resourcesFIAT = server getVariable "resourcesFIA";
-                [-1*(round(_hrT*0.9)),-1*(round(_resourcesFIAT*0.9))] remoteExec ["A3A_fnc_resourcesFIA",2];
+                [-1*(round(_hrT*0.9)),-1*(round(_resourcesFIAT*0.9))] remoteExec ["RES_fnc_resourcesFIA",2];
                 waitUntil {sleep 6; isPlayer theBoss};
-                [] remoteExec ["A3A_fnc_placementSelection",theBoss];
+                [] remoteExec ["RES_fnc_placementSelection",theBoss];
                };
             if (!isPlayer theBoss) then
                 {
@@ -89,7 +89,7 @@ petros addMPEventHandler ["mpkilled",
             }
         else
             {
-            [] call A3A_fnc_createPetros;
+            [] call RES_fnc_createPetros;
             };
         };
    }];

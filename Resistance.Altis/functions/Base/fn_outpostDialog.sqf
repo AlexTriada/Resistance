@@ -1,7 +1,7 @@
 private ["_typeX","_costs","_groupX","_unit","_radiusX","_roads","_road","_pos","_truckX","_textX","_mrk","_hr","_exists","_positionTel","_isRoad","_typeGroup","_resourcesFIA","_hrFIA"];
 
 if (["outpostsFIA"] call BIS_fnc_taskExists) exitWith {hint "We can only deploy / delete one Observation Post or Roadblock at a time."};
-if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(hasIFA) then {hint "You need a radio in your inventory to be able to give orders to other squads"} else {hint "You need a Radio Man in your group to be able to give orders to other squads"}};
+if (!([player] call RES_fnc_hasRadio)) exitWith {if !(hasIFA) then {hint "You need a radio in your inventory to be able to give orders to other squads"} else {hint "You need a Radio Man in your group to be able to give orders to other squads"}};
 
 _typeX = _this select 0;
 
@@ -34,7 +34,7 @@ if (_typeX != "delete") then
 	if (_isRoad) then
 		{
 		_typeGroup = groupsSDKAT;
-		_costs = _costs + ([vehSDKLightArmed] call A3A_fnc_vehiclePrice) + (server getVariable staticCrewTeamPlayer);
+		_costs = _costs + ([vehSDKLightArmed] call RES_fnc_vehiclePrice) + (server getVariable staticCrewTeamPlayer);
 		_hr = _hr + 1;
 		};
 
@@ -57,7 +57,7 @@ if (((_resourcesFIA < _costs) or (_hrFIA < _hr)) and (_typeX!= "delete")) exitWi
 
 if (_typeX != "delete") then
 	{
-	[-_hr,-_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
+	[-_hr,-_costs] remoteExec ["RES_fnc_resourcesFIA",2];
 	};
 
- [[_typeX,_positionTel],"A3A_fnc_createOutpostsFIA"] call BIS_fnc_MP
+ [[_typeX,_positionTel],"RES_fnc_createOutpostsFIA"] call BIS_fnc_MP

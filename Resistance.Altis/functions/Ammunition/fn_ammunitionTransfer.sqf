@@ -15,7 +15,7 @@ _backpcks = [];
 if (count backpackCargo _originX > 0) then
 	{
 	{
-	_backpcks pushBack (_x call A3A_fnc_basicBackpack);
+	_backpcks pushBack (_x call RES_fnc_basicBackpack);
 	} forEach backpackCargo _originX;
 	};
 _containers = everyContainer _originX;
@@ -146,16 +146,16 @@ else
 
 if (_destinationX == boxX) then
 	{
-	if (isMultiplayer) then {{if (_x distance boxX < 10) then {[petros,"hint","Ammobox Loaded"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach playableUnits} else {hint "Ammobox Loaded"};
+	if (isMultiplayer) then {{if (_x distance boxX < 10) then {[petros,"hint","Ammobox Loaded"] remoteExec ["RES_fnc_commsMP",_x]}} forEach playableUnits} else {hint "Ammobox Loaded"};
 	if ((_originX isKindOf "ReammoBox_F") and (_originX != vehicleBox)) then {deleteVehicle _originX};
-	_updated = [] call A3A_fnc_arsenalManage;
+	_updated = [] call RES_fnc_arsenalManage;
 	if (_updated != "") then
 		{
 		_updated = format ["<t size='0.5' color='#C1C0BB'>Arsenal Updated<br/><br/>%1</t>",_updated];
-		[petros,"income",_updated] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+		[petros,"income",_updated] remoteExec ["RES_fnc_commsMP",[teamPlayer,civilian]];
 		};
 	}
 else
 	{
-	[petros,"hint","Truck Loaded"] remoteExec ["A3A_fnc_commsMP",driver _destinationX];
+	[petros,"hint","Truck Loaded"] remoteExec ["RES_fnc_commsMP",driver _destinationX];
 	};

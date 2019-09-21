@@ -30,7 +30,7 @@ if (isPlayer _unit) then
 			if (player getVariable ["INCAPACITATED",false]) then
 				{
 				(findDisplay 46) displayRemoveEventHandler ["KeyDown", respawnMenu];
-				[player] spawn A3A_fnc_respawn;
+				[player] spawn RES_fnc_respawn;
 				};
 			};
 		_handled;
@@ -48,8 +48,8 @@ else
 	_unit stop true;
 	if (_inPlayerGroup) then
 		{
-		[_unit,"heal1"] remoteExec ["A3A_fnc_flagaction",0,_unit];
-		//[_unit,"carry"] remoteExec ["A3A_fnc_flagaction",0,_unit];
+		[_unit,"heal1"] remoteExec ["RES_fnc_flagaction",0,_unit];
+		//[_unit,"carry"] remoteExec ["RES_fnc_flagaction",0,_unit];
 		//_unit call jn_fnc_logistics_addAction;
 		if (_injurer != Invaders) then {[_unit,true] remoteExec ["setCaptive",0,_unit]; _unit setCaptive true};
 		}
@@ -58,7 +58,7 @@ else
 		if ({if ((isPlayer _x) and (_x distance _unit < distanceSPWN2)) exitWith {1}} count allUnits != 0) then
 			{
 			_playersX = true;
-			[_unit,"heal"] remoteExec ["A3A_fnc_flagaction",0,_unit];
+			[_unit,"heal"] remoteExec ["RES_fnc_flagaction",0,_unit];
 			if (_unit != petros) then {if (_injurer != Invaders) then {[_unit,true] remoteExec ["setCaptive",0,_unit]; _unit setCaptive true}};
 			};
 		if ((_injurer  == Occupants) or (_injurer  == Invaders)) then
@@ -66,7 +66,7 @@ else
 			_markerX = _unit getVariable ["markerX",""];
 			if (_markerX != "") then
 				{
-				if (!([_markerX] call BIS_fnc_taskExists) and (sidesX getVariable [_markerX,sideUnknown] == teamPlayer)) then {[_markerX,_injurer,teamPlayer] remoteExec ["A3A_fnc_underAttack",2]};
+				if (!([_markerX] call BIS_fnc_taskExists) and (sidesX getVariable [_markerX,sideUnknown] == teamPlayer)) then {[_markerX,_injurer,teamPlayer] remoteExec ["RES_fnc_underAttack",2]};
 				};
 			};
 		};
@@ -87,8 +87,8 @@ if (_isPlayer) then
 	group _unit setCombatMode "YELLOW";
 	if (isMultiplayer) then
 		{
-		[_unit,"heal1"] remoteExec ["A3A_fnc_flagaction",0,_unit];
-		//[_unit,"carry"] remoteExec ["A3A_fnc_flagaction",0,_unit];
+		[_unit,"heal1"] remoteExec ["RES_fnc_flagaction",0,_unit];
+		//[_unit,"carry"] remoteExec ["RES_fnc_flagaction",0,_unit];
 		};
 	};
 
@@ -101,7 +101,7 @@ while {(time < _bleedOut) and (_unit getVariable ["INCAPACITATED",false]) and (a
 		_helped = _unit getVariable ["helped",objNull];
 		if (isNull _helped) then
 			{
-			_helpX = [_unit] call A3A_fnc_askHelp;
+			_helpX = [_unit] call RES_fnc_askHelp;
 			if (isNull _helpX) then
 				{
 				_textX = format ["<t size='0.6'>There is no AI near to help you.<t size='0.5'><br/>Hit R to Respawn"];
@@ -132,13 +132,13 @@ while {(time < _bleedOut) and (_unit getVariable ["INCAPACITATED",false]) and (a
 			if (autoheal) then
 				{
 				_helped = _unit getVariable ["helped",objNull];
-				if (isNull _helped) then {[_unit] call A3A_fnc_askHelp;};
+				if (isNull _helped) then {[_unit] call RES_fnc_askHelp;};
 				};
 			}
 		else
 			{
 			_helped = _unit getVariable ["helped",objNull];
-			if (isNull _helped) then {[_unit] call A3A_fnc_askHelp;};
+			if (isNull _helped) then {[_unit] call RES_fnc_askHelp;};
 			};
 		};
 	sleep 3;
@@ -154,14 +154,14 @@ if (_isPlayer) then
 		player setVariable ["tf_globalVolume", _saveVolume];
 		player setVariable ["tf_voiceVolume", _saveVolumeVoice, true];
 		};
-	if (isMultiplayer) then {[_unit,"remove"] remoteExec ["A3A_fnc_flagaction",0,_unit]};
+	if (isMultiplayer) then {[_unit,"remove"] remoteExec ["RES_fnc_flagaction",0,_unit]};
 	}
 else
 	{
 	_unit stop false;
 	if (_inPlayerGroup or _playersX) then
 		{
-		[_unit,"remove"] remoteExec ["A3A_fnc_flagaction",0,_unit];
+		[_unit,"remove"] remoteExec ["RES_fnc_flagaction",0,_unit];
 		};
 	};
 
@@ -173,7 +173,7 @@ if (time > _bleedOut) exitWith
 	{
 	if (_isPlayer) then
 		{
-		[_unit] call A3A_fnc_respawn
+		[_unit] call RES_fnc_respawn
 		}
 	else
 		{

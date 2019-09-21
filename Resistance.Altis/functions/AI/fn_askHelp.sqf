@@ -12,7 +12,7 @@ if ((([objNull, "VIEW"] checkVisibility [eyePos _enemy, eyePos _unit]) > 0) or (
 	{
 	if (!isPlayer _x) then
 		{
-		if (([_x] call A3A_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < _distanceX) and !(_x getVariable ["maneuvering",false])) then
+		if (([_x] call RES_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < _distanceX) and !(_x getVariable ["maneuvering",false])) then
 			{
 			_medicX == _unit;
 			};
@@ -24,9 +24,9 @@ else
 	{
 	if (!isPlayer _x) then
 		{
-		if ([_x] call A3A_fnc_isMedic) then
+		if ([_x] call RES_fnc_isMedic) then
 			{
-			if (([_x] call A3A_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < 81) and !(_x getVariable ["maneuvering",false])) then
+			if (([_x] call RES_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < 81) and !(_x getVariable ["maneuvering",false])) then
 				{
 				//_helping = _x getVariable "helping";
 				if (!(_x getVariable ["helping",false]) and (!(_x getVariable ["rearming",false]))) then
@@ -39,14 +39,14 @@ else
 		};
 	} forEach _units;
 
-	if (((isNull _medicX) or (_unit getVariable ["INCAPACITATED",false])) and !([_unit] call A3A_fnc_fatalWound)) then
+	if (((isNull _medicX) or (_unit getVariable ["INCAPACITATED",false])) and !([_unit] call RES_fnc_fatalWound)) then
 		{
 		{
 		if (!isPlayer _x) then
 			{
-			if !([_x] call A3A_fnc_isMedic) then
+			if !([_x] call RES_fnc_isMedic) then
 				{
-				if (([_x] call A3A_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < _distanceX) and !(_x getVariable ["maneuvering",false])) then
+				if (([_x] call RES_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < _distanceX) and !(_x getVariable ["maneuvering",false])) then
 					{
 					//_helping = _x getVariable "helping";
 					if (!(_x getVariable ["helping",false]) and (!(_x getVariable ["rearming",false]))) then
@@ -61,7 +61,7 @@ else
 		};
 	if (!isNull _medicX) then
 		{
-		if (isNull(_unit getVariable ["helped",objNull])) then {[_unit,_medicX] spawn A3A_fnc_help};
+		if (isNull(_unit getVariable ["helped",objNull])) then {[_unit,_medicX] spawn RES_fnc_help};
 		}
 	else
 		{
@@ -69,7 +69,7 @@ else
 		{
 		if (!isPlayer _x) then
 			{
-			if (([_x] call A3A_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < _distanceX)) then
+			if (([_x] call RES_fnc_canFight) and ("ACE_epinephrine" in (items _x)) and (vehicle _x == _x) and (_x distance _unit < _distanceX)) then
 				{
 				_medicX == _unit;
 				};

@@ -13,14 +13,14 @@ if ((side _injurer == teamPlayer) and (_sideX == Occupants)) then
 	_markerX = _unit getVariable ["markerX",""];
 	if (_markerX != "") then
 		{
-		if (!([_markerX] call BIS_fnc_taskExists) and (sidesX getVariable [_markerX,sideUnknown] == Occupants)) then {[_markerX,side _injurer,_sideX] remoteExec ["A3A_fnc_underAttack",2]};
+		if (!([_markerX] call BIS_fnc_taskExists) and (sidesX getVariable [_markerX,sideUnknown] == Occupants)) then {[_markerX,side _injurer,_sideX] remoteExec ["RES_fnc_underAttack",2]};
 		};
 	};
 
 if ({if ((isPlayer _x) and (_x distance _unit < distanceSPWN2)) exitWith {1}} count allUnits != 0) then
 	{
 	_playersX = true;
-	[_unit,"heal"] remoteExec ["A3A_fnc_flagaction",0,_unit];
+	[_unit,"heal"] remoteExec ["RES_fnc_flagaction",0,_unit];
 	[_unit,true] remoteExec ["setCaptive"];
 	_unit setCaptive true;
 	//_unit setVariable ["sideX",_sideX,true];
@@ -28,20 +28,20 @@ if ({if ((isPlayer _x) and (_x distance _unit < distanceSPWN2)) exitWith {1}} co
 
 _unit setFatigue 1;
 _groupX = group _unit;
-[_groupX,_injurer] spawn A3A_fnc_AIreactOnKill;
+[_groupX,_injurer] spawn RES_fnc_AIreactOnKill;
 
 while {(time < _bleedOut) and (_unit getVariable ["INCAPACITATED",false]) and (alive _unit)} do
 	{
 	if (random 10 < 1) then {playSound3D [(injuredSounds call BIS_fnc_selectRandom),_unit,false, getPosASL _unit, 1, 1, 50];};
 	_helped = _unit getVariable ["helped",objNull];
-	if (isNull _helped) then {[_unit] call A3A_fnc_askHelp;};
+	if (isNull _helped) then {[_unit] call RES_fnc_askHelp;};
 	sleep 3;
 	};
 
 _unit stop false;
 if (_playersX) then
 	{
-	[_unit,"remove"] remoteExec ["A3A_fnc_flagaction",0,_unit];
+	[_unit,"remove"] remoteExec ["RES_fnc_flagaction",0,_unit];
 	};
 
 
@@ -51,23 +51,23 @@ if (time >= _bleedOut) exitWith
 		{
 		if (isPlayer _injurer) then
 			{
-			[1,_injurer] call A3A_fnc_playerScoreAdd;
+			[1,_injurer] call RES_fnc_playerScoreAdd;
 			}
 		else
 			{
 			_skill = skill _injurer;
 			[_injurer,_skill + 0.05] remoteExec ["setSkill",_injurer];
 			};
-		[-1,1,getPos _unit] remoteExec ["A3A_fnc_citySupportChange",2];
+		[-1,1,getPos _unit] remoteExec ["RES_fnc_citySupportChange",2];
 		switch (_sideX) do
 			{
 			case Occupants:
 				{
-				[0.1,0] remoteExec ["A3A_fnc_prestige",2];
+				[0.1,0] remoteExec ["RES_fnc_prestige",2];
 				};
 			case Invaders:
 				{
-				[0,0.25] remoteExec ["A3A_fnc_prestige",2];
+				[0,0.25] remoteExec ["RES_fnc_prestige",2];
 				};
 			};
 		};
@@ -91,7 +91,7 @@ if (alive _unit) then
 		}
 	else
 		{
-		[_unit] spawn A3A_fnc_surrenderAction;
+		[_unit] spawn RES_fnc_surrenderAction;
 		};
 	/*
 	if (captive _unit) then
@@ -103,11 +103,11 @@ if (alive _unit) then
 			diag_log "Y no se rinde y pierde setCaptive true";
 			//_unit disableAI "ANIM";
 			//sleep 120 + (random 120);
-			//if ([_unit] call A3A_fnc_canFight) then {_unit enableAI "ANIM"};
+			//if ([_unit] call RES_fnc_canFight) then {_unit enableAI "ANIM"};
 			}
 		else
 			{
-			[_unit] spawn A3A_fnc_surrenderAction;
+			[_unit] spawn RES_fnc_surrenderAction;
 			diag_log "Y se rinde";
 			};
 		};

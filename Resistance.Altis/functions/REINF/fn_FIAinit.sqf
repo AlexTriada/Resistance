@@ -2,14 +2,14 @@ private ["_unit","_victim","_killer","_skill","_nameX","_typeX"];
 
 _unit = _this select 0;
 
-[_unit] call A3A_fnc_initRevive;
+[_unit] call RES_fnc_initRevive;
 _unit setVariable ["spawner",true,true];
 
 _unit allowFleeing 0;
 _typeX = typeOf _unit;
 //_skill = if (_typeX in sdkTier1) then {(skillFIA * 0.2)} else {if (_typeX in sdkTier2) then {0.1 + (skillFIA * 0.2)} else {0.1 + (skillFIA * 0.2)}};
 _skill = skillFIA * 0.05 * skillMult;
-if (!activeGREF) then {if (not((uniform _unit) in uniformsSDK)) then {[_unit] call A3A_fnc_reDress}};
+if (!activeGREF) then {if (not((uniform _unit) in uniformsSDK)) then {[_unit] call RES_fnc_reDress}};
 
 if ((!isMultiplayer) and (leader _unit == theBoss)) then {_skill = _skill + 0.1};
 _unit setSkill _skill;
@@ -30,7 +30,7 @@ if (_typeX in SDKSniper) then
 		}
 	else
 		{
-		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		};
 	}
 else
@@ -42,7 +42,7 @@ else
 		};
 	if ((_typeX in SDKMil) or (_typeX == staticCrewTeamPlayer)) then
 		{
-		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		if ((loadAbs _unit < 340) and (_typeX in SDKMil)) then
 			{
 			if ((random 20 < skillFIA) and (count unlockedAA > 0)) then
@@ -59,11 +59,11 @@ else
 			{
 			if (count unlockedMG > 0) then
 				{
-				[_unit,unlockedMG] call A3A_fnc_randomRifle;
+				[_unit,unlockedMG] call RES_fnc_randomRifle;
 				}
 			else
 				{
-				[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+				[_unit,unlockedRifles] call RES_fnc_randomRifle;
 				};
 			}
 		else
@@ -72,16 +72,16 @@ else
 				{
 				if (count unlockedGL > 0) then
 					{
-					[_unit,unlockedGL] call A3A_fnc_randomRifle;
+					[_unit,unlockedGL] call RES_fnc_randomRifle;
 					}
 				else
 					{
-					[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+					[_unit,unlockedRifles] call RES_fnc_randomRifle;
 					};
 				}
 			else
 				{
-				if (_typeX != SDKUnarmed) then {[_unit,unlockedRifles] call A3A_fnc_randomRifle};
+				if (_typeX != SDKUnarmed) then {[_unit,unlockedRifles] call RES_fnc_randomRifle};
 				if (_typeX in SDKExp) then
 					{
 					_unit setUnitTrait ["explosiveSpecialist",true];
@@ -141,7 +141,7 @@ _unit selectWeapon (primaryWeapon _unit);
 
 if (!haveRadio) then
 	{
-	if ((_unit != leader _unit) and (_typeX != staticCrewTeamPlayer)) then {_unit unlinkItem (_unit call A3A_fnc_getRadio)};
+	if ((_unit != leader _unit) and (_typeX != staticCrewTeamPlayer)) then {_unit unlinkItem (_unit call RES_fnc_getRadio)};
 	};
 
 if ({if (_x in smokeX) exitWith {1}} count unlockedMagazines > 0) then {_unit addMagazines [selectRandom smokeX,2]};
@@ -198,7 +198,7 @@ if !(hasIFA) then
 		};
 	};
 /*
-if ((_typeX != "B_G_Soldier_M_F") and (_typeX != "B_G_Sharpshooter_F")) then {if (_aiming > 0.35) then {_aiming = 0.35}};
+if ((_typeX != "B_G_SoldieRES_M_F") and (_typeX != "B_G_SharpshooteRES_F")) then {if (_aiming > 0.35) then {_aiming = 0.35}};
 
 _unit setskill ["aimingAccuracy",_aiming];
 _unit setskill ["spotDistance",_spotD];
@@ -214,19 +214,19 @@ if (player == leader _unit) then
 	_unit setVariable ["owner",player];
 	_EHkilledIdx = _unit addEventHandler ["killed", {
 		_victim = _this select 0;
-		[_victim] spawn A3A_fnc_postmortem;
+		[_victim] spawn RES_fnc_postmortem;
 		_killer = _this select 1;
 		if !(hasIFA) then {arrayids pushBackUnique (name _victim)};
 		if (side _killer == Occupants) then
 			{
-			_nul = [0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-			[-0.25,0] remoteExec ["A3A_fnc_prestige",2];
+			_nul = [0.25,0,getPos _victim] remoteExec ["RES_fnc_citySupportChange",2];
+			[-0.25,0] remoteExec ["RES_fnc_prestige",2];
 			}
 		else
 			{
 			if (side _killer == Invaders) then
 				{
-				[0,-0.25] remoteExec ["A3A_fnc_prestige",2]
+				[0,-0.25] remoteExec ["RES_fnc_prestige",2]
 				}
 			else
 				{
@@ -244,7 +244,7 @@ if (player == leader _unit) then
 		arrayids = arrayids - [_idunit];
 		_unit setIdentity _idUnit;
 		};
-	if (captive player) then {[_unit] spawn A3A_fnc_undercoverAI};
+	if (captive player) then {[_unit] spawn RES_fnc_undercoverAI};
 
 	_unit setVariable ["rearming",false];
 	if ((!haveRadio) and !(hasIFA)) then
@@ -252,7 +252,7 @@ if (player == leader _unit) then
 		while {alive _unit} do
 			{
 			sleep 10;
-			if (([player] call A3A_fnc_hasRadio) && (_unit call A3A_fnc_getRadio != "")) exitWith {_unit groupChat format ["This is %1, radiocheck OK",name _unit]};
+			if (([player] call RES_fnc_hasRadio) && (_unit call RES_fnc_getRadio != "")) exitWith {_unit groupChat format ["This is %1, radiocheck OK",name _unit]};
 			if (unitReady _unit) then
 				{
 				if ((alive _unit) and (_unit distance (getMarkerPos respawnTeamPlayer) > 50) and (_unit distance leader group _unit > 500) and ((vehicle _unit == _unit) or ((typeOf (vehicle _unit)) in arrayCivVeh))) then
@@ -275,12 +275,12 @@ else
 	_EHkilledIdx = _unit addEventHandler ["killed", {
 		_victim = _this select 0;
 		_killer = _this select 1;
-		[_victim] remoteExec ["A3A_fnc_postmortem",2];
+		[_victim] remoteExec ["RES_fnc_postmortem",2];
 		if ((isPlayer _killer) and (side _killer == teamPlayer)) then
 			{
 			if (!isMultiPlayer) then
 				{
-				_nul = [0,20] remoteExec ["A3A_fnc_resourcesFIA",2];
+				_nul = [0,20] remoteExec ["RES_fnc_resourcesFIA",2];
 				_killer addRating 1000;
 				};
 			}
@@ -288,14 +288,14 @@ else
 			{
 			if (side _killer == Occupants) then
 				{
-				_nul = [0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-				[-0.25,0] remoteExec ["A3A_fnc_prestige",2];
+				_nul = [0.25,0,getPos _victim] remoteExec ["RES_fnc_citySupportChange",2];
+				[-0.25,0] remoteExec ["RES_fnc_prestige",2];
 				}
 			else
 				{
 				if (side _killer == Invaders) then
 					{
-					[0,-0.25] remoteExec ["A3A_fnc_prestige",2]
+					[0,-0.25] remoteExec ["RES_fnc_prestige",2]
 					}
 				else
 					{

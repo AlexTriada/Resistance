@@ -11,7 +11,7 @@ if (side _injurer == teamPlayer) then
 		if ((behaviour leader _groupX != "COMBAT") and (behaviour leader _groupX != "STEALTH")) then
 			{
 			_groupX setVariable ["movedToCover",time + 120];
-			{[_x,_injurer] call A3A_fnc_unitGetToCover} forEach units _groupX;
+			{[_x,_injurer] call RES_fnc_unitGetToCover} forEach units _groupX;
 			};
 		};
 	if (_part == "") then
@@ -23,7 +23,7 @@ if (side _injurer == teamPlayer) then
 				_unit setVariable ["INCAPACITATED",true,true];
 				_unit setUnconscious true;
 				_dam = 0.9;
-				[_unit,_injurer] spawn A3A_fnc_unconsciousAAF;
+				[_unit,_injurer] spawn RES_fnc_unconsciousAAF;
 				}
 			else
 				{
@@ -48,7 +48,7 @@ if (side _injurer == teamPlayer) then
 					_unit setVariable ["cancelRevive",true];
 					};
 				};
-			if (_dam > 0.6) then {[_unit,_injurer] spawn A3A_fnc_unitGetToCover};
+			if (_dam > 0.6) then {[_unit,_injurer] spawn RES_fnc_unitGetToCover};
 			};
 		}
 	else
@@ -76,7 +76,7 @@ if (side _injurer == teamPlayer) then
 								moveOut _unit;
 								};
 							if (isPlayer _unit) then {_unit allowDamage false};
-							if (!isNull _injurer) then {[_unit,_injurer] spawn A3A_fnc_unconsciousAAF} else {[_unit,objNull] spawn A3A_fnc_unconsciousAAF};
+							if (!isNull _injurer) then {[_unit,_injurer] spawn RES_fnc_unconsciousAAF} else {[_unit,objNull] spawn RES_fnc_unconsciousAAF};
 							};
 						};
 					}
@@ -93,7 +93,7 @@ if (side _injurer == teamPlayer) then
 								moveOut _unit;
 								};
 							if (isPlayer _unit) then {_unit allowDamage false};
-							if (!isNull _injurer) then {[_unit,_injurer] spawn A3A_fnc_unconsciousAAF} else {[_unit,objNull] spawn A3A_fnc_unconsciousAAF};
+							if (!isNull _injurer) then {[_unit,_injurer] spawn RES_fnc_unconsciousAAF} else {[_unit,objNull] spawn RES_fnc_unconsciousAAF};
 							};
 						};
 					};

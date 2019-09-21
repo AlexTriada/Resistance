@@ -13,7 +13,7 @@ _positionX = getMarkerPos (_markerX);
 _pos = [];
 _unit = objNull;
 _veh = objNull;
-_size = [_markerX] call A3A_fnc_sizeMarker;
+_size = [_markerX] call RES_fnc_sizeMarker;
 
 if (_markerX != "Synd_HQ") then
 	{
@@ -23,10 +23,10 @@ if (_markerX != "Synd_HQ") then
 		if (hasIFA) then {_veh setFlagTexture SDKFlagTexture};
 		_veh allowDamage false;
 		_vehiclesX pushBack _veh;
-		[_veh,"SDKFlag"] remoteExec ["A3A_fnc_flagaction",0,_veh];
-		//[_veh,"unit"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_veh];
-		//[_veh,"vehicle"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_veh];
-		//[_veh,"garage"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_veh];
+		[_veh,"SDKFlag"] remoteExec ["RES_fnc_flagaction",0,_veh];
+		//[_veh,"unit"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_veh];
+		//[_veh,"vehicle"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_veh];
+		//[_veh,"garage"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_veh];
 		};
 	if ((_markerX in resourcesX) or (_markerX in factories)) then
 		{
@@ -40,8 +40,8 @@ if (_markerX != "Synd_HQ") then
 					{
 					if (spawner getVariable _markerX != 2) then
 						{
-						_civ = _groupX createUnit ["C_man_w_worker_F", _positionX, [],0, "NONE"];
-						_nul = [_civ] spawn A3A_fnc_CIVinit;
+						_civ = _groupX createUnit ["C_man_w_workeRES_F", _positionX, [],0, "NONE"];
+						_nul = [_civ] spawn RES_fnc_CIVinit;
 						_civs pushBack _civ;
 						_civ setVariable ["markerX",_markerX,true];
 						sleep 0.5;
@@ -50,7 +50,7 @@ if (_markerX != "Synd_HQ") then
 							if (({alive _x} count units group (_this select 0)) == 0) then
 								{
 								_markerX = (_this select 0) getVariable "markerX";
-								_nameX = [_markerX] call A3A_fnc_localizar;
+								_nameX = [_markerX] call RES_fnc_localizar;
 								destroyedCities pushBackUnique _markerX;
 								publicVariable "destroyedCities";
 								["TaskFailed", ["", format ["%1 Destroyed",_nameX]]] remoteExec ["BIS_fnc_showNotification",[teamPlayer,civilian]];
@@ -65,7 +65,7 @@ if (_markerX != "Synd_HQ") then
 		};
 	if (_markerX in seaports) then
 		{
-		[_veh,"seaport"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_veh];
+		[_veh,"seaport"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_veh];
 		};
 	};
 _staticsX = staticsToSave select {_x distance2D _positionX < _size};
@@ -89,7 +89,7 @@ else
 	_unit = _groupEst createUnit [(_garrison select _index), _positionX, [], 0, "NONE"];
 	_unit moveInGunner _x;
 	};
-[_unit,_markerX] call A3A_fnc_FIAinitBases;
+[_unit,_markerX] call RES_fnc_FIAinitBases;
 _soldiers pushBack _unit;
 _garrison deleteAT _index;
 } forEach _staticsX;
@@ -98,18 +98,18 @@ if (staticCrewTeamPlayer in _garrison) then
 	{
 	{
 	_unit = _groupMortar createUnit [staticCrewTeamPlayer, _positionX, [], 0, "NONE"];
-	_pos = [_positionX] call A3A_fnc_mortarPos;
+	_pos = [_positionX] call RES_fnc_mortarPos;
 	_veh = SDKMortar createVehicle _pos;
 	_vehiclesX pushBack _veh;
 	_nul=[_veh] execVM "scripts\UPSMON\MON_artillery_add.sqf";//TODO need delete UPSMON link
 	_unit assignAsGunner _veh;
 	_unit moveInGunner _veh;
-	[_veh] call A3A_fnc_AIVEHinit;
+	[_veh] call RES_fnc_AIVEHinit;
 	_soldiers pushBack _unit;
 	} forEach (_garrison select {_x == staticCrewTeamPlayer});
 	_garrison = _garrison - [staticCrewTeamPlayer];
 	};
-_garrison = _garrison call A3A_fnc_garrisonReorg;
+_garrison = _garrison call RES_fnc_garrisonReorg;
 _radiusX = count _garrison;
 _countX = 0;
 _countGroup = 0;
@@ -118,7 +118,7 @@ while {(spawner getVariable _markerX != 2) and (_countX < _radiusX)} do
 	_typeX = _garrison select _countX;
 	_unit = _groupX createUnit [_typeX, _positionX, [], 0, "NONE"];
 	if (_typeX in SDKSL) then {_groupX selectLeader _unit};
-	[_unit,_markerX] call A3A_fnc_FIAinitBases;
+	[_unit,_markerX] call RES_fnc_FIAinitBases;
 	_soldiers pushBack _unit;
 	_countX = _countX + 1;
 	sleep 0.5;

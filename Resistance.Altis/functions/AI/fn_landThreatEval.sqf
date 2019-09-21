@@ -15,7 +15,7 @@ if (getMarkerPos _x distance _positionX < distanceSPWN) then
 	_analyzed = _x;
 	_garrison = garrison getVariable [_analyzed,[]];
 	_threat = _threat + (floor((count _garrison)/8));
-	//_size = [_analyzed] call A3A_fnc_sizeMarker;
+	//_size = [_analyzed] call RES_fnc_sizeMarker;
 	_staticsX = staticsToSave select {_x inArea _analyzed};
 	if (count _staticsX > 0) then
 		{

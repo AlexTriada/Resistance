@@ -1,7 +1,7 @@
 _unit = _this select 0;
 _playerX = _this select 1;
 
-[_unit,"remove"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_unit];
+[_unit,"remove"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_unit];
 
 if (!alive _unit) exitWith {};
 _sideX = side (group _unit);
@@ -41,12 +41,12 @@ if (round random 100 < _chance) then
 		{
 		if ((_sideX == Occupants) and (faction _unit != factionFIA)) then
 			{
-			[-0.5,0] remoteExec ["A3A_fnc_prestige",2];
+			[-0.5,0] remoteExec ["RES_fnc_prestige",2];
 			}
 		else
 			{
-			[1,0] remoteExec ["A3A_fnc_resourcesFIA",2];
-			[1,1] remoteExec ["A3A_fnc_prestige",2];
+			[1,0] remoteExec ["RES_fnc_resourcesFIA",2];
+			[1,1] remoteExec ["RES_fnc_prestige",2];
 			};
 		};
 	deleteVehicle _unit;

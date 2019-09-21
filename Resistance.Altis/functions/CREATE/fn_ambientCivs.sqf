@@ -55,7 +55,7 @@ while {true} do
 					_posHouse = selectRandom (_houseX buildingPos -1);
 					_civ = _groupX createUnit [selectRandom arrayCivs, _posHouse, [],0, "NONE"];
 					_civ setPosATL _posHouse;
-					[_civ] spawn A3A_fnc_CIVinit;
+					[_civ] spawn RES_fnc_CIVinit;
 					_civs pushBack _civ;
 					if (_civ == leader _civ) then {_nul = [_civ, "ambientCiv", "SAFE", "SPAWNED","NOFOLLOW", "NOVEH2","NOSHARE","DoRelax"] execVM "scripts\UPSMON.sqf"};
 					//TODO delete UPSMON

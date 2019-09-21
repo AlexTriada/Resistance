@@ -7,9 +7,9 @@ if (isNil "garageIsOpen") then {
 
 garage_mode = _this select 0;
 
-if (garage_mode == GARAGE_FACTION and (not([player] call A3A_fnc_isMember))) exitWith {hint "You cannot access the Garage as you are guest in this server"};
+if (garage_mode == GARAGE_FACTION and (not([player] call RES_fnc_isMember))) exitWith {hint "You cannot access the Garage as you are guest in this server"};
 if (player != player getVariable "owner") exitWith {hint "You cannot access the Garage while you are controlling AI"};
-if ([player,300] call A3A_fnc_enemyNearCheck) exitWith {Hint "You cannot manage the Garage with enemies nearby"};
+if ([player,300] call RES_fnc_enemyNearCheck) exitWith {Hint "You cannot manage the Garage with enemies nearby"};
 
 garage_vehiclesAvailable = [];
 
@@ -26,7 +26,7 @@ if (count _airportsX > 0) then {_hasAir = true};
 		{
 		garage_vehiclesAvailable pushBack _x;
 		};
-} forEach (if (garage_mode == GARAGE_FACTION) then {vehInGarage} else {[] call A3A_fnc_getPersonalGarageLocal});
+} forEach (if (garage_mode == GARAGE_FACTION) then {vehInGarage} else {[] call RES_fnc_getPersonalGarageLocal});
 
 if (count garage_vehiclesAvailable == 0) exitWith {hintC "The Garage is empty or the vehicles you have are not suitable to recover in the place you are.\n\nAir vehicles need to be recovered near Airport flags."};
 
@@ -53,7 +53,7 @@ if (isNil "garage_keyDownHandler") then {
 			_handled = true;
 			if (garage_vehicleIndex + 1 > (count garage_vehiclesAvailable) - 1) then {garage_vehicleIndex = 0} else {garage_vehicleIndex = garage_vehicleIndex + 1};
 			private _type = garage_vehiclesAvailable select garage_vehicleIndex;
-			[_type] call A3A_fnc_vehPlacementChangeVehicle;
+			[_type] call RES_fnc_vehPlacementChangeVehicle;
 			};
 		//Previous vehicle
 		if (_this select 1 == KEY_DOWN) then
@@ -61,7 +61,7 @@ if (isNil "garage_keyDownHandler") then {
 			_handled = true;
 			if (garage_vehicleIndex - 1 < 0) then {garage_vehicleIndex = (count garage_vehiclesAvailable) - 1} else {garage_vehicleIndex = garage_vehicleIndex - 1};
 					private _type = garage_vehiclesAvailable select garage_vehicleIndex;
-			[_type] call A3A_fnc_vehPlacementChangeVehicle;
+			[_type] call RES_fnc_vehPlacementChangeVehicle;
 			};
 		_handled;
 	}];
@@ -69,4 +69,4 @@ if (isNil "garage_keyDownHandler") then {
 private _extraMessage = "Arrow Up-Down to Switch Vehicles<br/>";
 
 garageIsOpen = true;
-[_initialType, "GARAGE", _extraMessage] call A3A_fnc_vehPlacementBegin;
+[_initialType, "GARAGE", _extraMessage] call RES_fnc_vehPlacementBegin;

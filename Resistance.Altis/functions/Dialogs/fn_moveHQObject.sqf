@@ -11,7 +11,7 @@ if (vehicle _playerX != _playerX) exitWith {hint "Вы не можете пер�
 if ({!(isNull _x)} count (attachedObjects _playerX) != 0) exitWith {hint "Вы уже перемещаете один предмет, другой взять нельзя"};
 _sites = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
 _markerX = [_sites,_playerX] call BIS_fnc_nearestPosition;
-_size = [_markerX] call A3A_fnc_sizeMarker;
+_size = [_markerX] call RES_fnc_sizeMarker;
 _positionX = getMarkerPos _markerX;
 if (_playerX distance2D _positionX > _size) exitWith {hint "Предмет должен быть ближе к зоне штаба"};
 
@@ -41,7 +41,7 @@ private _fnc_placeObject = {
 	_thingX setPosATL [getPosATL _thingX select 0,getPosATL _thingX select 1,0.1];
 
 	_thingX setVariable ["objectBeingMoved", false];
-	_thingX addAction ["Переместить предмет", A3A_fnc_moveHQObject,nil,0,false,true,"","(_this == theBoss)"];
+	_thingX addAction ["Переместить предмет", RES_fnc_moveHQObject,nil,0,false,true,"","(_this == theBoss)"];
 };
 
 private _actionX = _playerX addAction ["Поставить тут", {
@@ -50,7 +50,7 @@ private _actionX = _playerX addAction ["Поставить тут", {
 	[_thingX, player, (_this select 2)] call _fnc_placeObject;
 }, [_thingX, _fnc_placeObject],0,false,true,"",""];
 
-waitUntil {sleep 1; (_playerX != attachedTo _thingX) or (vehicle _playerX != _playerX) or (_playerX distance2D _positionX > (_size-3)) or !([_playerX] call A3A_fnc_canFight) or (!isPlayer _playerX)};
+waitUntil {sleep 1; (_playerX != attachedTo _thingX) or (vehicle _playerX != _playerX) or (_playerX distance2D _positionX > (_size-3)) or !([_playerX] call RES_fnc_canFight) or (!isPlayer _playerX)};
 
 [_thingX, _playerX, _actionX] call _fnc_placeObject;
 

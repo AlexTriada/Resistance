@@ -17,9 +17,9 @@ if (hasIFA) then {_timeLimit = _timeLimit * 2};
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + _timeLimit];
 _dateLimitNum = dateToNumber _dateLimit;
 _dateLimit = numberToDate [date select 0, _dateLimitNum];//converts datenumber back to date array so that time formats correctly
-_displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time portion of the date array to a string for clarity in hints
+_displayTime = [_dateLimit] call RES_fnc_dateToTimeString;//Converts the time portion of the date array to a string for clarity in hints
 
-_radiusX = [_markerX] call A3A_fnc_sizeMarker;
+_radiusX = [_markerX] call RES_fnc_sizeMarker;
 _houses = (nearestObjects [_positionX, ["house"], _radiusX]) select {!((typeOf _x) in UPSMON_Bld_remove)};
 _posHouse = [];
 _houseX = _houses select 0;
@@ -36,7 +36,7 @@ _posTraitor = _posHouse select _rnd;
 _posSol1 = _posHouse select (_rnd + 1);
 _posSol2 = (_houseX buildingExit 0);
 
-_nameDest = [_markerX] call A3A_fnc_localizar;
+_nameDest = [_markerX] call RES_fnc_localizar;
 
 _groupTraitor = createGroup Occupants;
 
@@ -56,7 +56,7 @@ _posTsk = (position _houseX) getPos [random 100, random 360];
 [[teamPlayer,civilian],"AS",[format ["A traitor has scheduled a meeting with %4 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,nameOccupants],"Kill the Traitor",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
 [[Occupants],"AS1",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,nameTeamPlayer],"Protect Contact",_markerX],getPos _houseX,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
 missionsX pushBack ["AS","CREATED"]; publicVariable "missionsX";
-{_nul = [_x,""] call A3A_fnc_NATOinit; _x allowFleeing 0} forEach units _groupTraitor;
+{_nul = [_x,""] call RES_fnc_NATOinit; _x allowFleeing 0} forEach units _groupTraitor;
 _posVeh = [];
 _dirVeh = 0;
 _roads = [];
@@ -88,7 +88,7 @@ _veh setDir _dirVeh;
 sleep 15;
 _veh allowDamage true;
 _traitor allowDamage true;
-_nul = [_veh] call A3A_fnc_AIVEHinit;
+_nul = [_veh] call RES_fnc_AIVEHinit;
 {_x disableAI "MOVE"; _x setUnitPos "UP"} forEach units _groupTraitor;
 
 _mrk = createMarkerLocal [format ["%1patrolarea", floor random 100], getPos _houseX];
@@ -100,19 +100,19 @@ _mrk setMarkerBrushLocal "DiagGrid";
 _mrk setMarkerAlphaLocal 0;
 
 _typeGroup = if (random 10 < tierWar) then {NATOSquad} else {[policeOfficer,policeGrunt,policeGrunt,policeGrunt,policeGrunt,policeGrunt,policeGrunt,policeGrunt]};
-_groupX = [_positionX,Occupants, NATOSquad] call A3A_fnc_spawnGroup;
+_groupX = [_positionX,Occupants, NATOSquad] call RES_fnc_spawnGroup;
 sleep 1;
 if (random 10 < 2.5) then
 	{
 	_dog = _groupX createUnit ["Fin_random_F",_positionX,[],0,"FORM"];
-	[_dog] spawn A3A_fnc_guardDog;
+	[_dog] spawn RES_fnc_guardDog;
 	};
 _nul = [leader _groupX, _mrk, "SAFE","SPAWNED", "NOVEH2", "NOFOLLOW"] execVM "scripts\UPSMON.sqf";
-{[_x,""] call A3A_fnc_NATOinit} forEach units _groupX;
+{[_x,""] call RES_fnc_NATOinit} forEach units _groupX;
 
-waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (not alive _traitor) or ({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits) > 0)};
+waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (not alive _traitor) or ({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call RES_fnc_distanceUnits) > 0)};
 
-if ({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits) > 0) then
+if ({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call RES_fnc_distanceUnits) > 0) then
 	{
 	{_x enableAI "MOVE"} forEach units _groupTraitor;
 	_traitor assignAsDriver _veh;
@@ -129,12 +129,12 @@ waitUntil  {sleep 1; (dateToNumber date > _dateLimitNum) or (not alive _traitor)
 
 if (not alive _traitor) then
 	{
-	["AS",[format ["A traitor has scheduled a meeting with %3 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,nameOccupants],"Kill the Traitor",_markerX],_traitor,"SUCCEEDED"] call A3A_fnc_taskUpdate;
-	["AS1",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,nameTeamPlayer],"Protect Contact",_markerX],getPos _houseX,"FAILED"] call A3A_fnc_taskUpdate;
+	["AS",[format ["A traitor has scheduled a meeting with %3 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,nameOccupants],"Kill the Traitor",_markerX],_traitor,"SUCCEEDED"] call RES_fnc_taskUpdate;
+	["AS1",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,nameTeamPlayer],"Protect Contact",_markerX],getPos _houseX,"FAILED"] call RES_fnc_taskUpdate;
 	if (_difficultX) then
 		{
-		[4,0] remoteExec ["A3A_fnc_prestige",2];
-		[0,600] remoteExec ["A3A_fnc_resourcesFIA",2];
+		[4,0] remoteExec ["RES_fnc_prestige",2];
+		[0,600] remoteExec ["RES_fnc_resourcesFIA",2];
 		{
 		if (!isPlayer _x) then
 			{
@@ -144,15 +144,15 @@ if (not alive _traitor) then
 			}
 		else
 			{
-			[20,_x] call A3A_fnc_playerScoreAdd;
+			[20,_x] call RES_fnc_playerScoreAdd;
 			};
-		} forEach ([_radiusX,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-		[10,theBoss] call A3A_fnc_playerScoreAdd;
+		} forEach ([_radiusX,0,_positionX,teamPlayer] call RES_fnc_distanceUnits);
+		[10,theBoss] call RES_fnc_playerScoreAdd;
 		}
 	else
 		{
-		[2,0] remoteExec ["A3A_fnc_prestige",2];
-		[0,300] remoteExec ["A3A_fnc_resourcesFIA",2];
+		[2,0] remoteExec ["RES_fnc_prestige",2];
+		[0,300] remoteExec ["RES_fnc_resourcesFIA",2];
 		{
 		if (!isPlayer _x) then
 			{
@@ -162,22 +162,22 @@ if (not alive _traitor) then
 			}
 		else
 			{
-			[10,_x] call A3A_fnc_playerScoreAdd;
+			[10,_x] call RES_fnc_playerScoreAdd;
 			};
-		} forEach ([_radiusX,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-		[5,theBoss] call A3A_fnc_playerScoreAdd;
+		} forEach ([_radiusX,0,_positionX,teamPlayer] call RES_fnc_distanceUnits);
+		[5,theBoss] call RES_fnc_playerScoreAdd;
 		};
 	}
 else
 	{
-	["AS",[format ["A traitor has scheduled a meeting with %3 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,nameOccupants],"Kill the Traitor",_markerX],_traitor,"FAILED"] call A3A_fnc_taskUpdate;
-	["AS1",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,nameTeamPlayer],"Protect Contact",_markerX],getPos _houseX,"SUCCEEDED"] call A3A_fnc_taskUpdate;
-	if (_difficultX) then {[-10,theBoss] call A3A_fnc_playerScoreAdd} else {[-10,theBoss] call A3A_fnc_playerScoreAdd};
+	["AS",[format ["A traitor has scheduled a meeting with %3 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,nameOccupants],"Kill the Traitor",_markerX],_traitor,"FAILED"] call RES_fnc_taskUpdate;
+	["AS1",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,nameTeamPlayer],"Protect Contact",_markerX],getPos _houseX,"SUCCEEDED"] call RES_fnc_taskUpdate;
+	if (_difficultX) then {[-10,theBoss] call RES_fnc_playerScoreAdd} else {[-10,theBoss] call RES_fnc_playerScoreAdd};
 	if (dateToNumber date > _dateLimitNum) then
 		{
 		_hrT = server getVariable "hr";
 		_resourcesFIAT = server getVariable "resourcesFIA";
-		[-1*(round(_hrT/3)),-1*(round(_resourcesFIAT/3))] remoteExec ["A3A_fnc_resourcesFIA",2];
+		[-1*(round(_hrT/3)),-1*(round(_resourcesFIAT/3))] remoteExec ["RES_fnc_resourcesFIA",2];
 		}
 	else
 		{
@@ -185,7 +185,7 @@ else
 			{
 			if (!(["DEF_HQ"] call BIS_fnc_taskExists)) then
 				{
-				[[Occupants],"A3A_fnc_attackHQ"] remoteExec ["A3A_fnc_scheduler",2];
+				[[Occupants],"RES_fnc_attackHQ"] remoteExec ["RES_fnc_scheduler",2];
 				};
 			}
 		else
@@ -199,18 +199,18 @@ else
 		};
 	};
 
-_nul = [1200,"AS"] spawn A3A_fnc_deleteTask;
-_nul = [10,"AS1"] spawn A3A_fnc_deleteTask;
-if (!([distanceSPWN,1,_veh,teamPlayer] call A3A_fnc_distanceUnits)) then {deleteVehicle _veh};
+_nul = [1200,"AS"] spawn RES_fnc_deleteTask;
+_nul = [10,"AS1"] spawn RES_fnc_deleteTask;
+if (!([distanceSPWN,1,_veh,teamPlayer] call RES_fnc_distanceUnits)) then {deleteVehicle _veh};
 
 {
-waitUntil {sleep 1; !([distanceSPWN,1,_x,teamPlayer] call A3A_fnc_distanceUnits)};
+waitUntil {sleep 1; !([distanceSPWN,1,_x,teamPlayer] call RES_fnc_distanceUnits)};
 deleteVehicle _x
 } forEach units _groupTraitor;
 deleteGroup _groupTraitor;
 
 {
-waitUntil {sleep 1; !([distanceSPWN,1,_x,teamPlayer] call A3A_fnc_distanceUnits)};
+waitUntil {sleep 1; !([distanceSPWN,1,_x,teamPlayer] call RES_fnc_distanceUnits)};
 deleteVehicle _x
 } forEach units _groupX;
 deleteGroup _groupX;

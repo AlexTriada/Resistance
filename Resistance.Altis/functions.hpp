@@ -1,7 +1,33 @@
-class A3A
-{
-	class Base
-	{
+class RES {
+/*
+ ██╗███╗   ██╗██╗████████╗
+ ██║████╗  ██║██║╚══██╔══╝
+ ██║██╔██╗ ██║██║   ██║
+ ██║██║╚██╗██║██║   ██║
+ ██║██║ ╚████║██║   ██║
+ ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝
+*/
+	class init {
+		class cityinfo {};
+		class credits {};
+		class getArrayMrks {};
+		class initGarrisons {};
+		class initGetMissionPath {};
+		class modBlacklist {};
+		class playerMarkers {};
+		class reinitY {};
+		class resourcecheck {};
+		class tags {};
+	};
+/*
+ ██████╗  █████╗ ███████╗███████╗
+ ██╔══██╗██╔══██╗██╔════╝██╔════╝
+ ██████╔╝███████║███████╗█████╗
+ ██╔══██╗██╔══██║╚════██║██╔══╝
+ ██████╔╝██║  ██║███████║███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝
+*/
+	class Base {
 		class addHC {};
 		class addTimeForIdle {};
 		class AILoadInfo {};
@@ -73,9 +99,15 @@ class A3A
 		class unlockVehicle {};
 		class zoneCheck {};
 	};
-
-	class AI
-	{
+/*
+  █████╗ ██╗
+ ██╔══██╗██║
+ ███████║██║
+ ██╔══██║██║
+ ██║  ██║██║
+ ╚═╝  ╚═╝╚═╝
+*/
+	class AI {
 		class AAFKilledEH {};
 		class airbomb {};
 		class airdrop {};
@@ -131,19 +163,15 @@ class A3A
 		class VANTinfo {};
 		class vehicleMarkers {};
 	};
-
-	class Convoy
-	{
-		class createAIAction {file="Convoy\createAIAction.sqf";};
-		class createConvoy {file="Convoy\createConvoy.sqf";};
-		class convoyMovement {file="Convoy\convoyMovement.sqf";};
-		class findAirportForAirstrike {file="Convoy\findAirportForAirstrike.sqf";};
-
-		class SelectAndCreateVehicle {file="Convoy\selectAndCreateVehicle.sqf";};
-	}
-
-	class CREATE
-	{
+/*
+  ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗
+ ██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
+ ██║     ██████╔╝█████╗  ███████║   ██║   █████╗
+ ██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██╔══╝
+ ╚██████╗██║  ██║███████╗██║  ██║   ██║   ███████╗
+  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+*/
+	class CREATE {
 		class AAFroadPatrol {};
 		class airportCanAttack {};
 		class AIVEHinit {};
@@ -182,15 +210,27 @@ class A3A
 		class wavedCA {};
 		class WPCreate {};
 	};
-
-	class Debugging
-	{
+/*
+ ██████╗ ███████╗██████╗ ██╗   ██╗ ██████╗
+ ██╔══██╗██╔════╝██╔══██╗██║   ██║██╔════╝
+ ██║  ██║█████╗  ██████╔╝██║   ██║██║  ███╗
+ ██║  ██║██╔══╝  ██╔══██╗██║   ██║██║   ██║
+ ██████╔╝███████╗██████╔╝╚██████╔╝╚██████╔╝
+ ╚═════╝ ╚══════╝╚═════╝  ╚═════╝  ╚═════╝
+*/
+	class Debugging {
 		class deleteEmptyGroupsOnSide {};
 		class spawnDebuggingLoop {};
 	};
-
-	class Dialogs
-	{
+/*
+ ██████╗ ██╗ █████╗ ██╗      ██████╗  ██████╗ ███████╗
+ ██╔══██╗██║██╔══██╗██║     ██╔═══██╗██╔════╝ ██╔════╝
+ ██║  ██║██║███████║██║     ██║   ██║██║  ███╗███████╗
+ ██║  ██║██║██╔══██║██║     ██║   ██║██║   ██║╚════██║
+ ██████╔╝██║██║  ██║███████╗╚██████╔╝╚██████╔╝███████║
+ ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝ ╚══════╝
+*/
+	class Dialogs {
 		class buyVehicle {};
 		class buyVehicleCiv {};
 		class clearForest {};
@@ -205,9 +245,15 @@ class A3A
 		class squadRecruit {};
 		class unit_recruit {};
 	};
-
-	class Garage
-	{
+/*
+  ██████╗  █████╗ ██████╗  █████╗  ██████╗ ███████╗
+ ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔════╝
+ ██║  ███╗███████║██████╔╝███████║██║  ███╗█████╗
+ ██║   ██║██╔══██║██╔══██╗██╔══██║██║   ██║██╔══╝
+ ╚██████╔╝██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗
+  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+*/
+	class Garage {
 		class addToPersonalGarage {};
 		class addToPersonalGarageLocal {};
 		class attemptPlaceVehicle {};
@@ -226,9 +272,15 @@ class A3A
 		class vehPlacementChangeVehicle {};
 		class vehPlacementCleanup {};
 	};
-
-	class Missions
-	{
+/*
+ ███╗   ███╗██╗███████╗███████╗██╗ ██████╗ ███╗   ██╗███████╗
+ ████╗ ████║██║██╔════╝██╔════╝██║██╔═══██╗████╗  ██║██╔════╝
+ ██╔████╔██║██║███████╗███████╗██║██║   ██║██╔██╗ ██║███████╗
+ ██║╚██╔╝██║██║╚════██║╚════██║██║██║   ██║██║╚██╗██║╚════██║
+ ██║ ╚═╝ ██║██║███████║███████║██║╚██████╔╝██║ ╚████║███████║
+ ╚═╝     ╚═╝╚═╝╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+*/
+	class Missions {
 		class AS_Official {};
 		class AS_specOP {};
 		class AS_Traitor {};
@@ -250,9 +302,15 @@ class A3A
 		class taskUpdate {};
 		class underAttack {};
 	};
-
-	class Ammunition
-	{
+/*
+  █████╗ ███╗   ███╗███╗   ███╗██╗   ██╗███╗   ██╗██╗████████╗██╗ ██████╗ ███╗   ██╗
+ ██╔══██╗████╗ ████║████╗ ████║██║   ██║████╗  ██║██║╚══██╔══╝██║██╔═══██╗████╗  ██║
+ ███████║██╔████╔██║██╔████╔██║██║   ██║██╔██╗ ██║██║   ██║   ██║██║   ██║██╔██╗ ██║
+ ██╔══██║██║╚██╔╝██║██║╚██╔╝██║██║   ██║██║╚██╗██║██║   ██║   ██║██║   ██║██║╚██╗██║
+ ██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║   ██║   ██║╚██████╔╝██║ ╚████║
+ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+*/
+	class Ammunition {
 		class ACEpvpReDress {};
 		class ammunitionTransfer {};
 		class arsenalManage {};
@@ -266,9 +324,15 @@ class A3A
 		class randomRifle {};
 		class transfer {};
 	};
-
-	class OrgPlayers
-	{
+/*
+  ██████╗ ██████╗  ██████╗ ██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗ ███████╗
+ ██╔═══██╗██╔══██╗██╔════╝ ██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗██╔════╝
+ ██║   ██║██████╔╝██║  ███╗██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝███████╗
+ ██║   ██║██╔══██╗██║   ██║██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗╚════██║
+ ╚██████╔╝██║  ██║╚██████╔╝██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║███████║
+  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚══════╝
+*/
+	class OrgPlayers {
 		class assigntheBoss {};
 		class donateMoney {};
 		class isMember {};
@@ -281,25 +345,15 @@ class A3A
 		class theBossSteal {};
 		class tierCheck {};
 	};
-
-	class Pathfinding
-	{
-		//Public API - Call these from anywhere
-		class loadNavGrid {file="Convoy\A-star-pathfinding\loadNavGrid.sqf";};
-		class findPath {file="Convoy\A-star-pathfinding\startPathfinding.sqf";};
-
-		//Private API - Do NOT call these elsewhere
-		class getMainMarkers {file="Convoy\A-star-pathfinding\getMainMarkers.sqf";};
-		class getClosestMainMarker {file="Convoy\A-star-pathfinding\getClosestMainMarker.sqf";};
-		class getNavPos {file="Convoy\A-star-pathfinding\getNavPos.sqf";};
-		class calculateH {file="Convoy\A-star-pathfinding\calculateH.sqf";};
-		class setNavOnMarker {file="Convoy\A-star-pathfinding\setNavOnMarker.sqf";};
-		class getNavConnections {file="Convoy\A-star-pathfinding\getNavConnections.sqf";};
-		class findNearestNavPoint {file="Convoy\A-star-pathfinding\findNearestNavPoint.sqf";};
-	}
-
-	class REINF
-	{
+/*
+ ██████╗ ███████╗██╗███╗   ██╗███████╗
+ ██╔══██╗██╔════╝██║████╗  ██║██╔════╝
+ ██████╔╝█████╗  ██║██╔██╗ ██║█████╗
+ ██╔══██╗██╔══╝  ██║██║╚██╗██║██╔══╝
+ ██║  ██║███████╗██║██║ ╚████║██║
+ ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚═╝
+*/
+	class REINF {
 		class addBombRun {};
 		class addFIAsquadHC {};
 		class addFIAveh {};
@@ -322,9 +376,15 @@ class A3A
 		class vehiclePrice {};
 		class vehStats {};
 	};
-
-	class Revive
-	{
+/*
+ ██████╗ ███████╗██╗   ██╗██╗██╗   ██╗███████╗
+ ██╔══██╗██╔════╝██║   ██║██║██║   ██║██╔════╝
+ ██████╔╝█████╗  ██║   ██║██║██║   ██║█████╗
+ ██╔══██╗██╔══╝  ╚██╗ ██╔╝██║╚██╗ ██╔╝██╔══╝
+ ██║  ██║███████╗ ╚████╔╝ ██║ ╚████╔╝ ███████╗
+ ╚═╝  ╚═╝╚══════╝  ╚═══╝  ╚═╝  ╚═══╝  ╚══════╝
+*/
+	class Revive {
 		class actionRevive {};
 		class carry {};
 		class fatalWound {};
@@ -336,44 +396,54 @@ class A3A
 		class unconscious {};
 		class unconsciousAAF {};
 	};
-
-	class Runways
-	{
+/*
+ ██████╗ ██╗   ██╗███╗   ██╗██╗    ██╗ █████╗ ██╗   ██╗███████╗
+ ██╔══██╗██║   ██║████╗  ██║██║    ██║██╔══██╗╚██╗ ██╔╝██╔════╝
+ ██████╔╝██║   ██║██╔██╗ ██║██║ █╗ ██║███████║ ╚████╔╝ ███████╗
+ ██╔══██╗██║   ██║██║╚██╗██║██║███╗██║██╔══██║  ╚██╔╝  ╚════██║
+ ██║  ██║╚██████╔╝██║ ╚████║╚███╔███╔╝██║  ██║   ██║   ███████║
+ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+*/
+	class Runways {
 		class getRunwayTakeoffForAirportMarker {};
 		class runwayInfo {};
 	};
-
-	class Save
-	{
+/*
+ ███████╗ █████╗ ██╗   ██╗███████╗
+ ██╔════╝██╔══██╗██║   ██║██╔════╝
+ ███████╗███████║██║   ██║█████╗
+ ╚════██║██╔══██║╚██╗ ██╔╝██╔══╝
+ ███████║██║  ██║ ╚████╔╝ ███████╗
+ ╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝
+*/
+	class Save {
 		class loadPlayer {};
 		class loadPreviousSession {};
 		class loadServer {};
 		class playerHasSave {};
 		class savePlayer {};
 	};
-
-	class Templates
-	{
+/*
+ ████████╗███████╗███╗   ███╗██████╗ ██╗      █████╗ ████████╗███████╗███████╗
+ ╚══██╔══╝██╔════╝████╗ ████║██╔══██╗██║     ██╔══██╗╚══██╔══╝██╔════╝██╔════╝
+    ██║   █████╗  ██╔████╔██║██████╔╝██║     ███████║   ██║   █████╗  ███████╗
+    ██║   ██╔══╝  ██║╚██╔╝██║██╔═══╝ ██║     ██╔══██║   ██║   ██╔══╝  ╚════██║
+    ██║   ███████╗██║ ╚═╝ ██║██║     ███████╗██║  ██║   ██║   ███████╗███████║
+    ╚═╝   ╚══════╝╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝
+*/
+	class Templates {
 		class getLoadout {};
 	};
-
-	class Utility
-	{
+/*
+ ██╗   ██╗████████╗██╗██╗     ██╗████████╗██╗   ██╗
+ ██║   ██║╚══██╔══╝██║██║     ██║╚══██╔══╝╚██╗ ██╔╝
+ ██║   ██║   ██║   ██║██║     ██║   ██║    ╚████╔╝
+ ██║   ██║   ██║   ██║██║     ██║   ██║     ╚██╔╝
+ ╚██████╔╝   ██║   ██║███████╗██║   ██║      ██║
+  ╚═════╝    ╚═╝   ╚═╝╚══════╝╚═╝   ╚═╝      ╚═╝
+*/
+	class Utility {
 		class basicBackpack {};
 		class dateToTimeString {};
-	};
-
-	class init
-	{
-		class cityinfo {};
-		class credits {};
-		class getArrayMrks {};
-		class initGarrisons {};
-		class initGetMissionPath {};
-		class modBlacklist {};
-		class playerMarkers {};
-		class reinitY {};
-		class resourcecheck {};
-		class tags {};
 	};
 };

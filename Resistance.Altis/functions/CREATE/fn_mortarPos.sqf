@@ -1,9 +1,9 @@
 private ["_pos","_countX","_probe","_intersec","_zi","_zf"];
 _pos = _this select 0;
-_pos = _pos findEmptyPosition [1,30,"I_G_Mortar_01_F"];
+_pos = _pos findEmptyPosition [1,30,"I_G_MortaRES_01_F"];
 if (count _pos == 0) then {_pos = _this select 0};
 /*
-_probe = "I_G_Mortar_01_F" createVehicleLocal _pos;
+_probe = "I_G_MortaRES_01_F" createVehicleLocal _pos;
 _probe setposATL [_pos select 0,_pos select 1,(_pos select 2) + 60];*/
 _countX = 300;
 while {_countX > 0} do
@@ -29,12 +29,12 @@ while {_countX > 0} do
 		};
 	*/
 	//if (not _intersec) exitWith {};
-	if !([_pos] call A3A_fnc_isBuildingPosition) then {_exit = true};
+	if !([_pos] call RES_fnc_isBuildingPosition) then {_exit = true};
 	_pos = _pos getPos [31,random 360];
 	//_probe setpos [_pos select 0,_pos select 1,(_pos select 2) + 60];
 	_countX = _countX - 1;
 	};
-if (_countX == 0) then {_pos = (_this select 0) findEmptyPosition [1,30,"I_G_Mortar_01_F"]};
+if (_countX == 0) then {_pos = (_this select 0) findEmptyPosition [1,30,"I_G_MortaRES_01_F"]};
 //deleteVehicle _probe;
 if (count _pos == 0) then {_pos = _this select 0};
 

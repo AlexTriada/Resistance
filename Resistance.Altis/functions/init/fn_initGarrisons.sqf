@@ -12,7 +12,7 @@ _fnc_initGarrisons = {
 		_mrk = createMarker [format ["Dum%1", _x], _pos];
 		//TODO Multilanguage variable insted text
 		_mrk setMarkerShape "ICON";
-		_garrNum = ([_x] call A3A_fnc_garrisonSize) / 8;
+		_garrNum = ([_x] call RES_fnc_garrisonSize) / 8;
 		_garrison = [];
 
 		if (_useSideName) then {
@@ -54,7 +54,7 @@ _fnc_initGarrisons = {
 		_mrk setMarkerText _mrkText;
 
 		garrison setVariable [_x, _garrison, true];
-		[_x] spawn A3A_fnc_createControls;
+		[_x] spawn RES_fnc_createControls;
 	} forEach _target;
 };
 

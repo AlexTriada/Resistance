@@ -1,1 +1,1 @@
-[player] call A3A_fnc_getPersonalGarage;
+[player] call RES_fnc_getPersonalGarage;

@@ -1,7 +1,7 @@
 private ["_size","_frontierX","_markerX","_nVeh","_buildings"];
 _markerX = _this select 0;
-_size = [_markerX] call A3A_fnc_sizeMarker;
-_frontierX = [_markerX] call A3A_fnc_isFrontline;
+_size = [_markerX] call RES_fnc_sizeMarker;
+_frontierX = [_markerX] call RES_fnc_isFrontline;
 
 _nVeh = 0;
 

@@ -10,7 +10,7 @@ if (_key == 21) then
 			{
 			if (player == theBoss) then
 				{
-				[] spawn A3A_fnc_artySupport;
+				[] spawn RES_fnc_artySupport;
 				};
 			}
 		else

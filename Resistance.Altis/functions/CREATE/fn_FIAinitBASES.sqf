@@ -23,7 +23,7 @@ if (count _this > 1) then
 			}
 		};
 	};
-[_unit] call A3A_fnc_initRevive;
+[_unit] call RES_fnc_initRevive;
 
 _unit allowFleeing 0;
 _typeX = typeOf _unit;
@@ -31,7 +31,7 @@ _typeX = typeOf _unit;
 _skill = 0.1 + (skillFIA * 0.05 * skillMult);
 if ((_markerX == "Synd_HQ") and (isMultiplayer)) then {_skill = 1};
 _unit setSkill _skill;
-if (!activeGREF) then {if (not((uniform _unit) in uniformsSDK)) then {[_unit] call A3A_fnc_reDress}};
+if (!activeGREF) then {if (not((uniform _unit) in uniformsSDK)) then {[_unit] call RES_fnc_reDress}};
 
 if (random 40 < skillFIA) then
 		{
@@ -58,7 +58,7 @@ switch (true) do {
 		}
 		else
 		{
-			[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+			[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		};
 		if (debug) then {
 			diag_log format ["%1: [Antistasi] | DEBUG | FIAinitBASES.sqf | _unit:%2 is SDKSniper.",servertime,_unit];
@@ -66,7 +66,7 @@ switch (true) do {
 	};
 
 	case (_typeX in SDKMil): {
-		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		if ((loadAbs _unit < 340) and (random 20 < skillFIA) and (count unlockedAA > 0)) then
 			{
 				_unit addbackpack (unlockedBackpacks select 0);
@@ -80,11 +80,11 @@ switch (true) do {
 	case (_typeX in SDKMG): {
 		if (count unlockedMG > 0) then
 			{
-				[_unit,unlockedMG] call A3A_fnc_randomRifle;
+				[_unit,unlockedMG] call RES_fnc_randomRifle;
 			}
 		else
 			{
-				[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+				[_unit,unlockedRifles] call RES_fnc_randomRifle;
 			};
 		if (debug) then {
 			diag_log format ["%1: [Antistasi] | DEBUG | FIAinitBASES.sqf | _unit:%2 is SDKMG.",servertime,_unit];
@@ -94,11 +94,11 @@ switch (true) do {
 	case (_typeX in SDKGL): {
 		if (count unlockedGL > 0) then
 			{
-				[_unit,unlockedGL] call A3A_fnc_randomRifle;
+				[_unit,unlockedGL] call RES_fnc_randomRifle;
 			}
 		else
 			{
-				[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+				[_unit,unlockedRifles] call RES_fnc_randomRifle;
 			};
 		if (debug) then {
 			diag_log format ["%1: [Antistasi] | DEBUG | FIAinitBASES.sqf | _unit:%2 is SDKGL.",servertime,_unit];
@@ -106,7 +106,7 @@ switch (true) do {
 	};
 
 	case (_typeX in SDKMEDIC): {
-		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		_unit setUnitTrait ["medic",true];
 		if ({_x == "FirstAidKit"} count (items _unit) < 10) then
 			{
@@ -118,7 +118,7 @@ switch (true) do {
 	};
 
 	case (_typeX in SDKATman): {
-		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		if !(unlockedAT isEqualTo []) then
 			{
 				_rlauncher = selectRandom unlockedAT;
@@ -143,7 +143,7 @@ switch (true) do {
 	};
 
 	case (_typeX in squadLeaders): {
-		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		_unit setskill ["courage",_skill + 0.2];
 		_unit setskill ["commanding",_skill + 0.2];
 		if (debug) then {
@@ -152,7 +152,7 @@ switch (true) do {
 	};
 
 	default {
-		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
+		[_unit,unlockedRifles] call RES_fnc_randomRifle;
 		diag_log format ["%1: [Antistasi] | DEBUG | FIAinitBASES.sqf | Could not identify type of _unit: %2 %3.",servertime,_unit,_typeX];
 	};
 
@@ -166,7 +166,7 @@ if (debug) then {
 
 _unit selectWeapon (primaryWeapon _unit);
 
-if (!haveRadio) then {_unit unlinkItem (_unit call A3A_fnc_getRadio)};
+if (!haveRadio) then {_unit unlinkItem (_unit call RES_fnc_getRadio)};
 if !(hasIFA) then
 	{
 	if (sunOrMoon < 1) then
@@ -224,30 +224,30 @@ if ({if (_x in smokeX) exitWith {1}} count unlockedMagazines > 0) then {_unit ad
 _EHkilledIdx = _unit addEventHandler ["killed", {
 	_victim = _this select 0;
 	_killer = _this select 1;
-	[_victim] remoteExec ["A3A_fnc_postmortem",2];
+	[_victim] remoteExec ["RES_fnc_postmortem",2];
 	if (isPlayer _killer) then
 		{
 		if (!isMultiPlayer) then
 			{
-			_nul = [0,20] remoteExec ["A3A_fnc_resourcesFIA",2];
+			_nul = [0,20] remoteExec ["RES_fnc_resourcesFIA",2];
 			_killer addRating 1000;
 			};
 		};
 	if (side _killer == Occupants) then
 		{
-		[0,-0.25,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-		[-0.25,0] remoteExec ["A3A_fnc_prestige",2];
+		[0,-0.25,getPos _victim] remoteExec ["RES_fnc_citySupportChange",2];
+		[-0.25,0] remoteExec ["RES_fnc_prestige",2];
 		}
 	else
 		{
-		if (side _killer == Invaders) then {[0,-0.25] remoteExec ["A3A_fnc_prestige",2]};
+		if (side _killer == Invaders) then {[0,-0.25] remoteExec ["RES_fnc_prestige",2]};
 		};
 	_markerX = _victim getVariable "markerX";
 	if (!isNil "_markerX") then
 		{
 		if (sidesX getVariable [_markerX,sideUnknown] == teamPlayer) then
 			{
-			[typeOf _victim,teamPlayer,_markerX,-1] remoteExec ["A3A_fnc_garrisonUpdate",2];
+			[typeOf _victim,teamPlayer,_markerX,-1] remoteExec ["RES_fnc_garrisonUpdate",2];
 			_victim setVariable [_markerX,nil,true];
 			};
 		};

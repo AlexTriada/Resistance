@@ -1,8 +1,8 @@
 private _soldiers = _this;
 
-waitUntil {sleep 10;{([_x] call A3A_fnc_canFight) and (vehicle _x == _x)} count _soldiers == {[_x] call A3A_fnc_canFight} count _soldiers};
+waitUntil {sleep 10;{([_x] call RES_fnc_canFight) and (vehicle _x == _x)} count _soldiers == {[_x] call RES_fnc_canFight} count _soldiers};
 
-if ({[_x] call A3A_fnc_canFight} count _soldiers == 0) exitWith {};
+if ({[_x] call RES_fnc_canFight} count _soldiers == 0) exitWith {};
 private _sideX = side (group (_soldiers select 0));
 private _eny = [teamPlayer];
 if (_sideX == Occupants) then {_eny pushBack Invaders} else {_eny pushBack Occupants};
@@ -10,7 +10,7 @@ if (_sideX == Occupants) then {_eny pushBack Invaders} else {_eny pushBack Occup
 while {true} do
 	{
 	sleep 10;//poner 10
-	_soldiers = _soldiers select {[_x] call A3A_fnc_canFight};
+	_soldiers = _soldiers select {[_x] call RES_fnc_canFight};
 	if (_soldiers isEqualTo []) exitWith {};
 	_exit = false;
 	_enemiesX = [];
@@ -23,7 +23,7 @@ while {true} do
 		}
 	else
 		{
-		if ((_x distance _soldierX < (distanceSPWN/2)) and {[_x] call A3A_fnc_canFight} and {side group _x in _eny} and {vehicle _x == _x}) then
+		if ((_x distance _soldierX < (distanceSPWN/2)) and {[_x] call RES_fnc_canFight} and {side group _x in _eny} and {vehicle _x == _x}) then
 			{
 			_enemiesX pushBackUnique _x;
 			};

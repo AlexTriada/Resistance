@@ -12,7 +12,7 @@ _exists = false;
 _silencio = false;
 if (count _this > 1) then {_silencio = true};
 
-if ([_typeX] call BIS_fnc_taskExists) exitWith {if (!_silencio) then {[petros,"globalChat","I already gave you a mission of this type"] remoteExec ["A3A_fnc_commsMP",theBoss]}};
+if ([_typeX] call BIS_fnc_taskExists) exitWith {if (!_silencio) then {[petros,"globalChat","I already gave you a mission of this type"] remoteExec ["RES_fnc_commsMP",theBoss]}};
 
 if (_typeX == "AS") then
 	{
@@ -48,14 +48,14 @@ if (_typeX == "AS") then
 		{
 		if (!_silencio) then
 			{
-			[petros,"globalChat","I have no assasination missions for you. Move our HQ closer to the enemy or finish some other assasination missions in order to have better intel"] remoteExec ["A3A_fnc_commsMP",theBoss];
-			[petros,"hint","Assasination Missions require cities, Patrolled Jungles or Airports closer than 4Km from your HQ."] remoteExec ["A3A_fnc_commsMP",theBoss];
+			[petros,"globalChat","I have no assasination missions for you. Move our HQ closer to the enemy or finish some other assasination missions in order to have better intel"] remoteExec ["RES_fnc_commsMP",theBoss];
+			[petros,"hint","Assasination Missions require cities, Patrolled Jungles or Airports closer than 4Km from your HQ."] remoteExec ["RES_fnc_commsMP",theBoss];
 			};
 		}
 	else
 		{
 		_siteX = selectRandom _potentials;
-		if (_siteX in airportsX) then {[[_siteX],"A3A_fnc_AS_Official"] remoteExec ["A3A_fnc_scheduler",2]} else {if (_siteX in citiesX) then {[[_siteX],"A3A_fnc_AS_Traitor"] remoteExec ["A3A_fnc_scheduler",2]} else {[[_siteX],"A3A_fnc_AS_SpecOP"] remoteExec ["A3A_fnc_scheduler",2]}};
+		if (_siteX in airportsX) then {[[_siteX],"RES_fnc_AS_Official"] remoteExec ["RES_fnc_scheduler",2]} else {if (_siteX in citiesX) then {[[_siteX],"RES_fnc_AS_Traitor"] remoteExec ["RES_fnc_scheduler",2]} else {[[_siteX],"RES_fnc_AS_SpecOP"] remoteExec ["RES_fnc_scheduler",2]}};
 		};
 	};
 if (_typeX == "CON") then
@@ -70,14 +70,14 @@ if (_typeX == "CON") then
 		{
 		if (!_silencio) then
 			{
-			[petros,"globalChat","I have no Conquest missions for you. Move our HQ closer to the enemy or finish some other conquest missions in order to have better intel."] remoteExec ["A3A_fnc_commsMP",theBoss];
-			[petros,"hint","Conquest Missions require roadblocks or outposts closer than 4Km from your HQ."] remoteExec ["A3A_fnc_commsMP",theBoss];
+			[petros,"globalChat","I have no Conquest missions for you. Move our HQ closer to the enemy or finish some other conquest missions in order to have better intel."] remoteExec ["RES_fnc_commsMP",theBoss];
+			[petros,"hint","Conquest Missions require roadblocks or outposts closer than 4Km from your HQ."] remoteExec ["RES_fnc_commsMP",theBoss];
 			};
 		}
 	else
 		{
 		_siteX = selectRandom _potentials;
-		[[_siteX],"A3A_fnc_CON_Outpost"] remoteExec ["A3A_fnc_scheduler",2];
+		[[_siteX],"RES_fnc_CON_Outpost"] remoteExec ["RES_fnc_scheduler",2];
 		};
 	};
 if (_typeX == "DES") then
@@ -108,15 +108,15 @@ if (_typeX == "DES") then
 		{
 		if (!_silencio) then
 			{
-			[petros,"globalChat","I have no destroy missions for you. Move our HQ closer to the enemy or finish some other destroy missions in order to have better intel"] remoteExec ["A3A_fnc_commsMP",theBoss];
-			[petros,"hint","Destroy Missions require Airbases or Radio Towers closer than 4Km from your HQ."] remoteExec ["A3A_fnc_commsMP",theBoss];
+			[petros,"globalChat","I have no destroy missions for you. Move our HQ closer to the enemy or finish some other destroy missions in order to have better intel"] remoteExec ["RES_fnc_commsMP",theBoss];
+			[petros,"hint","Destroy Missions require Airbases or Radio Towers closer than 4Km from your HQ."] remoteExec ["RES_fnc_commsMP",theBoss];
 			};
 		}
 	else
 		{
 		_siteX = _potentials call BIS_fnc_selectRandom;
-		if (_siteX in airportsX) then {if (random 10 < 8) then {[[_siteX],"A3A_fnc_DES_Vehicle"] remoteExec ["A3A_fnc_scheduler",2]} else {[[_siteX],"A3A_fnc_DES_Heli"] remoteExec ["A3A_fnc_scheduler",2]}};
-		if (_siteX in antennas) then {[[_siteX],"DES_antenna"] remoteExec ["A3A_fnc_scheduler",2]}
+		if (_siteX in airportsX) then {if (random 10 < 8) then {[[_siteX],"RES_fnc_DES_Vehicle"] remoteExec ["RES_fnc_scheduler",2]} else {[[_siteX],"RES_fnc_DES_Heli"] remoteExec ["RES_fnc_scheduler",2]}};
+		if (_siteX in antennas) then {[[_siteX],"DES_antenna"] remoteExec ["RES_fnc_scheduler",2]}
 		};
 	};
 if (_typeX == "LOG") then
@@ -151,7 +151,7 @@ if (_typeX == "LOG") then
 					}
 				else
 					{
-					if ([_pos,_posbase] call A3A_fnc_isTheSameIsland) then {_potentials pushBack _siteX};
+					if ([_pos,_posbase] call RES_fnc_isTheSameIsland) then {_potentials pushBack _siteX};
 					};
 				};
 			if (_siteX in banks) then
@@ -165,16 +165,16 @@ if (_typeX == "LOG") then
 		{
 		if (!_silencio) then
 			{
-			[petros,"globalChat","I have no logistics missions for you. Move our HQ closer to the enemy or finish some other logistics missions in order to have better intel"] remoteExec ["A3A_fnc_commsMP",theBoss];
-			[petros,"hint","Logistics Missions require Outposts, Cities or Banks closer than 4Km from your HQ."] remoteExec ["A3A_fnc_commsMP",theBoss];
+			[petros,"globalChat","I have no logistics missions for you. Move our HQ closer to the enemy or finish some other logistics missions in order to have better intel"] remoteExec ["RES_fnc_commsMP",theBoss];
+			[petros,"hint","Logistics Missions require Outposts, Cities or Banks closer than 4Km from your HQ."] remoteExec ["RES_fnc_commsMP",theBoss];
 			};
 		}
 	else
 		{
 		_siteX = _potentials call BIS_fnc_selectRandom;
-		if (_siteX in citiesX) then {[[_siteX],"A3A_fnc_LOG_Supplies"] remoteExec ["A3A_fnc_scheduler",2]};
-		if (_siteX in outposts) then {[[_siteX],"A3A_fnc_LOG_Ammo"] remoteExec ["A3A_fnc_scheduler",2]};
-		if (_siteX in banks) then {[[_siteX],"A3A_fnc_LOG_Bank"] remoteExec ["A3A_fnc_scheduler",2]};
+		if (_siteX in citiesX) then {[[_siteX],"RES_fnc_LOG_Supplies"] remoteExec ["RES_fnc_scheduler",2]};
+		if (_siteX in outposts) then {[[_siteX],"RES_fnc_LOG_Ammo"] remoteExec ["RES_fnc_scheduler",2]};
+		if (_siteX in banks) then {[[_siteX],"RES_fnc_LOG_Bank"] remoteExec ["RES_fnc_scheduler",2]};
 		};
 	};
 if (_typeX == "RES") then
@@ -194,14 +194,14 @@ if (_typeX == "RES") then
 		{
 		if (!_silencio) then
 			{
-			[petros,"globalChat","I have no rescue missions for you. Move our HQ closer to the enemy or finish some other rescue missions in order to have better intel"] remoteExec ["A3A_fnc_commsMP",theBoss];
-			[petros,"hint","Rescue Missions require Cities or Airports closer than 4Km from your HQ."] remoteExec ["A3A_fnc_commsMP",theBoss];
+			[petros,"globalChat","I have no rescue missions for you. Move our HQ closer to the enemy or finish some other rescue missions in order to have better intel"] remoteExec ["RES_fnc_commsMP",theBoss];
+			[petros,"hint","Rescue Missions require Cities or Airports closer than 4Km from your HQ."] remoteExec ["RES_fnc_commsMP",theBoss];
 			};
 		}
 	else
 		{
 		_siteX = _potentials call BIS_fnc_selectRandom;
-		if (_siteX in citiesX) then {[[_siteX],"A3A_fnc_RES_Refugees"] remoteExec ["A3A_fnc_scheduler",2]} else {[[_siteX],"A3A_fnc_RES_Prisoners"] remoteExec ["A3A_fnc_scheduler",2]};
+		if (_siteX in citiesX) then {[[_siteX],"RES_fnc_RES_Refugees"] remoteExec ["RES_fnc_scheduler",2]} else {[[_siteX],"RES_fnc_RES_Prisoners"] remoteExec ["RES_fnc_scheduler",2]};
 		};
 	};
 if (_typeX == "CONVOY") then
@@ -216,7 +216,7 @@ if (_typeX == "CONVOY") then
 				{
 				_siteX = _sites select _i;
 				_pos = getMarkerPos _siteX;
-				_base = [_siteX] call A3A_fnc_findBasesForConvoy;
+				_base = [_siteX] call RES_fnc_findBasesForConvoy;
 				if ((_pos distance _posbase < (distanceMission*2)) and (_base !="")) then
 					{
 					if ((_siteX in citiesX) and (sidesX getVariable [_siteX,sideUnknown] == teamPlayer)) then
@@ -243,22 +243,22 @@ if (_typeX == "CONVOY") then
 			{
 			if (!_silencio) then
 				{
-				[petros,"globalChat","I have no Convoy missions for you. Move our HQ closer to the enemy or finish some other missions in order to have better intel"] remoteExec ["A3A_fnc_commsMP",theBoss];
-				[petros,"hint","Convoy Missions require Airports or Cities closer than 5Km from your HQ, and they must have an idle friendly base in their surroundings."] remoteExec ["A3A_fnc_commsMP",theBoss];
+				[petros,"globalChat","I have no Convoy missions for you. Move our HQ closer to the enemy or finish some other missions in order to have better intel"] remoteExec ["RES_fnc_commsMP",theBoss];
+				[petros,"hint","Convoy Missions require Airports or Cities closer than 5Km from your HQ, and they must have an idle friendly base in their surroundings."] remoteExec ["RES_fnc_commsMP",theBoss];
 				};
 			}
 		else
 			{
 			_siteX = _potentials call BIS_fnc_selectRandom;
-			_base = [_siteX] call A3A_fnc_findBasesForConvoy;
-			[[_siteX,_base],"A3A_fnc_convoy"] remoteExec ["A3A_fnc_scheduler",2];
+			_base = [_siteX] call RES_fnc_findBasesForConvoy;
+			[[_siteX,_base],"RES_fnc_convoy"] remoteExec ["RES_fnc_scheduler",2];
 			};
 		}
 	else
 		{
-		[petros,"globalChat","There is a big battle around, I don't think the enemy will send any convoy"] remoteExec ["A3A_fnc_commsMP",theBoss];
-		[petros,"hint","Convoy Missions require a calmed status around the island, and now it is not the proper time."] remoteExec ["A3A_fnc_commsMP",theBoss];
+		[petros,"globalChat","There is a big battle around, I don't think the enemy will send any convoy"] remoteExec ["RES_fnc_commsMP",theBoss];
+		[petros,"hint","Convoy Missions require a calmed status around the island, and now it is not the proper time."] remoteExec ["RES_fnc_commsMP",theBoss];
 		};
 	};
 
-if ((count _potentials > 0) and (!_silencio)) then {[petros,"globalChat","I have a mission for you"] remoteExec ["A3A_fnc_commsMP",theBoss]};
+if ((count _potentials > 0) and (!_silencio)) then {[petros,"globalChat","I have a mission for you"] remoteExec ["RES_fnc_commsMP",theBoss]};

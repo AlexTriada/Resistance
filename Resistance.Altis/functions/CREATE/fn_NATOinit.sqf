@@ -6,9 +6,9 @@ _typeX = typeOf _unit;
 if (typeOf _unit == "Fin_random_F") exitWith {};
 _sideX = side _unit;
 //_unit setVariable ["sideX",_sideX];
-_unit addEventHandler ["HandleDamage",A3A_fnc_handleDamageAAF];
+_unit addEventHandler ["HandleDamage",RES_fnc_handleDamageAAF];
 
-_unit addEventHandler ["killed",A3A_fnc_AAFKilledEH];
+_unit addEventHandler ["killed",RES_fnc_AAFKilledEH];
 if (count _this > 1) then
 	{
 	_markerX = _this select 1;
@@ -217,7 +217,7 @@ if !(hasIFA) then
 	}
 else
 	{
-	_unit unlinkItem (_unit call A3A_fnc_getRadio);
+	_unit unlinkItem (_unit call RES_fnc_getRadio);
 	};
 _revealX = false;
 if (vehicle _unit != _unit) then

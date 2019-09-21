@@ -7,7 +7,7 @@ if (hasInterface) then {
 };
 
 if (isMultiplayer && !isServer) exitwith {
-	[_playerId] remoteExec ["A3A_fnc_playerHasSave", 2];
+	[_playerId] remoteExec ["RES_fnc_playerHasSave", 2];
 	if (canSuspend) then {
 		waitUntil {!isNil "hasSave";};
 		hasSave;

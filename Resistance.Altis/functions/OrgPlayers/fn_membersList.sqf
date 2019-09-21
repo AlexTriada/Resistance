@@ -8,7 +8,7 @@ _playerX = _x getVariable ["owner",objNull];
 if (!isNull _playerX) then
 	{
 	//_uid = getPlayerUID _playerX;
-	if ([_playerX] call A3A_fnc_isMember) then {_textX = format ["%1%2\n",_textX,name _playerX]} else {_countN = _countN + 1};
+	if ([_playerX] call RES_fnc_isMember) then {_textX = format ["%1%2\n",_textX,name _playerX]} else {_countN = _countN + 1};
 	};
 } forEach playableUnits;
 

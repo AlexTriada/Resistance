@@ -9,7 +9,7 @@ _soldiers = [];
 
 _positionX = getMarkerPos (_markerX);
 
-_num = [_markerX] call A3A_fnc_sizeMarker;
+_num = [_markerX] call RES_fnc_sizeMarker;
 _sideX = sidesX getVariable [_markerX,sideUnknown];
 if ({if ((getMarkerPos _x inArea _markerX) and (sidesX getVariable [_x,sideUnknown] != _sideX)) exitWith {1}} count markersX > 0) exitWith {};
 _num = round (_num / 100);
@@ -32,7 +32,7 @@ else
 	if (_sideX == Occupants) then
 		{
 		_num = round (_num * (_prestigeOPFOR + _prestigeBLUFOR)/100);
-		_frontierX = [_markerX] call A3A_fnc_isFrontline;
+		_frontierX = [_markerX] call RES_fnc_isFrontline;
 		if (_frontierX) then
 			{
 			_num = _num * 2;
@@ -57,14 +57,14 @@ if (_num < 1) then {_num = 1};
 _countX = 0;
 while {(spawner getVariable _markerX != 2) and (_countX < _num)} do
 	{
-	_groupX = _params call A3A_fnc_spawnGroup;
+	_groupX = _params call RES_fnc_spawnGroup;
 	sleep 1;
 	if (_esAAF) then
 		{
 		if (random 10 < 2.5) then
 			{
 			_dog = _groupX createUnit ["Fin_random_F",_positionX,[],0,"FORM"];
-			[_dog] spawn A3A_fnc_guardDog;
+			[_dog] spawn RES_fnc_guardDog;
 			};
 		};
 	_nul = [leader _groupX, _markerX, "SAFE", "RANDOM", "SPAWNED","NOVEH2", "NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
@@ -75,19 +75,19 @@ while {(spawner getVariable _markerX != 2) and (_countX < _num)} do
 if ((_esAAF) or (_markerX in destroyedCities)) then
 	{
 	{_grp = _x;
-	{[_x,""] call A3A_fnc_NATOinit; _soldiers pushBack _x} forEach units _grp;} forEach _groups;
+	{[_x,""] call RES_fnc_NATOinit; _soldiers pushBack _x} forEach units _grp;} forEach _groups;
 	}
 else
 	{
 	{_grp = _x;
-	{[_x] spawn A3A_fnc_FIAinitBases; _soldiers pushBack _x} forEach units _grp;} forEach _groups;
+	{[_x] spawn RES_fnc_FIAinitBases; _soldiers pushBack _x} forEach units _grp;} forEach _groups;
 	};
 
-waitUntil {sleep 1;((spawner getVariable _markerX == 2)) or ({[_x,_markerX] call A3A_fnc_canConquer} count _soldiers == 0)};
+waitUntil {sleep 1;((spawner getVariable _markerX == 2)) or ({[_x,_markerX] call RES_fnc_canConquer} count _soldiers == 0)};
 
-if (({[_x,_markerX] call A3A_fnc_canConquer} count _soldiers == 0) and (_esAAF)) then
+if (({[_x,_markerX] call RES_fnc_canConquer} count _soldiers == 0) and (_esAAF)) then
 	{
-	[[_positionX,Occupants,"",false],"A3A_fnc_patrolCA"] remoteExec ["A3A_fnc_scheduler",2];
+	[[_positionX,Occupants,"",false],"RES_fnc_patrolCA"] remoteExec ["RES_fnc_scheduler",2];
 	};
 
 waitUntil {sleep 1;(spawner getVariable _markerX == 2)};

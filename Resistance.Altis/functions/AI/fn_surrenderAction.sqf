@@ -8,11 +8,11 @@ _unit setVariable ["surrendered",true];
 
 if (side _unit == Occupants) then
 	{
-	_nul = [-2,0,getPos _unit] remoteExec ["A3A_fnc_citySupportChange",2];
+	_nul = [-2,0,getPos _unit] remoteExec ["RES_fnc_citySupportChange",2];
 	}
 else
 	{
-	_nul = [1,0,getPos _unit] remoteExec ["A3A_fnc_citySupportChange",2];
+	_nul = [1,0,getPos _unit] remoteExec ["RES_fnc_citySupportChange",2];
 	};
 _weaponsX = [];
 _ammunition = [];
@@ -67,12 +67,12 @@ _markerX = _unit getVariable "markerX";
 if (!isNil "_markerX") then
 	{
 	_sideX = side (group _unit);
-	[_markerX,_sideX] remoteExec ["A3A_fnc_zoneCheck",2];
+	[_markerX,_sideX] remoteExec ["RES_fnc_zoneCheck",2];
 	};
-[_unit] spawn A3A_fnc_postmortem;
-[_boxX] spawn A3A_fnc_postmortem;
+[_unit] spawn RES_fnc_postmortem;
+[_boxX] spawn RES_fnc_postmortem;
 sleep 10;
 _unit allowDamage true;
 if (isMultiplayer) then {[_unit,false] remoteExec ["enableSimulationGlobal",2]} else {_unit enableSimulation false};
-[_unit,"interrogate"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_unit];
-[_unit,"captureX"]remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_unit];
+[_unit,"interrogate"] remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_unit];
+[_unit,"captureX"]remoteExec ["RES_fnc_flagaction",[teamPlayer,civilian],_unit];

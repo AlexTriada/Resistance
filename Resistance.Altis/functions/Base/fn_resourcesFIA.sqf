@@ -35,6 +35,6 @@ else
 
 if (_textX != "") then
 	{
-	[petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",theBoss];
-	//[] remoteExec ["A3A_fnc_statistics",[teamPlayer,civilian]];
+	[petros,"income",_textX] remoteExec ["RES_fnc_commsMP",theBoss];
+	//[] remoteExec ["RES_fnc_statistics",[teamPlayer,civilian]];
 	};

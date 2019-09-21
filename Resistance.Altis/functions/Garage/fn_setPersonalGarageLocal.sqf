@@ -1,3 +1,3 @@
 params [["_garage", []]];
 
-[player, _garage] call A3A_fnc_setPersonalGarage;
+[player, _garage] call RES_fnc_setPersonalGarage;

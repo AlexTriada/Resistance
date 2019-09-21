@@ -30,4 +30,4 @@ if (count _todo < 1) exitWith
 	if (count _this == 2) then {deleteVehicle _truckX};
 	};
 
-if (count _this == 2) then {[_truckX,boxX,true] remoteExec ["A3A_fnc_ammunitionTransfer",2]} else {[_truckX,boxX] remoteExec ["A3A_fnc_ammunitionTransfer",2]}
+if (count _this == 2) then {[_truckX,boxX,true] remoteExec ["RES_fnc_ammunitionTransfer",2]} else {[_truckX,boxX] remoteExec ["RES_fnc_ammunitionTransfer",2]}

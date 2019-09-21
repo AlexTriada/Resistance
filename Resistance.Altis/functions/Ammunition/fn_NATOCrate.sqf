@@ -64,7 +64,7 @@ if !(hasIFA) then
 
 	if (round random 100 < 25) then
 		{
-		_crate addBackpackCargoGlobal ["B_Static_Designator_01_weapon_F",1];
+		_crate addBackpackCargoGlobal ["B_Static_DesignatoRES_01_weapon_F",1];
 		}
 	else
 		{
@@ -88,8 +88,8 @@ if !(hasIFA) then
 		};
 	if (hasACE) then
 		{
-		_crate addMagazineCargoGlobal ["ACE_HuntIR_M203", 3];
-		//_crate addBackpackCargoGlobal ["ACE_HuntIR_Box",1];
-		_crate addItemCargoGlobal ["ACE_HuntIR_monitor", 1];
+		_crate addMagazineCargoGlobal ["ACE_HuntIRES_M203", 3];
+		//_crate addBackpackCargoGlobal ["ACE_HuntIRES_Box",1];
+		_crate addItemCargoGlobal ["ACE_HuntIRES_monitor", 1];
 		};
 	};

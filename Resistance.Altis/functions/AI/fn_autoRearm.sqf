@@ -3,7 +3,7 @@ private ["_unit","_Pweapon","_Sweapon","_countX","_magazines","_hasBox","_distan
 _unit = _this select 0;
 
 if (isPlayer _unit) exitWith {};
-if !([_unit] call A3A_fnc_canFight) exitWith {};
+if !([_unit] call RES_fnc_canFight) exitWith {};
 _inPlayerGroup = (isPlayer (leader _unit));
 //_helping = _unit getVariable "helping";
 if (_unit getVariable ["helping",false]) exitWith {if (_inPlayerGroup) then {_unit groupChat "I cannot rearm right now. I'm healing a comrade"}};
@@ -60,8 +60,8 @@ if ((_Pweapon in initialRifles) or (_Pweapon == "")) then
 		_unit doMove (getPosATL _target);
 		if (_inPlayerGroup) then {_unit groupChat "Picking a better weapon"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
-		if ((unitReady _unit) and ([_unit] call A3A_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		if ((unitReady _unit) and ([_unit] call RES_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
 		if (_unit distance _target < 3) then
 			{
 			_unit action ["TakeWeapon",_target,_weaponX];
@@ -119,8 +119,8 @@ if ((_hasBox) and (_unit getVariable "rearming")) then
 	_unit doMove (getPosATL _target);
 	if (_inPlayerGroup) then {_unit groupChat "Rearming"};
 	_timeOut = time + 60;
-	waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
-	if ((unitReady _unit) and ([_unit] call A3A_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
+	waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+	if ((unitReady _unit) and ([_unit] call RES_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
 	if (_unit distance _target < 3) then
 		{
 		_unit action ["rearm",_target];
@@ -173,8 +173,8 @@ if ((_Sweapon == "") and (loadAbs _unit < 340)) then
 		_unit doMove (getPosATL _target);
 		if (_inPlayerGroup) then {_unit groupChat "Picking a secondary weapon"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
-		if ((unitReady _unit) and ([_unit] call A3A_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		if ((unitReady _unit) and ([_unit] call RES_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
 		if (_unit distance _target < 3) then
 			{
 			_unit action ["TakeWeapon",_target,_weaponX];
@@ -233,13 +233,13 @@ if (_Sweapon != "") then
 		_unit doMove (position _target);
 		if (_inPlayerGroup) then {_unit groupChat "Rearming"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
-		if ((unitReady _unit) and ([_unit] call A3A_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		if ((unitReady _unit) and ([_unit] call RES_fnc_canFight) and (_unit distance _target > 3) and (_target isKindOf "ReammoBox_F") and (!isNull _target)) then {_unit setPos position _target};
 		if (_unit distance _target < 3) then
 			{
 			if ((backpack _unit == "") and (backPack _target != "")) then
 				{
-				_unit addBackPackGlobal ((backpack _target) call A3A_fnc_basicBackpack);
+				_unit addBackPackGlobal ((backpack _target) call RES_fnc_basicBackpack);
 				_unit action ["rearm",_target];
 				sleep 3;
 				{_unit addItemToBackpack _x} forEach (backpackItems _target);
@@ -268,7 +268,7 @@ if (_Sweapon != "") then
 	sleep 3;
 	};
 _hasBox = false;
-if (!haveRadio && {_unit call A3A_fnc_getRadio == ""}) then
+if (!haveRadio && {_unit call RES_fnc_getRadio == ""}) then
 	{
 	_needsRearm = true;
 	_hasBox = false;
@@ -276,7 +276,7 @@ if (!haveRadio && {_unit call A3A_fnc_getRadio == ""}) then
 	_victims = allDead select {(_x distance _unit < 51) and (!(_x getVariable ["busy",false]))};
 	{
 	_victim = _x;
-	if ((_victim call A3A_fnc_getRadio != "") and (_unit distance _victim < _distanceX)) then
+	if ((_victim call RES_fnc_getRadio != "") and (_unit distance _victim < _distanceX)) then
 		{
 		_target = _victim;
 		_hasBox = true;
@@ -290,11 +290,11 @@ if (!haveRadio && {_unit call A3A_fnc_getRadio == ""}) then
 		_unit doMove (getPosATL _target);
 		if (_inPlayerGroup) then {_unit groupChat "Picking a Radio"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
 		if (_unit distance _target < 3) then
 			{
 			_unit action ["rearm",_target];
-			private _radio = _target call A3A_fnc_getRadio;
+			private _radio = _target call RES_fnc_getRadio;
 			_unit linkItem _radio;
 			_target unlinkItem _radio;
 			};
@@ -326,7 +326,7 @@ if (hmd _unit == "") then
 		_unit doMove (getPosATL _target);
 		if (_inPlayerGroup) then {_unit groupChat "Picking NV Googles"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
 		if (_unit distance _target < 3) then
 			{
 			_unit action ["rearm",_target];
@@ -360,7 +360,7 @@ if (not(headgear _unit in helmets)) then
 		_unit doMove (getPosATL _target);
 		if (_inPlayerGroup) then {_unit groupChat "Picking a Helmet"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
 		if (_unit distance _target < 3) then
 			{
 			_unit action ["rearm",_target];
@@ -371,7 +371,7 @@ if (not(headgear _unit in helmets)) then
 		};
 	};
 _hasBox = false;
-_minFA = if ([_unit] call A3A_fnc_isMedic) then {10} else {1};
+_minFA = if ([_unit] call RES_fnc_isMedic) then {10} else {1};
 
 if ({_x == "ACE_epinephrine"} count (items _unit) < _minFA) then
 	{
@@ -395,7 +395,7 @@ if ({_x == "ACE_epinephrine"} count (items _unit) < _minFA) then
 		_unit doMove (getPosATL _target);
 		if (_inPlayerGroup) then {_unit groupChat "Picking a First Aid Kit"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
 		if (_unit distance _target < 3) then
 			{
 			while {{_x == "ACE_epinephrine"} count (items _unit) < _minFA} do
@@ -429,7 +429,7 @@ if ((_hasBox) and (_unit getVariable "rearming")) then
 	_unit doMove (getPosATL _target);
 	if (_inPlayerGroup) then {_unit groupChat "Picking a a better vest"};
 	_timeOut = time + 60;
-	waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+	waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
 	if (_unit distance _target < 3) then
 		{
 		_itemsUnit = vestItems _unit;
@@ -470,10 +470,10 @@ if (backpack _unit == "") then
 		_unit doMove (getPosATL _target);
 		if (_inPlayerGroup) then {_unit groupChat "Picking a Backpack"};
 		_timeOut = time + 60;
-		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
+		waitUntil {sleep 1; !([_unit] call RES_fnc_canFight) or (isNull _target) or (_unit distance _target < 3) or (_timeOut < time) or (unitReady _unit)};
 		if (_unit distance _target < 3) then
 			{
-			_unit addBackPackGlobal ((backpack _target) call A3A_fnc_basicBackpack);
+			_unit addBackPackGlobal ((backpack _target) call RES_fnc_basicBackpack);
 			_unit action ["rearm",_target];
 			//{_unit addItemCargoGlobal [_x,1]} forEach ((backpackItems _target) + (backpackMagazines _target));
 			_things = nearestObjects [_target, ["WeaponHolderSimulated", "GroundWeaponHolder", "WeaponHolder"], 5];

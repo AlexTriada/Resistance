@@ -17,7 +17,7 @@ if !(alive _cured) exitWith
 	if (_inPlayerGroup) then {_medicX groupChat format ["%1 мёртв",name _cured]};
 	_healed
 	};
-if !([_medicX] call A3A_fnc_canFight) exitWith {if (_player) then {hint "You are not able to revive anyone"};_healed};
+if !([_medicX] call RES_fnc_canFight) exitWith {if (_player) then {hint "You are not able to revive anyone"};_healed};
 
 
 if ((not("ACE_epinephrine" in (items _medicX))) and (not("ACE_epinephrine" in (items _cured)))) exitWith {
@@ -35,7 +35,7 @@ if ((not("ACE_epinephrine" in (items _medicX))) and !(_medicX canAdd "ACE_epinep
 	if (_inPlayerGroup) then {_medicX groupChat "I'm out of FA kits!"};
 	_healed
 	};
-if ((([_cured] call A3A_fnc_fatalWound)) and !([_medicX] call A3A_fnc_isMedic)) exitWith
+if ((([_cured] call RES_fnc_fatalWound)) and !([_medicX] call RES_fnc_isMedic)) exitWith
 	{
 	if (_player) then {hint format ["%1 тяжело ранен. только медик может его оживить",name _cured]};
 	if (_inPlayerGroup) then {_medicX groupChat format ["%1 тяжело ранен. только медик может его оживить",name _cured]};
@@ -64,13 +64,13 @@ if (not("ACE_epinephrine" in (items _medicX))) then
 	_medicX addItem "ACE_epinephrine";
 	_cured removeItem "ACE_epinephrine";
 	};
-_timer = if ([_cured] call A3A_fnc_fatalWound) then
+_timer = if ([_cured] call RES_fnc_fatalWound) then
 			{
 			time + 35 + (random 20)
 			}
 		else
 			{
-			if ((!isMultiplayer and (isPlayer _cured)) or ([_medicX] call A3A_fnc_isMedic)) then
+			if ((!isMultiplayer and (isPlayer _cured)) or ([_medicX] call RES_fnc_isMedic)) then
 				{
 				time + 10 + (random 5)
 				}
@@ -99,7 +99,7 @@ _medicX addEventHandler ["AnimDone",
 	{
 	private _medicX = _this select 0;
 	private _cured = _medicX getVariable ["cured",objNull];
-	if (([_medicX] call A3A_fnc_canFight) and (time <= (_medicX getVariable ["timeToHeal",time])) and !(_medicX getVariable ["cancelRevive",false]) and (alive _cured) and (_cured getVariable ["INCAPACITATED",false]) and (_medicX == vehicle _medicX)) then
+	if (([_medicX] call RES_fnc_canFight) and (time <= (_medicX getVariable ["timeToHeal",time])) and !(_medicX getVariable ["cancelRevive",false]) and (alive _cured) and (_cured getVariable ["INCAPACITATED",false]) and (_medicX == vehicle _medicX)) then
 		{
 		_medicX playMoveNow selectRandom medicAnims;
 		}
@@ -107,14 +107,14 @@ _medicX addEventHandler ["AnimDone",
 		{
 		_medicX removeEventHandler ["AnimDone",_thisEventHandler];
 		_medicX setVariable ["animsDone",true];
-		if (([_medicX] call A3A_fnc_canFight) and !(_medicX getVariable ["cancelRevive",false]) and (_medicX == vehicle _medicX) and (alive _cured)) then
+		if (([_medicX] call RES_fnc_canFight) and !(_medicX getVariable ["cancelRevive",false]) and (_medicX == vehicle _medicX) and (alive _cured)) then
 			{
 			if (_cured getVariable ["INCAPACITATED",false]) then
 				{
 				_medicX setVariable ["success",true];
 				//_cured setVariable ["INCAPACITATED",false,true];
 				//_medicX action ["HealSoldier",_cured];
-				if ([_medicX] call A3A_fnc_isMedic) then {_cured setDamage 0.25} else {_cured setDamage 0.5};
+				if ([_medicX] call RES_fnc_isMedic) then {_cured setDamage 0.25} else {_cured setDamage 0.5};
 				_medicX removeItem "ACE_epinephrine";
 				};
 			};
@@ -150,7 +150,7 @@ if !(alive _cured) exitWith
 	if (_inPlayerGroup) then {_medicX groupChat format ["Мы потеряли %1",name _cured]};
 	_healed
 	};
-if (!([_medicX] call A3A_fnc_canFight) or (_medicX != vehicle _medicX) or (_medicX distance _cured > 3)) exitWith {if (_player) then {hint "Оживление отменено"};_healed};
+if (!([_medicX] call RES_fnc_canFight) or (_medicX != vehicle _medicX) or (_medicX distance _cured > 3)) exitWith {if (_player) then {hint "Оживление отменено"};_healed};
 
 if (_medicX getVariable ["success",true]) then
 	{

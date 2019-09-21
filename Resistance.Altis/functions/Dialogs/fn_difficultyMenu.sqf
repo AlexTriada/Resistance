@@ -35,7 +35,7 @@ if !(skillMult == 1) then
 		server setVariable ["resourcesFIA",200,true];
 		minWeaps = 40;
 		};
-	[] call A3A_fnc_statistics;
+	[] call RES_fnc_statistics;
 	};
 _nul= createDialog "gameMode_menu";
 waitUntil {dialog};
@@ -49,6 +49,6 @@ if (gameMode != 1) then
     if (gameMode == 4) then {"NATO_carrier" setMarkerAlpha 0};
 	};
 hint "Map Init in progress";
-[] call A3A_fnc_initGarrisons;
+[] call RES_fnc_initGarrisons;
 hint "Map Init Done";
-[] spawn A3A_fnc_placementselection;
+[] spawn RES_fnc_placementselection;

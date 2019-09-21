@@ -1,6 +1,6 @@
 private ["_markerX","_nameDest","_nameENY"];
 _markerX = _this select 0;
-_nameDest = [_markerX] call A3A_fnc_localizar;
+_nameDest = [_markerX] call RES_fnc_localizar;
 _sideEny = _this select 1;
 _nameENY = if (_sideEny == teamPlayer) then
 				{
@@ -19,4 +19,4 @@ if (_sideX isEqualType []) then {_sideX = teamPlayer};
 
 waitUntil {sleep 10; (sidesX getVariable [_markerX,sideUnknown] != _sideX) or (spawner getVariable _markerX == 2)};
 
-[0,_markerX] spawn A3A_fnc_deleteTask;
+[0,_markerX] spawn RES_fnc_deleteTask;

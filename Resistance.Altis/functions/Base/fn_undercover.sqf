@@ -55,17 +55,17 @@ if ({((side _x== Invaders) or (side _x== Occupants)) and (((_x knowsAbout _playe
 	};
 
 _base = [_airportsX,_player] call BIS_fnc_nearestPosition;
-_size = [_base] call A3A_fnc_sizeMarker;
+_size = [_base] call RES_fnc_sizeMarker;
 if ((_player distance getMarkerPos _base < _size*2) and (not(sidesX getVariable [_base,sideUnknown] == teamPlayer))) exitWith {hint "You cannot go Undercover near Airports, Outposts or Roadblocks"};
 
 ["Undercover ON",0,0,4,0,0,4] spawn bis_fnc_dynamicText;
 
 [_player,true] remoteExec ["setCaptive",0,_player];
 _player setCaptive true;
-[] spawn A3A_fnc_statistics;
+[] spawn RES_fnc_statistics;
 if (_player == leader group _player) then
 	{
-	{if ((!isplayer _x) and (local _x) and (_x getVariable ["owner",_x] == _player)) then {[_x] spawn A3A_fnc_undercoverAI}} forEach units group _player;
+	{if ((!isplayer _x) and (local _x) and (_x getVariable ["owner",_x] == _player)) then {[_x] spawn RES_fnc_undercoverAI}} forEach units group _player;
 	};
 _isInControl = false;
 while {_changeX == ""} do
@@ -133,7 +133,7 @@ while {_changeX == ""} do
 			if ((_typeX != civHeli) and (!(_typeX in civBoats))) then
 				{
 				_base = [_airportsX,_player] call BIS_fnc_nearestPosition;
-				//_size = [_base] call A3A_fnc_sizeMarker;
+				//_size = [_base] call RES_fnc_sizeMarker;
 //Following lines are for the detection of players in the detectionAreas
 _onDetectionMarker = (detectionAreas findIf {_player inArea _x } != -1);
 _onBaseMarker = (_player inArea _base);
@@ -172,7 +172,7 @@ _airport = [_airportsX1,_player] call BIS_fnc_nearestPosition;
 				if (_typeX == civHeli) then
 					{
 					_base = [_airportsX1,_player] call BIS_fnc_nearestPosition;
-					_size = [_base] call A3A_fnc_sizeMarker;
+					_size = [_base] call RES_fnc_sizeMarker;
 					if ((_player distance2d getMarkerPos _base < _size*3) and ((sidesX getVariable [_base,sideUnknown] == Occupants) or (sidesX getVariable [_base,sideUnknown] == Invaders))) then
 						{
 						_changeX = "NoFly";
@@ -192,7 +192,7 @@ if (vehicle _player != _player) then
 	};
 
 ["Undercover OFF",0,0,4,0,0,4] spawn bis_fnc_dynamicText;
-[] spawn A3A_fnc_statistics;
+[] spawn RES_fnc_statistics;
 switch _changeX do
 	{
 	case "Reported":

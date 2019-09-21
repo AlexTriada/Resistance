@@ -51,5 +51,5 @@ else
 	};
 if (isNil "_garrison") exitWith {garrisonIsChanging = false};
 garrison setVariable [_markerX,_garrison,true];
-if (_sideX == teamPlayer) then {[_markerX] call A3A_fnc_mrkUpdate};
+if (_sideX == teamPlayer) then {[_markerX] call RES_fnc_mrkUpdate};
 garrisonIsChanging = false;

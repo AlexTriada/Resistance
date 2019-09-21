@@ -24,55 +24,55 @@ if (random 100 < _chance) then
 	{
 	if (_sideX == Occupants) then
 		{
-		if ([vehNATOPlane] call A3A_fnc_vehAvailable) then {_textX = format ["%1 %2 Planes Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 Planes Unavailable<br/>",_textX,nameOccupants]}
+		if ([vehNATOPlane] call RES_fnc_vehAvailable) then {_textX = format ["%1 %2 Planes Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 Planes Unavailable<br/>",_textX,nameOccupants]}
 		}
 	else
 		{
-		if ([vehCSATPlane] call A3A_fnc_vehAvailable) then {_textX = format ["%1 %2 Planes Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 Planes Unavailable<br/>",_textX,nameInvaders]}
+		if ([vehCSATPlane] call RES_fnc_vehAvailable) then {_textX = format ["%1 %2 Planes Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 Planes Unavailable<br/>",_textX,nameInvaders]}
 		};
 	};
 if (random 100 < _chance) then
 	{
 	if (_sideX == Occupants) then
 		{
-		if ({[_x] call A3A_fnc_vehAvailable} count vehNATOAttackHelis > 0) then {_textX = format ["%1 %2 Attack Helis Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 Attack Helis Unavailable<br/>",_textX,nameOccupants]}
+		if ({[_x] call RES_fnc_vehAvailable} count vehNATOAttackHelis > 0) then {_textX = format ["%1 %2 Attack Helis Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 Attack Helis Unavailable<br/>",_textX,nameOccupants]}
 		}
 	else
 		{
-		if ({[_x] call A3A_fnc_vehAvailable} count vehCSATAttackHelis > 0) then {_textX = format ["%1 %2 Attack Helis Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 Attack Helis Unavailable<br/>",_textX,nameInvaders]}
+		if ({[_x] call RES_fnc_vehAvailable} count vehCSATAttackHelis > 0) then {_textX = format ["%1 %2 Attack Helis Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 Attack Helis Unavailable<br/>",_textX,nameInvaders]}
 		};
 	};
 if (random 100 < _chance) then
 	{
 	if (_sideX == Occupants) then
 		{
-		if ({[_x] call A3A_fnc_vehAvailable} count vehNATOAPC > 0) then {_textX = format ["%1 %2 APCs Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 APCs Unavailable<br/>",_textX,nameOccupants]}
+		if ({[_x] call RES_fnc_vehAvailable} count vehNATOAPC > 0) then {_textX = format ["%1 %2 APCs Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 APCs Unavailable<br/>",_textX,nameOccupants]}
 		}
 	else
 		{
-		if ({[_x] call A3A_fnc_vehAvailable} count vehCSATAPC > 0) then {_textX = format ["%1 %2 APCs Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 APCs Unavailable<br/>",_textX,nameInvaders]}
+		if ({[_x] call RES_fnc_vehAvailable} count vehCSATAPC > 0) then {_textX = format ["%1 %2 APCs Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 APCs Unavailable<br/>",_textX,nameInvaders]}
 		};
 	};
 if (random 100 < _chance) then
 	{
 	if (_sideX == Occupants) then
 		{
-		if ([vehNATOTank] call A3A_fnc_vehAvailable) then {_textX = format ["%1 %2 Tanks Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 Tanks Unavailable<br/>",_textX,nameOccupants]}
+		if ([vehNATOTank] call RES_fnc_vehAvailable) then {_textX = format ["%1 %2 Tanks Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 Tanks Unavailable<br/>",_textX,nameOccupants]}
 		}
 	else
 		{
-		if ([vehCSATTank] call A3A_fnc_vehAvailable) then {_textX = format ["%1 %2 Tanks Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 Tanks Unavailable<br/>",_textX,nameInvaders]}
+		if ([vehCSATTank] call RES_fnc_vehAvailable) then {_textX = format ["%1 %2 Tanks Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 Tanks Unavailable<br/>",_textX,nameInvaders]}
 		};
 	};
 if (random 100 < _chance) then
 	{
 	if (_sideX == Occupants) then
 		{
-		if ([vehNATOAA] call A3A_fnc_vehAvailable) then {_textX = format ["%1 %2 AA Tanks Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 AA Tanks Unavailable<br/>",_textX,nameOccupants]}
+		if ([vehNATOAA] call RES_fnc_vehAvailable) then {_textX = format ["%1 %2 AA Tanks Available<br/>",_textX,nameOccupants]} else {_textX = format ["%1 %2 AA Tanks Unavailable<br/>",_textX,nameOccupants]}
 		}
 	else
 		{
-		if ([vehCSATAA] call A3A_fnc_vehAvailable) then {_textX = format ["%1 %2 AA Tanks Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 AA Tanks Unavailable<br/>",_textX,nameInvaders]}
+		if ([vehCSATAA] call RES_fnc_vehAvailable) then {_textX = format ["%1 %2 AA Tanks Available<br/>",_textX,nameInvaders]} else {_textX = format ["%1 %2 AA Tanks Unavailable<br/>",_textX,nameInvaders]}
 		};
 	};
 

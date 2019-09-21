@@ -65,7 +65,7 @@ if !(hasIFA) then
 
 	if (round random 100 < 25) then
 		{
-		_crate addBackpackCargoGlobal ["O_Static_Designator_02_weapon_F",1];
+		_crate addBackpackCargoGlobal ["O_Static_DesignatoRES_02_weapon_F",1];
 		}
 	else
 		{

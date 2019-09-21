@@ -39,13 +39,13 @@ waitUntil {sleep 1; (not alive _veh) or (_veh distance _landpos < 550) or !(canM
 
 _veh flyInHeight 15;
 
-//_veh animateDoor ['door_R', 1];
+//_veh animateDoor ['dooRES_R', 1];
 
 waitUntil {sleep 1; (not alive _veh) or ((speed _veh < 1) and (speed _veh > -1)) or !(canMove _veh)};
 
 if (alive _veh) then
 	{
-	[_veh] call A3A_fnc_smokeCoverAuto;
+	[_veh] call RES_fnc_smokeCoverAuto;
 
 	{
 	[_veh,_x,_xRef,_yRef] spawn
@@ -59,7 +59,7 @@ if (alive _veh) then
 		_d = -1;
 		unassignVehicle _unit;
 		moveOut _unit;
-		[_unit,"gunner_standup01"] remoteExec ["switchmove"];
+		[_unit,"gunneRES_standup01"] remoteExec ["switchmove"];
 		_unit attachTo [_veh, [_xRef,_yRef,_d]];
 		while {((getposATL _unit select 2) > 1) and (alive _veh) and (alive _unit) and (speed _veh < 10) and (speed _veh > -10)} do
 			{
@@ -80,13 +80,13 @@ waitUntil {sleep 1; (not alive _veh) or ((count assignedCargo _veh == 0) and (co
 
 sleep 5;
 _veh flyInHeight 150;
-//_veh animateDoor ['door_R', 0];
+//_veh animateDoor ['dooRES_R', 0];
 
 if !(_reinf) then
 	{
 	_wp2 = _groupX addWaypoint [(position (leader _groupX)), 0];
 	_wp2 setWaypointType "MOVE";
-	_wp2 setWaypointStatements ["true", "(group this) spawn A3A_fnc_attackDrillAI"];
+	_wp2 setWaypointStatements ["true", "(group this) spawn RES_fnc_attackDrillAI"];
 	_wp2 = _groupX addWaypoint [_positionX, 1];
 	_wp2 setWaypointType "MOVE";
 	_wp2 setWaypointStatements ["true","{if (side _x != side this) then {this reveal [_x,4]}} forEach allUnits"];
@@ -97,7 +97,7 @@ else
 	{
 	_wp2 = _groupX addWaypoint [_positionX, 0];
 	_wp2 setWaypointType "MOVE";
-	_wp2 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""A3A_fnc_garrisonUpdate"",2];[group this] spawn A3A_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
+	_wp2 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""RES_fnc_garrisonUpdate"",2];[group this] spawn RES_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
 	};
 _wp3 = _heli addWaypoint [_posOrigin, 1];
 _wp3 setWaypointType "MOVE";

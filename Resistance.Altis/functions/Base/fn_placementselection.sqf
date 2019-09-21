@@ -9,11 +9,11 @@ else
 	"Initial HQ Placement Selection" hintC ["Click on the Map Position you want to start the Game.","Close the map with M to start in the default position.","Don't select areas with enemies nearby!!\n\nGame experience changes a lot on different starting positions."];
 	};
 
-hintC_arr_EH = findDisplay 72 displayAddEventHandler ["unload",
+hintC_arRES_EH = findDisplay 72 displayAddEventHandler ["unload",
 	{
 	0 = _this spawn
 		{
-		_this select 0 displayRemoveEventHandler ["unload", hintC_arr_EH];
+		_this select 0 displayRemoveEventHandler ["unload", hintC_arRES_EH];
 		hintSilent "";
 		};
 	}];
@@ -88,9 +88,9 @@ if (visiblemap) then
 			sidesX setVariable [_x,teamPlayer,true];
 			};
 		} forEach _controlsX;
-		[_positionTel] call A3A_fnc_createPetros;
+		[_positionTel] call RES_fnc_createPetros;
 		};
-	[_positionTel] call A3A_fnc_relocateHQObjects;
+	[_positionTel] call RES_fnc_relocateHQObjects;
 	if (isNil "placementDone") then {if (isMultiplayer) then {{if ((side _x == teamPlayer) or (side _x == civilian)) then {_x setPos getPos petros}} forEach playableUnits} else {theBoss setPos (getMarkerPos respawnTeamPlayer)}};
 	theBoss allowDamage true;
 	openmap [false,false];

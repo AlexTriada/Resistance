@@ -66,7 +66,7 @@ _wp3 setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicl
 {removebackpack _x; _x addBackpack "B_Parachute"} forEach units _groupX;
 waitUntil {sleep 1; (currentWaypoint _groupPilot == 3) or (not alive _veh) or (!canMove _veh)};
 
-//[_veh] call A3A_fnc_entriesLand;
+//[_veh] call RES_fnc_entriesLand;
 
 if (alive _veh) then
 	{
@@ -90,7 +90,7 @@ if !(_reinf) then
    _posLeader set [2,0];
    _wp5 = _groupX addWaypoint [_posLeader,0];
    _wp5 setWaypointType "MOVE";
-   _wp5 setWaypointStatements ["true", "(group this) spawn A3A_fnc_attackDrillAI"];
+   _wp5 setWaypointStatements ["true", "(group this) spawn RES_fnc_attackDrillAI"];
    _wp4 = _groupX addWaypoint [_positionX, 1];
    _wp4 setWaypointType "MOVE";
    _wp4 setWaypointStatements ["true","{if (side _x != side this) then {this reveal [_x,4]}} forEach allUnits"];
@@ -101,6 +101,6 @@ else
    {
    _wp4 = _groupX addWaypoint [_positionX, 0];
    _wp4 setWaypointType "MOVE";
-   _wp4 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""A3A_fnc_garrisonUpdate"",2];[group this] spawn A3A_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
+   _wp4 setWaypointStatements ["true","nul = [(thisList select {alive _x}),side this,(group this) getVariable [""reinfMarker"",""""],0] remoteExec [""RES_fnc_garrisonUpdate"",2];[group this] spawn RES_fnc_groupDespawner; reinfPatrols = reinfPatrols - 1; publicVariable ""reinfPatrols"";"];
    };
-//[_veh] call A3A_fnc_entriesLand;
+//[_veh] call RES_fnc_entriesLand;

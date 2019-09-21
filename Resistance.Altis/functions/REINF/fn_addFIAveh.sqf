@@ -1,13 +1,13 @@
 
 if (!(isNil "placingVehicle") && {placingVehicle}) exitWith { hint "Unable to buy vehicle, you are already placing something" };
 if (player != player getVariable ["owner",player]) exitWith {hint "You cannot buy vehicles while you are controlling AI"};
-if ([player,300] call A3A_fnc_enemyNearCheck) exitWith {Hint "You cannot buy vehicles with enemies nearby"};
+if ([player,300] call RES_fnc_enemyNearCheck) exitWith {Hint "You cannot buy vehicles with enemies nearby"};
 
 
 private _typeVehX = _this select 0;
 if (_typeVehX == "not_supported") exitWith {hint "The vehicle you requested is not supported in your current modset"};
 
-vehiclePurchase_cost = [_typeVehX] call A3A_fnc_vehiclePrice;
+vehiclePurchase_cost = [_typeVehX] call RES_fnc_vehiclePrice;
 
 private _resourcesFIA = 0;
 if (!isMultiPlayer) then {_resourcesFIA = server getVariable "resourcesFIA"} else
@@ -28,4 +28,4 @@ if !(player inArea vehiclePurchase_nearestMarker) exitWith {hint "You need to be
 
 private _extraMessage =	format ["Buying vehicle for $%1", vehiclePurchase_cost];
 
-[_typeVehX, "BUYFIA", _extraMessage] call A3A_fnc_vehPlacementBegin;
+[_typeVehX, "BUYFIA", _extraMessage] call RES_fnc_vehPlacementBegin;
