@@ -2,7 +2,7 @@
 
 <Project name = "Resistance">
 
-	<Package name = "Common">
+	<Package name = "common">
 
 		<Container name = "OneWord">
 			<Key ID = "STR_RES_resistance">
@@ -29,7 +29,7 @@
 
 	</Package>
 
-	<Package name = "Description">
+	<Package name = "description">
 
 		<Container name = "Mission">
 			<Key ID = "STR_RES_onLoadIntro">
@@ -62,4 +62,24 @@
 		</Container>
 
 	</Package>
+
+	<Package name = "dialogs">
+
+		<Container name = "combat">
+		</Container>
+
+		<Container name = "common">
+		</Container>
+
+		<Container name = "flag">
+		</Container>
+
+		<Container name = "hq">
+		</Container>
+
+		<Container name = "map">
+		</Container>
+
+	</Package>
+
 </Project>
