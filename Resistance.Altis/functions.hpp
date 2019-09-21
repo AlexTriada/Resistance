@@ -358,10 +358,15 @@ class RES {
 		class addFIAsquadHC {};
 		class addFIAveh {};
 		class addSquadVeh {};
+		class addToGarrison {};
 		class autoGarrison {};
 		class build {};
 		class buildCreateVehicleCallback {};
 		class buildMinefield {};
+		class controlHCsquad {};
+		class controlunit {};
+		class dismissPlayerGroup {};
+		class dismissSquad {};
 		class enemyNearCheck {};
 		class FIAinit {};
 		class FIAskillAdd {};

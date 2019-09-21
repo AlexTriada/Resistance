@@ -25,6 +25,10 @@
 				<Original>Engineer</Original>
 				<Russian>Инженер</Russian>
 			</Key>
+			<Key ID = "STR_RES_back">
+				<Original>Back</Original>
+				<Russian>Назад</Russian>
+			</Key>
 		</Container>
 
 	</Package>
@@ -66,6 +70,90 @@
 	<Package name = "dialogs">
 
 		<Container name = "combat">
+			<Key ID = "STR_RES_AI_management_title">
+				<Original>Battle Options</Original>
+				<Russian>Управление ИИ</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L1_text">
+				<Original>Temp. AI Control</Original>
+				<Russian>Прямое упр. ИИ</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L1_tooltip">
+				<Original>Take personal control of the selected squad member or HC squad leader and be able to perform any kind of actions for 60 seconds. Control state will be cancelled if the player or the controlled unit receives any kind of damage</Original>
+				<Russian>Взять управление выбранным членом отряда или командиром выбранной группы в режиме управления группами. Управление может быть прервано если игрок или выбранный член отряда получит ранение</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L1_hint">
+				<Original>You must select from HC or Squad Bars, not both</Original>
+				<Russian>Вы должны выбрать в меню управления отрядом или в меню управления группами, а не в обоих</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R1_text">
+				<Original>Auto Rearm \ Loot</Original>
+				<Russian>Авто Снар. \ Лут</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R1_tooltip">
+				<Original>AI will search for better weapons, vests, helmets etc. if they are in a vehicle, they will just store what they scavenge in the vehicle. if not, they will equip them</Original>
+				<Russian>ИИ будет искать лучшее оружие, бронежилет, шлем итп. Если они в технике, они будут складывать в неё всё, что смогут собрать. Если нет, они возьмут это с собой</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L2_text">
+				<Original>Auto Heal</Original>
+				<Russian>Автолечение</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L2_tooltip">
+				<Original>AI squad mates will heal proactively each other</Original>
+				<Russian>ИИ в отряде будут лечить друг друга самостоятельно</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L2_hint_dis">
+				<Original>Auto Healing disabled</Original>
+				<Russian>Автолечение Выключено</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L2_hint_en">
+				<Original>Auto Heal enabled</Original>
+				<Russian>Автолечение Включено</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R2_text">
+				<Original>Squad SITREP</Original>
+				<Russian>Статус Отряда</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R2_tooltip">
+				<Original>Recover info about a HC squad status</Original>
+				<Russian>Получить информацию о статусе выбранного отряда в режиме управления группами</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L3_text">
+				<Original>Garrison Units / Squads</Original>
+				<Russian>Перевести в гарнизон</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L3_tooltip">
+				<Original>Adds selected units or squads to a map selected garrison</Original>
+				<Russian>Перевести выбранного члена отряда или отряд в выбранный на карте гарнизон</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_hint_nosel">
+				<Original>No units or squads selected</Original>
+				<Russian>Не выбран ни один член отряда ни отряд</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R3_text">
+				<Original>Squad Add Vehicle</Original>
+				<Russian>Снабдить отряд ТС</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R3_tooltip">
+				<Original>Look at some vehicle and assign it to the selected squad for it's use</Original>
+				<Russian>Глядя на транспортное средство, добавить его выбранному отряду</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L4_text">
+				<Original>Dismiss Units / Squad</Original>
+				<Russian>Отправить в Запас</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_L4_tooltip">
+				<Original>Dimiss selected units or squads, recovering it's cost to the proper resource pool</Original>
+				<Russian>Вернуть выбранный отряд на базу, с последующей отправкой в Запас и компенсацией потраченных средств</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R4_text">
+				<Original>Mount / Dismount</Original>
+				<Russian>Посадка / Высадка</Russian>
+			</Key>
+			<Key ID = "STR_RES_AI_management_R4_tooltip">
+				<Original>Force squad to mount or dismount their assigned vehicle</Original>
+				<Russian>Приказать отряду высадиться или погрузиться в приданную технику</Russian>
+			</Key>
 		</Container>
 
 		<Container name = "common">
