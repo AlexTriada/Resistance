@@ -29,15 +29,7 @@ class veh_query {
 			y = 0.251941 * safezoneH + safezoneY;
 			w = 0.06 * safezoneW;//0.175015
 			h = 0.05 * safezoneH;
-			action = "
-				closeDialog 0;
-				vehQuery = nil;
-				if (player == theBoss) then {
-					[] spawn RES_fnc_squadRecruit;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; vehQuery = nil; if (player == theBoss) then { [] spawn RES_fnc_squadRecruit; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_Gsquad: RscButton {
@@ -47,7 +39,7 @@ class veh_query {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; vehQuery = true";
+			action = "closeDialog 0; vehQuery = true;";
 		};
 
 		class HQ_button_Gstatic: RscButton {
@@ -57,7 +49,7 @@ class veh_query {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; vehQuery = nil";
+			action = "closeDialog 0; vehQuery = nil;";
 		};
 	};
 };

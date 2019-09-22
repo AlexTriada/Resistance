@@ -40,17 +40,7 @@ class HQ_menu {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				if (isMultiPlayer) then {
-					if (player == theBoss) then {
-						call RES_fnc_theBossSteal;
-					} else {
-						hint ""Only Player Commander has access to this function"";
-					};
-				} else {
-					hint ""This function is MP only"";
-				};
-			";
+			action = "if (isMultiPlayer) then { if (player == theBoss) then { call RES_fnc_theBossSteal; } else { hint ""Only Player Commander has access to this function""; }; } else { hint ""This function is MP only""; };";
 		};
 
 		class HQ_button_savegame: RscButton {
@@ -61,14 +51,7 @@ class HQ_menu {
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					CreateDialog ""build_menu"";
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { CreateDialog ""build_menu""; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_moveHQ: RscButton {
@@ -79,14 +62,7 @@ class HQ_menu {
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					[] spawn RES_fnc_moveHQ;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { [] spawn RES_fnc_moveHQ; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_recruitUnit: RscButton {
@@ -97,17 +73,7 @@ class HQ_menu {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				if (player == theBoss) then {
-					if (isMultiplayer) then {
-						[] call RES_fnc_membersList;
-					} else {
-						hint ""This function is MP only"";
-					};
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "if (player == theBoss) then { if (isMultiplayer) then { [] call RES_fnc_membersList; } else { hint ""This function is MP only""; }; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_recruitSquad: RscButton {
@@ -118,14 +84,7 @@ class HQ_menu {
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					[] spawn RES_fnc_rebuildAssets;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { [] spawn RES_fnc_rebuildAssets; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_vehicle: RscButton {
@@ -136,14 +95,7 @@ class HQ_menu {
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					[] call RES_fnc_FIAskillAdd;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { [] call RES_fnc_FIAskillAdd; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_skill: RscButton {
@@ -154,10 +106,7 @@ class HQ_menu {
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				[GARAGE_FACTION] spawn RES_fnc_garage;
-			";
+			action = "closeDialog 0; [GARAGE_FACTION] spawn RES_fnc_garage;";
 		};
 	};
 };

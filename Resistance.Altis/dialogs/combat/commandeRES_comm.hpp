@@ -40,14 +40,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Recruit new squads and manage them with the HC Module (CTRL + SPACE)";
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					[] spawn RES_fnc_squadRecruit;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { [] spawn RES_fnc_squadRecruit; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class 8slots_R1: RscButton {
@@ -58,14 +51,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Ask for Air Support (uses Airstrike points)";
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					createDialog ""carpet_bombing"";
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { createDialog ""carpet_bombing""; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class 8slots_L2: RscButton {
@@ -76,14 +62,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Establish a new watchpost or roadblock depending on the type of terrain you select";
-			action = "
-				if (player == theBoss) then {
-					closeDialog 0;
-					[""create""] spawn RES_fnc_outpostDialog;
-				} else {
-					hint ""You're not the Commander!"";
-				};
-			";
+			action = "if (player == theBoss) then { closeDialog 0; [""create""] spawn RES_fnc_outpostDialog; } else { hint ""You're not the Commander!""; };";
 		};
 
 		class 8slots_R2: RscButton {
@@ -94,14 +73,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Cleans several things in game. Use with caution as it freezes the mission";
-			action = "
-				if (player == theBoss) then {
-					closedialog 0;
-					[] remoteExec [""RES_fnc_garbageCleaner"", 2];
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "if (player == theBoss) then { closedialog 0; [] remoteExec [""RES_fnc_garbageCleaner"", 2]; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class 8slots_L3: RscButton {
@@ -112,14 +84,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Remove selected observation post or roadblock, money will be refunded";
-			action = "
-				if (player == theBoss) then {
-					closeDialog 0;
-					[""delete""] spawn RES_fnc_outpostDialog;
-				} else {
-					hint ""You're not the Commander!"";
-				};
-			";
+			action = "if (player == theBoss) then { closeDialog 0; [""delete""] spawn RES_fnc_outpostDialog; } else { hint ""You're not the Commander!""; };";
 		};
 
 		class 8slots_R3: RscButton {
@@ -130,14 +95,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Look at a vehicle and garage it into faction garage (shared among commanders)";
-			action = "
-				if (player == theBoss) then {
-					closeDialog 0;
-					[true] call RES_fnc_garageVehicle;
-				} else {
-					hint ""You're not the Commander!"";
-				};
-			";
+			action = "if (player == theBoss) then { closeDialog 0; [true] call RES_fnc_garageVehicle; } else { hint ""You're not the Commander!""; };";
 		};
 
 		class 8slots_L4: RscButton {
@@ -148,14 +106,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Step down from commander or toggle eligibility";
-			action = "
-				if (isMultiplayer) then {
-					closedialog 0;
-					execVM ""orgPlayers\commResign.sqf"";
-				} else {
-					hint ""This feature is MP Only"";
-				};
-			";
+			action = "if (isMultiplayer) then { closedialog 0; execVM ""orgPlayers\commResign.sqf""; } else { hint ""This feature is MP Only""; };";
 		};
 
 		class 8slots_R4: RscButton {
@@ -166,14 +117,7 @@ class commandeRES_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Look at a vehicle and sell it for money";
-			action = "
-				if (player == theBoss) then {
-					closeDialog 0;
-					[] call RES_fnc_sellVehicle;
-				} else {
-					hint ""Only the Commander can sell vehicles"";
-				};
-			";
+			action = "if (player == theBoss) then { closeDialog 0; [] call RES_fnc_sellVehicle; } else { hint ""Only the Commander can sell vehicles""; };";
 		};
 	};
 };

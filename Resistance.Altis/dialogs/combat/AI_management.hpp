@@ -40,18 +40,7 @@ class AI_management {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_RES_AI_management_L1_tooltip;
-			action = "
-				closeDialog 0;
-				if ((count groupselectedUnits player > 0) && (count hcSelected player > 0)) exitWith {
-					hint (""STR_RES_AI_management_L1_hint"" call BIS_fnc_localize);
-				};
-				if (count groupselectedUnits player == 1) then {
-					[groupselectedUnits player] spawn RES_fnc_controlunit;
-				};
-				if (count hcSelected player == 1) then {
-					[hcSelected player] spawn RES_fnc_controlHCsquad;
-				};
-			";
+			action = "closeDialog 0; if ((count groupselectedUnits player > 0) && (count hcSelected player > 0)) exitWith { hint (""STR_RES_AI_management_L1_hint"" call BIS_fnc_localize); }; if (count groupselectedUnits player == 1) then { [groupselectedUnits player] spawn RES_fnc_controlunit; }; if (count hcSelected player == 1) then { [hcSelected player] spawn RES_fnc_controlHCsquad; };";
 		};
 
 		class 8slots_R1: RscButton {
@@ -62,14 +51,7 @@ class AI_management {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_RES_AI_management_R1_tooltip;
-			action = "
-				closeDialog 0;
-				if (count groupselectedUnits player == 0) then {
-					(units group player) spawn RES_fnc_rearmCall;
-				} else {
-					(groupselectedUnits player) spawn RES_fnc_rearmCall;
-				};
-			";
+			action = "closeDialog 0; if (count groupselectedUnits player == 0) then { (units group player) spawn RES_fnc_rearmCall; } else { (groupselectedUnits player) spawn RES_fnc_rearmCall; };";
 		};
 
 		class 8slots_L2: RscButton {
@@ -80,16 +62,7 @@ class AI_management {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_RES_AI_management_L2_tooltip;
-			action = "
-				if (autoHeal) then {
-					autoHeal = false;
-					hint (""STR_RES_AI_management_L2_hint_dis"" call BIS_fnc_localize);
-				} else {
-					autoHeal = true;
-					hint (""STR_RES_AI_management_L2_hint_en"" call BIS_fnc_localize);
-					[] spawn RES_fnc_autoHealFnc;
-				};
-			";
+			action = "if (autoHeal) then { autoHeal = false; hint (""STR_RES_AI_management_L2_hint_dis"" call BIS_fnc_localize); } else { autoHeal = true; hint (""STR_RES_AI_management_L2_hint_en"" call BIS_fnc_localize); [] spawn RES_fnc_autoHealFnc; };";
 		};
 
 		class 8slots_R2: RscButton {
@@ -111,19 +84,7 @@ class AI_management {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_RES_AI_management_L3_tooltip;
-			action = "
-				closeDialog 0;
-				if (count groupselectedUnits player > 0) then {
-					[groupselectedUnits player] spawn RES_fnc_addToGarrison;
-				} else {
-					if (count (hcSelected player) > 0) then {
-						[hcSelected player] spawn RES_fnc_addToGarrison;
-					};
-				};
-				if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then {
-					hint (""STR_RES_AI_management_hint_nosel"" call BIS_fnc_localize);
-				};
-			";
+			action = "closeDialog 0; if (count groupselectedUnits player > 0) then { [groupselectedUnits player] spawn RES_fnc_addToGarrison; } else { if (count (hcSelected player) > 0) then { [hcSelected player] spawn RES_fnc_addToGarrison; }; }; if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then { hint (""STR_RES_AI_management_hint_nosel"" call BIS_fnc_localize); };";
 		};
 
 		class 8slots_R3: RscButton {
@@ -145,19 +106,7 @@ class AI_management {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_RES_AI_management_L4_tooltip;
-			action = "
-				closeDialog 0;
-				if (count groupselectedUnits player > 0) then {
-					[groupselectedUnits player] spawn RES_fnc_dismissPlayerGroup;
-				} else {
-					if (count (hcSelected player) > 0) then {
-						[hcSelected player] spawn RES_fnc_dismissSquad;
-					};
-				};
-				if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then {
-					hint (""STR_RES_AI_management_hint_nosel"" call BIS_fnc_localize);
-				};
-			";
+			action = "closeDialog 0; if (count groupselectedUnits player > 0) then { [groupselectedUnits player] spawn RES_fnc_dismissPlayerGroup; } else { if (count (hcSelected player) > 0) then { [hcSelected player] spawn RES_fnc_dismissSquad; }; }; if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then { hint (""STR_RES_AI_management_hint_nosel"" call BIS_fnc_localize); };";
 		};
 
 		class 8slots_R4: RscButton {

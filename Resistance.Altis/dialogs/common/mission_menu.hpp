@@ -39,14 +39,7 @@ class mission_menu {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then {
-					[[""AS""], ""RES_fnc_missionRequest""] call BIS_fnc_MP;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then { [[""AS""], ""RES_fnc_missionRequest""] call BIS_fnc_MP; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_CONV: RscButton {
@@ -56,14 +49,7 @@ class mission_menu {
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then {
-					[[""CONVOY""], ""RES_fnc_missionRequest""] call BIS_fnc_MP;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then { [[""CONVOY""], ""RES_fnc_missionRequest""] call BIS_fnc_MP; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_DES: RscButton {
@@ -73,14 +59,7 @@ class mission_menu {
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then {
-					[[""DES""], ""RES_fnc_missionRequest""] call BIS_fnc_MP;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then { [[""DES""], ""RES_fnc_missionRequest""] call BIS_fnc_MP; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_LOG: RscButton {
@@ -90,14 +69,7 @@ class mission_menu {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then {
-					[[""LOG""], ""RES_fnc_missionRequest""] call BIS_fnc_MP;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then { [[""LOG""], ""RES_fnc_missionRequest""] call BIS_fnc_MP;} else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_RES: RscButton {
@@ -107,14 +79,7 @@ class mission_menu {
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then {
-					[[""RES""], ""RES_fnc_missionRequest""] call BIS_fnc_MP;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then { [[""RES""], ""RES_fnc_missionRequest""] call BIS_fnc_MP; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_vehicle: RscButton {
@@ -124,14 +89,7 @@ class mission_menu {
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then {
-					[[""CON""], ""RES_fnc_missionRequest""] call BIS_fnc_MP;
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "closeDialog 0; if (([player] call RES_fnc_isMember) || (not(isPlayer theBoss))) then { [[""CON""], ""RES_fnc_missionRequest""] call BIS_fnc_MP; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_exit: RscButton {

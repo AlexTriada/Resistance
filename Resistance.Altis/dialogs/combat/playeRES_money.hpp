@@ -40,14 +40,7 @@ class playeRES_money {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Use this option to add the player which you are currently looking to the member's list";
-			action = "
-				if (isMultiplayer) then {
-					closeDialog 0;
-					[""add""] call RES_fnc_memberAdd;
-				} else {
-					hint ""This function is MP only"";
-				};
-			";
+			action = "if (isMultiplayer) then { closeDialog 0; [""add""] call RES_fnc_memberAdd; } else { hint ""This function is MP only""; };";
 		};
 
 		class HQ_button_MG: RscButton {
@@ -58,14 +51,7 @@ class playeRES_money {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Use this option to remove the player which you are currently looking to the member's list";
-			action = "
-				if (isMultiplayer) then {
-					closeDialog 0;
-					[""remove""] call RES_fnc_memberAdd;
-				} else {
-					hint ""This function is MP only"";
-				};
-			";
+			action = "if (isMultiplayer) then { closeDialog 0; [""remove""] call RES_fnc_memberAdd; } else { hint ""This function is MP only""; };";
 		};
 
 		class HQ_button_AT: RscButton {

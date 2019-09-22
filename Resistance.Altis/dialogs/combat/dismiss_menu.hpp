@@ -30,19 +30,7 @@ class dismiss_menu {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Dimiss selected units or squads, recovering it's cost to the proper resource pool";
-			action = "
-				closeDialog 0;
-				if (count groupselectedUnits player > 0) then {
-					[groupselectedUnits player] execVM ""REINF\dismissPlayerGroup.sqf"";
-				} else {
-					if (count (hcSelected player) > 0) then {
-						[hcSelected player] execVM ""REINF\dismissSquad.sqf"";
-					};
-				};
-				if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then {
-					hint ""No units or squads selected"";
-				};
-			";
+			action = "closeDialog 0; if (count groupselectedUnits player > 0) then { [groupselectedUnits player] execVM ""REINF\dismissPlayerGroup.sqf""; } else { if (count (hcSelected player) > 0) then { [hcSelected player] execVM ""REINF\dismissSquad.sqf""; }; }; if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then { hint ""No units or squads selected""; };";
 		};
 
 		class HQ_button_Gstatic: RscButton {
@@ -53,19 +41,7 @@ class dismiss_menu {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Adds selected units or squads to a map selected garrison";
-			action = "
-				closeDialog 0;
-				if (count groupselectedUnits player > 0) then {
-					[groupselectedUnits player] execVM ""REINF\addToGarrison.sqf"";
-				} else {
-					if (count (hcSelected player) > 0) then {
-						[hcSelected player] execVM ""REINF\addToGarrison.sqf"";
-					};
-				};
-				if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then {
-					hint ""No units or squads selected"";
-				};
-			";
+			action = "closeDialog 0; if (count groupselectedUnits player > 0) then { [groupselectedUnits player] execVM ""REINF\addToGarrison.sqf""; } else { if (count (hcSelected player) > 0) then { [hcSelected player] execVM ""REINF\addToGarrison.sqf""; }; }; if ((count groupselectedUnits player == 0) && (count hcSelected player == 0)) then { hint ""No units or squads selected""; };";
 		};
 	};
 };

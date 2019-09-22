@@ -62,7 +62,7 @@ class radio_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Become Undercover if you match the requirements. Enemy AI won't attack you until they discover you";
-			action = "closeDialog 0; [] spawn RES_fnc_undercover";
+			action = "closeDialog 0; [] spawn RES_fnc_undercover;";
 		};
 
 		class 8slots_R2: RscButton {
@@ -95,7 +95,7 @@ class radio_comm {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Allow other groups to mount this vehicle";
-			action = "closeDialog 0; [] call RES_fnc_unlockVehicle";
+			action = "closeDialog 0; [] call RES_fnc_unlockVehicle;";
 		};
 
 		class 8slots_L4: RscButton {

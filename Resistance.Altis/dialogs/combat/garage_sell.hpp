@@ -39,18 +39,7 @@ class garage_sell {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (player != theBoss) then {
-					[false] call RES_fnc_garageVehicle;
-				} else {
-					if (isMultiplayer) then {
-						createDialog ""garage_check"";
-					} else {
-						[true] call RES_fnc_garageVehicle;
-					};
-				};
-			";
+			action = "closeDialog 0; if (player != theBoss) then { [false] call RES_fnc_garageVehicle; } else { if (isMultiplayer) then { createDialog ""garage_check""; } else { [true] call RES_fnc_garageVehicle; }; };";
 		};
 
 		class HQ_button_Gstatic: RscButton {
@@ -60,14 +49,7 @@ class garage_sell {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					[] call RES_fnc_sellVehicle;
-				} else {
-					hint ""Only the Commander can sell vehicles"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { [] call RES_fnc_sellVehicle; } else { hint ""Only the Commander can sell vehicles""; };";
 		};
 	};
 };

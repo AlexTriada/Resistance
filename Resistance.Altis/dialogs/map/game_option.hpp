@@ -40,14 +40,7 @@ class game_options {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Set the max number of spawned civilians. Affects game performance";
-			action = "
-				if (player == theBoss) then {
-					closeDialog 0;
-					createDialog ""civ_config"";
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "if (player == theBoss) then { closeDialog 0; createDialog ""civ_config""; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class 8slots_R1: RscButton {
@@ -58,14 +51,7 @@ class game_options {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Affects performance. Please use this with caution. Set it to lower distances if you feel Antistasi is running bad";
-			action = "
-				if (player == theBoss) then {
-					closeDialog 0;
-					createDialog ""spawn_config"";
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "if (player == theBoss) then { closeDialog 0; createDialog ""spawn_config""; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class 8slots_L2: RscButton {
@@ -76,14 +62,7 @@ class game_options {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Sets how much local and simulated AI can spawn in the map. Affects performance and AI ""intelligence"". Use with caution. This is not an exact number as vehicles and squad leaders will allways spawn";
-			action = "
-				if (player == theBoss) then {
-					closeDialog 0;
-					createDialog ""fps_limiter"";
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "if (player == theBoss) then { closeDialog 0; createDialog ""fps_limiter""; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class 8slots_R2: RscButton {
@@ -94,17 +73,7 @@ class game_options {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Disables/Enable situational music";
-			action = "
-				closedialog 0;
-				if (musicON) then {
-					musicON = false;
-					hint ""Music turned OFF"";
-				} else {
-					musicON = true;
-					hint ""Music turned ON"";
-				};
-				execVM ""musica.sqf"";
-			";
+			action = "closedialog 0; if (musicON) then { musicON = false; hint ""Music turned OFF""; } else { musicON = true; hint ""Music turned ON""; }; execVM ""musica.sqf"";";
 		};
 
 		class 8slots_M4: RscButton {
@@ -115,15 +84,7 @@ class game_options {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Use this option to save your current game. It does save the most important data in a ""Grand Theft Auto"" way. This opnion allows good MP save and independent saves of any version update. Vanilla saves are disabled because of lack of several features";
-			action = "
-				closeDialog 0;
-				if (player == theBoss) then {
-					[""statSave\saveLoop.sqf"", ""BIS_fnc_execVM""] call BIS_fnc_MP;
-				} else {
-					[] execVM ""statSave\saveLoop.sqf"";
-					hintC ""Personal Stats Saved"";
-				};
-			";
+			action = "closeDialog 0; if (player == theBoss) then { [""statSave\saveLoop.sqf"", ""BIS_fnc_execVM""] call BIS_fnc_MP; } else { [] execVM ""statSave\saveLoop.sqf""; hintC ""Personal Stats Saved""; };";
 		};
 	};
 };

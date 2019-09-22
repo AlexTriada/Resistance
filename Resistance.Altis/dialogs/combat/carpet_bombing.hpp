@@ -73,7 +73,7 @@ class carpet_bombing {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Gain Airstrike points giving this aircraft to the faction Air pool";
-			action = "closeDialog 0; [] call RES_fnc_addBombRun";
+			action = "closeDialog 0; [] call RES_fnc_addBombRun;";
 		};
 	};
 };

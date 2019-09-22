@@ -1,5 +1,0 @@
-#include "dialogs\combat\cfgDialogs.hpp"
-#include "dialogs\common\cfgDialogs.hpp"
-#include "dialogs\flag\cfgDialogs.hpp"
-#include "dialogs\hq\cfgDialogs.hpp"
-#include "dialogs\map\cfgDialogs.hpp"

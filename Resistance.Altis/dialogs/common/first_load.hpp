@@ -30,10 +30,7 @@ class first_load {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				[] spawn RES_fnc_loadPreviousSession;
-			";
+			action = "closeDialog 0; [] spawn RES_fnc_loadPreviousSession;";
 		};
 
 		class HQ_button_Gstatic: RscButton {
@@ -44,13 +41,7 @@ class first_load {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				closeDialog 0;
-				if ((player == theBoss) && (isNil ""placementDone"") && !(isMultiplayer)) then {
-					closeDialog 0;
-					[] spawn RES_fnc_difficultyMenu;
-				};
-			";
+			action = "closeDialog 0; if ((player == theBoss) && (isNil ""placementDone"") && !(isMultiplayer)) then { closeDialog 0; [] spawn RES_fnc_difficultyMenu; };";
 		};
 	};
 };

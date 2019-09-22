@@ -39,20 +39,7 @@ class civ_config {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				if (player == theBoss) then {
-					if (civPerc < 150) then {
-						civPerc = civPerc + 1;
-						if (civPerc > 150) then {
-							civPerc = 150;
-						};
-						publicVariable ""civPerc"";
-					};
-					hint format [""Maximum Number of Civilians Set to %1"", civPerc];
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "if (player == theBoss) then { if (civPerc < 150) then { civPerc = civPerc + 1; if (civPerc > 150) then { civPerc = 150; }; publicVariable ""civPerc""; }; hint format [""Maximum Number of Civilians Set to %1"", civPerc]; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 
 		class HQ_button_Gstatic: RscButton {
@@ -62,20 +49,7 @@ class civ_config {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "
-				if (player == theBoss) then {
-					if (civPerc > 0) then {
-						civPerc = civPerc - 1;
-						if (civPerc < 0) then {
-							civPerc = 0;
-						};
-						publicVariable ""civPerc"";
-					};
-					hint format [""Maximum Number of Civilians Set to %1"", civPerc];
-				} else {
-					hint ""Only Player Commander has access to this function"";
-				};
-			";
+			action = "if (player == theBoss) then { if (civPerc > 0) then { civPerc = civPerc - 1; if (civPerc < 0) then { civPerc = 0; }; publicVariable ""civPerc""; }; hint format [""Maximum Number of Civilians Set to %1"", civPerc]; } else { hint ""Only Player Commander has access to this function""; };";
 		};
 	};
 };

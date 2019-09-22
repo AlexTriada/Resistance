@@ -62,7 +62,7 @@ class vehicle_manager {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Gain Airstrike points giving this vehicle to the faction Air pool";
-			action = "closeDialog 0; [] call RES_fnc_addBombRun";
+			action = "closeDialog 0; [] call RES_fnc_addBombRun;";
 		};
 
 		class HQ_button_unlock: RscButton {
@@ -73,7 +73,7 @@ class vehicle_manager {
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Allow other groups to mount this vehicle";
-			action = "closeDialog 0; [] call RES_fnc_unlockVehicle";
+			action = "closeDialog 0; [] call RES_fnc_unlockVehicle;";
 		};
 	};
 };
