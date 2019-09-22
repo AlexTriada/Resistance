@@ -159,7 +159,7 @@ class RscButton {
 	offsetPressedY = 0.002;
 	borderSize = 0;
 	onMouseEnter = "(_this select 0) ctrlSetTextColor [1,0.969,0,1]";
-	onMouseExit = "(_this select 0) ctrlSetTextColor [0.73,0,0,1]";
+	onMouseExit = "(_this select 0) ctrlSetTextColor [1,1,1,1]";
 };
 
 class RscFrame {
