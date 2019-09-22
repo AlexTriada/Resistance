@@ -136,7 +136,7 @@ class RscButton {
 	colorText[] = {1, 1, 1, 1};
 	colorDisabled[] = {1, 1, 1, 1};
 	colorBackground[] =  {0.247, 0.243, 0.243, 1};
-	colorBackgroundDisabled[] = {0, 0.0, 0};
+	colorBackgroundDisabled[] = {0, 0, 0, 0};
 	colorBackgroundActive[] = {0.247, 0.243, 0.243, 1};
 	colorFocused[] = {0.247, 0.243, 0.243, 1};
 	colorShadow[] = {0.023529, 0, 0.0313725, 1};
