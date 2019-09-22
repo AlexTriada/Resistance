@@ -97,8 +97,8 @@ class RscText {
 	type = CT_STATIC;
 	style = ST_MULTI;
 	linespacing = 1;
-	colorBackground[] = {0,0,0,0};
-	colorText[] = {1,1,1,1};
+	colorBackground[] = {0, 0, 0, 0};
+	colorText[] = {1, 1, 1, 1};
 	text = "";
 	shadow = 2;
 	font = "PuristaMedium";
@@ -115,8 +115,8 @@ class RscPicture {
 	idc = -1;
 	type = CT_STATIC;
 	style = ST_PICTURE;
-	colorBackground[] = {0,0,0,0};
-	colorText[] = {1,1,1,1};
+	colorBackground[] = {0, 0, 0, 0};
+	colorText[] = {1, 1, 1, 1};
 	font = "PuristaMedium";
 	sizeEx = 0;
 	lineSpacing = 0;
@@ -133,18 +133,18 @@ class RscButton {
 	access = 0;
 	type = CT_BUTTON;
 	text = "";
-	colorText[] = {1,1,1,1};
-	colorDisabled[] = {1,1,1,1};
-	colorBackground[] =  {0.247,0.243,0.243,1};
-	colorBackgroundDisabled[] = {0,0.0,0};
-	colorBackgroundActive[] = {0.247,0.243,0.243,1};
-	colorFocused[] = {0.247,0.243,0.243,1};
-	colorShadow[] = {0.023529,0,0.0313725,1};
-	colorBorder[] = {0.023529,0,0.0313725,1};
-	soundEnter[] = {"\A3\ui_f\data\sound\RscButton\soundEnter",0.09,1};
-	soundPush[] = {"\A3\ui_f\data\sound\RscButton\soundPush",0.09,1};
-	soundClick[] = {"\A3\ui_f\data\sound\RscButton\soundClick",0.09,1};
-	soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape",0.09,1};
+	colorText[] = {1, 1, 1, 1};
+	colorDisabled[] = {1, 1, 1, 1};
+	colorBackground[] =  {0.247, 0.243, 0.243, 1};
+	colorBackgroundDisabled[] = {0, 0.0, 0};
+	colorBackgroundActive[] = {0.247, 0.243, 0.243, 1};
+	colorFocused[] = {0.247, 0.243, 0.243, 1};
+	colorShadow[] = {0.023529, 0, 0.0313725, 1};
+	colorBorder[] = {0.023529, 0, 0.0313725, 1};
+	soundEnter[] = {"\A3\ui_f\data\sound\RscButton\soundEnter", 0.09, 1};
+	soundPush[] = {"\A3\ui_f\data\sound\RscButton\soundPush", 0.09, 1};
+	soundClick[] = {"\A3\ui_f\data\sound\RscButton\soundClick", 0.09, 1};
+	soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape", 0.09, 1};
 	style = 2;
 	x = 0;
 	y = 0;
@@ -158,8 +158,8 @@ class RscButton {
 	offsetPressedX = 0.002;
 	offsetPressedY = 0.002;
 	borderSize = 0;
-	onMouseEnter = "(_this select 0) ctrlSetTextColor [1,0.969,0,1]";
-	onMouseExit = "(_this select 0) ctrlSetTextColor [1,1,1,1]";
+	onMouseEnter = "(_this select 0) ctrlSetTextColor [1, 0.969, 0, 1]";
+	onMouseExit = "(_this select 0) ctrlSetTextColor [1, 1, 1, 1]";
 };
 
 class RscFrame {
@@ -167,8 +167,8 @@ class RscFrame {
 	idc = -1;
 	style = ST_FRAME;
 	shadow = 2;
-	colorBackground[] = {1,1,1,1};//{1,1,1,1}
-	colorText[] = {1,1,1,0.9};
+	colorBackground[] = {1, 1, 1, 1};//{1, 1, 1, 1}
+	colorText[] = {1, 1, 1, 0.9};
 	font = "PuristaMedium";
 	sizeEx = 0.03;
 	text = "";
@@ -179,10 +179,10 @@ class BOX {
 	idc = -1;
 	style = ST_CENTER;
 	shadow = 2;
-	colorText[] = {1,1,1,1};
+	colorText[] = {1, 1, 1, 1};
 	font = "PuristaMedium";
 	sizeEx = 0.02;
-	colorBackground[] = { 0.2,0.2,0.2, 0.9 };
+	colorBackground[] = { 0.2, 0.2, 0.2, 0.9 };
 	text = "";
 };
 
@@ -195,81 +195,31 @@ class RscListBox {
 	 font = "TahomaB";
 	 sizeEx = 0.04;
 	 rowHeight = 0;
-	 colorText[] = {1,1,1,1};
-	 colorScrollbar[] = {1,1,1,1};
-	 colorSelect[] = {0,0,0,1};
-	 colorSelect2[] = {1,0.5,0,1};
-	 colorSelectBackground[] = {0.6,0.6,0.6,1};
-	 colorSelectBackground2[] = {0.2,0.2,0.2,1};
-	 colorBackground[] = {0.2,0.2,0.2,0.9};
+	 colorText[] = {1, 1, 1, 1};
+	 colorScrollbar[] = {1, 1, 1, 1};
+	 colorSelect[] = {0, 0, 0, 1};
+	 colorSelect2[] = {1, 0.5, 0, 1};
+	 colorSelectBackground[] = {0.6, 0.6, 0.6, 1};
+	 colorSelectBackground2[] = {0.2, 0.2, 0.2, 1};
+	 colorBackground[] = {0.2, 0.2, 0.2, 0.9};
 	 maxHistoryDelay = 1.0;
-	 soundSelect[] = {"",0.1,1};
+	 soundSelect[] = {"", 0.1, 1};
 	 period = 1;
 	 autoScrollSpeed = -1;
 	 autoScrollDelay = 5;
 	 autoScrollRewind = 0;
-	 arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
-	 arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
+	 arrowEmpty = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
+	 arrowFull = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
 	 shadow = 0;
 
 	 class ListScrollBar {
-		  color[] = {1,1,1,0.6};
-		  colorActive[] = {1,1,1,1};
-		  colorDisabled[] = {1,1,1,0.3};
-		  thumb = "#(argb,8,8,3)color(1,1,1,1)";
-		  arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
-		  arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
-		  border = "#(argb,8,8,3)color(1,1,1,1)";
+		  color[] = {1, 1, 1, 0.6};
+		  colorActive[] = {1, 1, 1, 1};
+		  colorDisabled[] = {1, 1, 1, 0.3};
+		  thumb = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
+		  arrowEmpty = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
+		  arrowFull = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
+		  border = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
 		  shadow = 0;
 	 };
-};
-
-class RscTitles {
-
-	class Default {
-	   idd = -1;
-	   fadein = 0;
-	   fadeout = 0;
-	   duration = 0;
-	};
-
-	class H8erHUD {
-		idd = 745;
-		movingEnable =  0;
-		enableSimulation = 1;
-		enableDisplay = 1;
-		duration     =  10e10;
-		fadein       =  0;
-		fadeout      =  0;
-		name = "H8erHUD";
-		onLoad = "with uiNameSpace do { H8erHUD = _this select 0 }";
-		class controls {
-			class structuredText {
-				access = 0;
-				type = 13;
-				idc = 1001;
-				style = 0x00;
-				lineSpacing = 1;
-				x = 0.103165 * safezoneW + safezoneX;
-				y = 0.007996 * safezoneH + safezoneY;//0.757996
-				w = 0.778208 * safezoneW;
-				h = 0.0660106 * safezoneH;
-				size = 0.055;//0.020
-				colorBackground[] = {0, 0, 0, 0};
-				colorText[] = {0.34, 0.33, 0.33, 0};// {1, 1, 1, 1}
-				text = "";
-				font = "PuristaSemiBold";
-				class Attributes {
-					font = "PuristaSemiBold";
-					color = "#C1C0BB";//"#FFFFFF";
-					align = "CENTER";
-					valign = "top";
-					shadow = true;
-					shadowColor = "#000000";
-					underline = false;
-					size = "4";//4
-				};
-			};
-		};
-	};
 };
