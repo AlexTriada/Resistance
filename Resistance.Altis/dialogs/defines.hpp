@@ -212,7 +212,7 @@ class RscListBox {
 	arrowFull = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
 	shadow = 0;
 
-	 class ListScrollBar {
+	class ListScrollBar {
 		color[] = {1, 1, 1, 0.6};
 		colorActive[] = {1, 1, 1, 1};
 		colorDisabled[] = {1, 1, 1, 0.3};
@@ -221,5 +221,5 @@ class RscListBox {
 		arrowFull = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
 		border = "#(argb, 8, 8, 3)color(1, 1, 1, 1)";
 		shadow = 0;
-	 };
+	};
 };
