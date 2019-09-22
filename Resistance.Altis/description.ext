@@ -9,8 +9,8 @@
 
 class Header {
 	gameType = CTI;
-	minplayers=0;
-	maxplayers=60;
+	minplayers=1;
+	maxplayers=1;
 };
 
 author="Triada";
