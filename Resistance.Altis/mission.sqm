@@ -53,9 +53,11 @@ randomSeed=9555186;
 class ScenarioData
 {
 	author="Triada";
+	forceRotorLibSimulation=1;
 };
 class Mission
 {
+	assetType="Free";
 	class Intel
 	{
 		timeOfChanges=1800.0002;
