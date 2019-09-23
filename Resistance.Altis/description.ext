@@ -182,9 +182,9 @@ class CfgFunctions {
 
 class Params {
 	class autoSave {
-        title = $STR_RES_Params_autosave; // Enable Autosave (every hour)
-        values[] = {1, 0};
-        texts[] = {$STR_RES_yes, $STR_RES_no};
-        default = 1;
-    };
+		title = $STR_RES_Params_autosave; // Enable Autosave (every hour)
+		values[] = {1, 0};
+		texts[] = {$STR_RES_yes, $STR_RES_no};
+		default = 1;
+	};
 };
