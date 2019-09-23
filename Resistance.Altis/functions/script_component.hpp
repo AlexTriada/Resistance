@@ -1,9 +1,3 @@
-#ifdef DEBUG_ENABLED_MAIN
-    #define DEBUG_MODE_FULL
-#endif
+#define RES_DEBUG
 
-#ifdef DEBUG_SETTINGS_MAIN
-    #define DEBUG_SETTINGS DEBUG_SETTINGS_MAIN
-#endif
-
-#include "script_macros.hpp"
+#include "..\script_macros.hpp"
