@@ -1,3 +1,7 @@
+#include "script_component.hpp"
+
+LOG("[Resistance] | INFO | %1 Started");
+
 /*
  ████████╗███████╗    ██████╗  █████╗ ██████╗ ██╗ ██████╗
  ╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██╔══██╗██║██╔═══██╗
@@ -21,9 +25,11 @@ if (hasInterface) then {
  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═══╝
 */
 
-waitUntil { Sleep 2; if (Local Player) exitWith {true}; false};
+waitUntil { Sleep 0.1; if (Local Player) exitWith {true}; false};
 
 [east, "Medic"] call BIS_fnc_addRespawnInventory;
 [east, "Engineer"] call BIS_fnc_addRespawnInventory;
 [east, "Assault1"] call BIS_fnc_addRespawnInventory;
 [east, "Assault2"] call BIS_fnc_addRespawnInventory;
+
+LOG("[Resistance] | INFO | %1 Finished");
