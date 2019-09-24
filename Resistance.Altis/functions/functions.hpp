@@ -18,6 +18,7 @@ class RES {
 		class reinitY {};
 		class resourcecheck {};
 		class tags {};
+		class unconsciousIcon {};
 	};
 /*
  ██████╗  █████╗ ███████╗███████╗
