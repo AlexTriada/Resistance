@@ -1,3 +1,16 @@
+/*
+* Author: [Triada]
+* [create 3D icon on uncoscious players]
+*
+* Arguments: none
+*
+* Return Value: none
+*
+* Example:
+* [] spawn ace_common_fnc_imanexample
+*
+* Public: [No]
+*/
 #define DISTANCE_3D 10000
 #define ICON_SIZE 0.8
 #define ICON_COLOR [1, 0, 0, 1]

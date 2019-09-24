@@ -41,6 +41,6 @@ waitUntil { Sleep 0.1; if (Local Player) exitWith {true}; false};
  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝
 */
 
-#include "init\icon_unconscious.hpp"
+[] spawn RES_fnc_unconsciousIcon;
 
 LOG("[Resistance] | INFO | %1 Finished");
