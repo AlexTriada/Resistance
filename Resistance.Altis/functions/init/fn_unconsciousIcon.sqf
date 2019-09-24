@@ -7,7 +7,7 @@
 * Return Value: none
 *
 * Example:
-* [] spawn ace_common_fnc_imanexample
+* [] spawn RES_fnc_unconscious
 *
 * Public: [No]
 */

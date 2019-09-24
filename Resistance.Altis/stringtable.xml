@@ -1,9 +1,6 @@
 <?xml version = "1.0" encoding = "utf-8"?>
-
 <Project name = "Resistance">
-
 	<Package name = "common">
-
 		<Container name = "OneWord">
 			<Key ID = "STR_RES_resistance">
 				<Original>Resistance</Original>
@@ -30,11 +27,8 @@
 				<Russian>Назад</Russian>
 			</Key>
 		</Container>
-
 	</Package>
-
 	<Package name = "description">
-
 		<Container name = "Mission">
 			<Key ID = "STR_RES_onLoadIntro">
 				<Original>YourMessage</Original>
@@ -57,18 +51,14 @@
 				<Russian>Cервер заблокирован</Russian>
 			</Key>
 		</Container>
-
 		<Container name = "Params">
 			<Key ID = "STR_RES_Params_autosave">
 				<Original>Enable Autosave (every hour)</Original>
 				<Russian>Включить Автосохранение (каждый час)</Russian>
 			</Key>
 		</Container>
-
 	</Package>
-
 	<Package name = "dialogs">
-
 		<Container name = "combat">
 			<Key ID = "STR_RES_AI_management_title">
 				<Original>Battle Options</Original>
@@ -155,19 +145,5 @@
 				<Russian>Приказать отряду высадиться или погрузиться в приданную технику.</Russian>
 			</Key>
 		</Container>
-
-		<Container name = "common">
-		</Container>
-
-		<Container name = "flag">
-		</Container>
-
-		<Container name = "hq">
-		</Container>
-
-		<Container name = "map">
-		</Container>
-
 	</Package>
-
 </Project>
