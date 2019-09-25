@@ -54,96 +54,14 @@ reviveBleedOutDelay = 30;
 */
 
 respawn = "BASE";
-respawnButton = 1;
-respawnDelay = 1;
-respawnVehicleDelay = 120;
-respawnDialog = 0;
-respawnOnStart = -1;
-respawnTemplatesEast[] = { "Counter", "MenuInventory", "MenuPosition", "Res_death"};
-enablePlayerAddRespawn = 1;
-
-class CfgRespawnInventory {
-	class Medic {
-		displayName = $STR_RES_medic;
-		role = "Support";
-		items[] = {
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"Medikit"
-		};
-		linkedItems[] = { "ItemWatch" };
-		uniformClass = "U_OG_Guerilla2_1";
-		backpack = "B_AssaultPack_mcamo";
-	};
-	class Engineer {
-		displayName = $STR_RES_engineer;
-		role = "Support";
-		items[] = {
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit",
-			"Toolkit"
-		};
-		linkedItems[] = { "ItemWatch" };
-		uniformClass = "U_OG_Guerilla2_1";
-		backpack = "B_AssaultPack_mcamo";
-	};
-	class Assault1 {
-		displayName = "Ополченец1";
-		role = "Assault";
-		items[] = {
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit"
-		};
-		linkedItems[] = { "ItemWatch" };
-		uniformClass = "U_OG_Guerilla2_1";
-	};
-	class Assault2 {
-		displayName = "Ополченец2";
-		role = "Assault";
-		items[] = {
-			"FirstAidKit",
-			"FirstAidKit",
-			"FirstAidKit"
-		};
-		linkedItems[] = { "ItemWatch" };
-		uniformClass = "U_OG_Guerilla2_1";
-	};
-};
+respawnTemplatesGuer[] = {"RES_respawn"};
 
 class CfgRespawnTemplates {
-	class Res_death {
-		onPlayerKilled = "";
-		onPlayerRespawn = "";
-	}
-	class Spectator {
-		onPlayerRespawn = "";
-	}
-}
-
-class CfgRoles {
-	class Assault {
-		displayName = $STR_A3_Role_Assault;
-		icon = "\a3\Ui_f\data\GUI\Cfg\RespawnRoles\assault_ca.paa";
-	};
-	class Support {
-		displayName = $STR_A3_Role_Support;
-		icon = "\a3\Ui_f\data\GUI\Cfg\RespawnRoles\support_ca.paa";
-	};
-	class Recon {
-		displayName = $STR_A3_Role_Recon;
-		icon = "\a3\Ui_f\data\GUI\Cfg\RespawnRoles\recon_ca.paa";
+	class RES_respawn {
+		onPlayerKilled = "RES_fnc_killedPlayer";
+		onPlayerRespawn = "RES_fnc_respawnPlayer";
+		respawnDelay = 3;
+		respawnOnStart = 0;
 	};
 };
 

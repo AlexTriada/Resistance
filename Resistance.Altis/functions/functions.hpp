@@ -13,10 +13,12 @@ class RES {
 		class getArrayMrks {};
 		class initGarrisons {};
 		class initGetMissionPath {};
+		class killedPlayer {};
 		class modBlacklist {};
 		class playerMarkers {};
 		class reinitY {};
 		class resourcecheck {};
+		class respawnPlayer {};
 		class tags {};
 		class unconsciousIcon {};
 	};

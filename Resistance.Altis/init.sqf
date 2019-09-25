@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-LOG("[Resistance] | INFO | %1 Started");
+LOG("[Resistance] | Info | %1 Started")
 
 if (hasInterface) then {
 
@@ -13,8 +13,8 @@ if (hasInterface) then {
 	╚═╝   ╚═╝         ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝ ╚═════╝
 */
 
-	tf_radio_channel_name = "TaskForceRadio#1";
-	tf_radio_channel_password = "2018";
+	// tf_radio_channel_name = "Resistance";
+	// tf_radio_channel_password = "2112";
 
 /*
  ██╗ ██████╗ ██████╗ ███╗   ██╗    ██████╗ ██████╗
@@ -26,7 +26,6 @@ if (hasInterface) then {
 */
 
 	[] spawn RES_fnc_unconsciousIcon;
-};
 
 /*
  ██████╗ ███████╗███████╗██████╗  █████╗ ██╗    ██╗███╗   ██╗
@@ -37,11 +36,8 @@ if (hasInterface) then {
  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═══╝
 */
 
-waitUntil { Sleep 0.1; if (Local Player) exitWith {true}; false};
+};
 
-[east, "Medic"] call BIS_fnc_addRespawnInventory;
-[east, "Engineer"] call BIS_fnc_addRespawnInventory;
-[east, "Assault1"] call BIS_fnc_addRespawnInventory;
-[east, "Assault2"] call BIS_fnc_addRespawnInventory;
 
-LOG("[Resistance] | INFO | %1 Finished");
+
+LOG("[Resistance] | Info | %1 Finished")

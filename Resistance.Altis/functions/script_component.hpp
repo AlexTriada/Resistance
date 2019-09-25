@@ -1,3 +1,1 @@
-#define RES_DEBUG
-
-#include "..\script_macros.hpp"
+#include "..\debug_macros.hpp"
