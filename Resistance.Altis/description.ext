@@ -9,11 +9,11 @@
 
 class Header {
 	gameType = CTI;
-	minplayers=1;
-	maxplayers=1;
+	minplayers = 1;
+	maxplayers = 1;
 };
 
-author="Triada";
+author ="Triada";
 onLoadMission = $STR_RES_onLoadMission;
 onLoadIntro = $STR_RES_onLoadIntro;
 onLoadMissionTime = 1;
@@ -24,8 +24,8 @@ onLoadName = $STR_RES_resistance;
 overviewPicture = "pic.paa";
 overviewText = $STR_RES_overviewText;
 overviewTextLocked = $STR_RES_overviewTextLocked;
-forceRotorLibSimulation=1;
-disabledAI=1;
+forceRotorLibSimulation = 1;
+disabledAI = 1;
 
 /*
  ██████╗ ███████╗██╗   ██╗██╗██╗   ██╗███████╗
