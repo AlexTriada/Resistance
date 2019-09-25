@@ -1,6 +1,6 @@
 /*
 * Author: [Triada]
-* [respawn script]
+* [function that running when player respawn]
 *
 * Arguments:
 * 0: The first argument <OBJECT>
@@ -8,9 +8,9 @@
 * 2: Multiple input types <OBJECT>
 * 3: Optional input <BOOL> (default: true)
 *
-* Return Value: nothing
+* Return Value: none
 *
-* Example: nothing
+* Example: none
 *
 * Public: [No]
 */

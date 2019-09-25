@@ -1,9 +1,9 @@
 /*
 * Author: [Triada]
-* [Description]
+* [function, that running when player is killed]
 *
 * Arguments:
-* 0: The first argument <STRING>
+* 0: The first argument <OBJECT>
 * 1: The second argument <OBJECT>
 * 2: Multiple input types <OBJECT>
 * 3: Optional input <BOOL> (default: true)
