@@ -24,6 +24,8 @@ onLoadName = $STR_RES_resistance;
 overviewPicture = "pic.paa";
 overviewText = $STR_RES_overviewText;
 overviewTextLocked = $STR_RES_overviewTextLocked;
+forceRotorLibSimulation=1;
+disabledAI=1;
 
 /*
  ██████╗ ███████╗██╗   ██╗██╗██╗   ██╗███████╗
@@ -53,15 +55,16 @@ reviveBleedOutDelay = 30;
  ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═══╝
 */
 
-respawn = "BASE";
-respawnTemplatesGuer[] = {"RES_respawn"};
+respawn = 3; // "BASE"
+respawnTemplatesGuer[] = {"RESISTANCE"};
+respawnButton = 1;
+respawnDelay = 3;
+respawnOnStart = 0;
 
 class CfgRespawnTemplates {
-	class RES_respawn {
+	class RESISTANCE {
 		onPlayerKilled = "RES_fnc_killedPlayer";
 		onPlayerRespawn = "RES_fnc_respawnPlayer";
-		respawnDelay = 3;
-		respawnOnStart = 0;
 	};
 };
 
@@ -103,6 +106,12 @@ class Params {
 		title = $STR_RES_Params_autosave; // Enable Autosave (every hour)
 		values[] = {1, 0};
 		texts[] = {$STR_RES_yes, $STR_RES_no};
-		default = 1;
+		default = 0;
 	};
+	class icon3D {
+		title = $STR_RES_Params_icon3D; // Enable 3D icon on unconscious players
+		values[] = {1, 0};
+		texts[] = {$STR_RES_yes, $STR_RES_no};
+		default = 0;
+	}
 };

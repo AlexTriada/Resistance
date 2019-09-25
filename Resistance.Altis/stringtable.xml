@@ -56,6 +56,10 @@
 				<Original>Enable Autosave (every hour)</Original>
 				<Russian>Включить Автосохранение (каждый час)</Russian>
 			</Key>
+			<Key ID = "STR_RES_Params_icon3D">
+				<Original>Enable 3D icon on unconscious players</Original>
+				<Russian>Включить 3D иконки на раненых игроков</Russian>
+			</Key>
 		</Container>
 	</Package>
 	<Package name = "dialogs">
