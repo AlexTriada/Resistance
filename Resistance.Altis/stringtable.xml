@@ -52,6 +52,10 @@
 			</Key>
 		</Container>
 		<Container name = "Params">
+			<Key ID = "STR_RES_Params_loadSave">
+				<Original>Load last mission save</Original>
+				<Russian>Загрузить последнее сохранение миссии</Russian>
+			</Key>
 			<Key ID = "STR_RES_Params_autosave">
 				<Original>Enable Autosave (every hour)</Original>
 				<Russian>Включить Автосохранение (каждый час)</Russian>
