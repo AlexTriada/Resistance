@@ -1,6 +1,8 @@
 #include "script_component.hpp"
+
 #define ENABLE_3D_ICONS _icon3D == 1
 #define LOAD_SERVER_SAVE _loadSave == 1
+
 LOG("[Resistance] | Info | %1 Started")
 
 /*
