@@ -428,8 +428,13 @@ class RES {
 		class loadPlayer {};
 		class loadPreviousSession {};
 		class loadServer {};
+		class loadStat {};
 		class playerHasSave {};
 		class savePlayer {};
+		class saveStat {};
+		class setStat {};
+		class varNameToSaveName {};
+		class returnSavedStat {};
 	};
 /*
  ████████╗███████╗███╗   ███╗██████╗ ██╗      █████╗ ████████╗███████╗███████╗
