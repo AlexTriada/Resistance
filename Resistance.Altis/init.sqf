@@ -1,5 +1,6 @@
 #include "script_component.hpp"
-
+#define ENABLE_3D_ICONS _icon3D == 1
+#define LOAD_SERVER_SAVE _loadSave == 1
 LOG("[Resistance] | Info | %1 Started")
 
 /*
@@ -35,7 +36,7 @@ if (hasInterface) then {
 */
 	private _icon3D = "icon3D" call BIS_fnc_getParamValue;
 
-	if (_icon3D) then {
+	if (ENABLE_3D_ICONS) then {
 		[] spawn RES_fnc_unconsciousIcon;
 	};
 };
@@ -52,7 +53,7 @@ if (hasInterface) then {
 if (isServer) then {
 	private _loadSave = "loadSave" call BIS_fnc_getParamValue;
 
-	if (_loadSave) then {
+	if (LOAD_SERVER_SAVE) then {
 		[] call RES_fnc_loadServer;
 	};
 };

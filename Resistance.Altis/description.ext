@@ -104,19 +104,19 @@ class CfgFunctions {
 class Params {
 	class loadSave {
 		title = $STR_RES_Params_loadSave; // Load last mission save
-		values[] = {true, false};
+		values[] = {1, 0};
 		texts[] = {$STR_RES_yes, $STR_RES_no};
-		default = 1;
+		default = 0;
 	};
 	class autoSave {
 		title = $STR_RES_Params_autosave; // Enable Autosave (every hour)
-		values[] = {true, false};
+		values[] = {1, 0};
 		texts[] = {$STR_RES_yes, $STR_RES_no};
 		default = 0;
 	};
 	class icon3D {
 		title = $STR_RES_Params_icon3D; // Enable 3D icon on unconscious players
-		values[] = {true, false};
+		values[] = {1, 0};
 		texts[] = {$STR_RES_yes, $STR_RES_no};
 		default = 0;
 	}
