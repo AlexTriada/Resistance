@@ -20,7 +20,7 @@
 
 	Public: Yes
 */
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 LOG("[Resistance] | Info | %1 Started")
 

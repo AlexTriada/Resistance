@@ -20,13 +20,13 @@
 
 	Public: No
 */
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 #include "\A3\Ui_f\hpp\defineResinclDesign.inc"
 
 LOG("[Resistance] | Info | %1 Started")
 
 if (isServer) then {
-	LOG("[Resistance] | Info | Starting Persistent Load");
+	LOG("[Resistance] | Info | %1 | Starting Persistent Load")
 
 	petros allowdamage false;
 
@@ -160,8 +160,8 @@ if (isServer) then {
 	clearBackpackCargoGlobal boxX;
 
 	[] remoteExec ["RES_fnc_statistics", [teamPlayer, civilian]];
-	LOG("[Resistance] | Info | Persistent Load Completed");
-	LOG("[Resistance] | Info | Generating Map Markers");
+	LOG("[Resistance] | Info | %1 | Persistent Load Completed")
+	LOG("[Resistance] | Info | %1 | Generating Map Markers")
 	["tasks"] call fn_LoadStat;
 
 	if !(isMultiplayer) then {

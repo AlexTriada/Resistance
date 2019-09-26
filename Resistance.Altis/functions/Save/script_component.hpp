@@ -1,1 +1,1 @@
-#include "..\..\debug_macros.hpp"
+#include "..\script_component.hpp"
