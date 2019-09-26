@@ -26,7 +26,7 @@
 LOG("[Resistance] | Info | %1 Started")
 
 if (isServer) then {
-	LOG("[Resistance] | Info | Starting Persistent Load.");
+	LOG("[Resistance] | Info | Starting Persistent Load");
 
 	petros allowdamage false;
 
@@ -160,8 +160,8 @@ if (isServer) then {
 	clearBackpackCargoGlobal boxX;
 
 	[] remoteExec ["RES_fnc_statistics", [teamPlayer, civilian]];
-	LOG("[Resistance] | Info | Persistent Load Completed.");
-	LOG("[Resistance] | Info | Generating Map Markers.");
+	LOG("[Resistance] | Info | Persistent Load Completed");
+	LOG("[Resistance] | Info | Generating Map Markers");
 	["tasks"] call fn_LoadStat;
 
 	if !(isMultiplayer) then {
