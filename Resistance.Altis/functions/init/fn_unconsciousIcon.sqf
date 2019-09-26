@@ -9,7 +9,7 @@
 	Return Value: none
 
 	Example:
-	[] spawn ESC_fnc_unconscious
+	[] spawn RES_fnc_unconscious
 
 	Public: [No]
 */
