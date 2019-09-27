@@ -2,7 +2,7 @@
 	Author: Triada
 
 	Description:
-	function, that running when player respawn
+	running when player was respawned
 
 	Parameter(s):
 	0: <OBJECT> new unit
@@ -12,12 +12,20 @@
 
 	Return Value: none
 
-	Example: none
+	Example: add this to description.ext and dont forget create appropriate class in CfgFunctions
+
+	respawnTemplates[] = {"RESISTANCE"};
+
+	class CfgRespawnTemplates {
+		class RESISTANCE {
+			onPlayerRespawn = "RES_fnc_respawnPlayer";
+		};
+	};
 
 	Public: No
 */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 LOG("[Resistance] | Info | %1 Started")
 
