@@ -2,7 +2,6 @@
 
 LOG("[Resistance] | Info | %1 Started")
 
-if (isServer) then {
 /*
 	████████╗███████╗    ██████╗  █████╗ ██████╗ ██╗ ██████╗
 	╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██╔══██╗██║██╔═══██╗
@@ -13,6 +12,8 @@ if (isServer) then {
 */
 	tf_radio_channel_name = "Resistance";
 	tf_radio_channel_password = "2112";
+
+if (isServer) then {
 
 	private _loadSave = [false, true] select ("loadSave" call BIS_fnc_getParamValue);
 	private "_campaignID";
