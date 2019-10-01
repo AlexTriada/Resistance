@@ -2,7 +2,8 @@
 	Author: Triada
 
 	Description:
-	initialising BOX
+	adding to the BOX some weapons with mags, some mines, some items and optics,
+	and some long range radios, if TFAR mod is loading
 
 	Parameter(s):
 	0: box <OBJECT> default: objNull
@@ -46,6 +47,7 @@
 #define MAX_OPTIC_COUNT 2
 
 #define LONG_RANGE_TFR "tf_rt1523g_big_bwmod"
+#define LONG_RANGE_TFR_COUNT 2
 
 LOG("[Resistance] | Info | %1 Started")
 
@@ -114,7 +116,7 @@ if !(_opticsAAF isEqualTo []) then {
 };
 
 if (_hasTFAR) then {
-	_box addBackpackCargoGlobal [LONG_RANGE_TFR, 1];
+	_box addBackpackCargoGlobal [LONG_RANGE_TFR, LONG_RANGE_TFR_COUNT];
 };
 
 LOG("[Resistance] | Info | %1 Finished")

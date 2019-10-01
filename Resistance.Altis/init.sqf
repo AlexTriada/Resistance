@@ -1,8 +1,5 @@
 #include "script_component.hpp"
 
-#define ENABLE_3D_ICONS _icon3D == 1
-#define LOAD_SERVER_SAVE _loadSave == 1
-
 LOG("[Resistance] | Info | %1 Started")
 
 if (hasInterface) then {
@@ -27,19 +24,19 @@ if (hasInterface) then {
 	██║╚██████╗╚██████╔╝██║ ╚████║    ██████╔╝██████╔╝
 	╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═════╝ ╚═════╝
 */
-	private _icon3D = "icon3D" call BIS_fnc_getParamValue;
+	private _icon3D = [false, true] select ("icon3D" call BIS_fnc_getParamValue);
 
-	if (ENABLE_3D_ICONS) then {
+	if (_icon3D) then {
 		[] spawn RES_fnc_unconsciousIcon;
 	};
 };
 
 if (isServer) then {
 
-	private _loadSave = "loadSave" call BIS_fnc_getParamValue;
+	private _loadSave = [false, true] select ("loadSave" call BIS_fnc_getParamValue);
 	private "_campaignID";
 
-	if (LOAD_SERVER_SAVE) then {
+	if (_loadSave) then {
 		_campaignID = profileNameSpace getVariable ["RES_CampaignID", ""];
 		[] call RES_fnc_loadServer;
 	} else {

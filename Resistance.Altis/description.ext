@@ -121,5 +121,5 @@ class Params {
 		values[] = {1, 0};
 		texts[] = {$STR_RES_yes, $STR_RES_no};
 		default = 1;
-	}
+	};
 };
