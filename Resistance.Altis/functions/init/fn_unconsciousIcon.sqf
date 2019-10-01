@@ -26,10 +26,10 @@ private ["_pos"];
 addMissionEventHandler [
 	"Draw3D", {
 		{
-			_pos = getPosWorld _x;
+			_pos = ASLToAGL getPosWorld _x;
 
 			if ((_x getVariable "ACE_isUnconscious") && {(_x distance player) < DISTANCE_3D}) then {
-				drawIcon3D ["\a3\ui_f\data\IGUI\Cfg\Revive\overlayIcons\u100_ca.paa", ICON_COLOR, [_pos #0, _pos #1, 0.1], ICON_SIZE, ICON_SIZE, 0];
+				drawIcon3D ["\a3\ui_f\data\IGUI\Cfg\Revive\overlayIcons\u100_ca.paa", ICON_COLOR, _pos, ICON_SIZE, ICON_SIZE, 0];
 			};
 		} forEach (playableUnits - [player]);
 	}

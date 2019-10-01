@@ -27,6 +27,8 @@ overviewTextLocked = $STR_RES_overviewTextLocked;
 forceRotorLibSimulation = 1;
 disabledAI = 1;
 
+allowFunctionsLog = 1;
+
 /*
  ██████╗ ███████╗██╗   ██╗██╗██╗   ██╗███████╗
  ██╔══██╗██╔════╝██║   ██║██║██║   ██║██╔════╝
@@ -118,6 +120,6 @@ class Params {
 		title = $STR_RES_Params_icon3D; // Enable 3D icon on unconscious players
 		values[] = {1, 0};
 		texts[] = {$STR_RES_yes, $STR_RES_no};
-		default = 0;
+		default = 1;
 	}
 };
