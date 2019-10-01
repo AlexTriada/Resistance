@@ -2,8 +2,21 @@
 
 LOG("[Resistance] | Info | %1 Started")
 
-if (hasInterface) then {
+if (isServer) then {
 
+	private _loadSave = [false, true] select ("loadSave" call BIS_fnc_getParamValue);
+	private "_campaignID";
+
+	if (_loadSave) then {
+		_campaignID = profileNameSpace getVariable ["RES_CampaignID", ""];
+		[] call RES_fnc_loadServer;
+	} else {
+		_campaignID = str(round((random(100000)) + random 10000));
+		profileNameSpace setVariable ["RES_CampaignID", _campaignID];
+	};
+};
+
+if (hasInterface) then {
 /*
 	████████╗███████╗    ██████╗  █████╗ ██████╗ ██╗ ██████╗
 	╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██╔══██╗██║██╔═══██╗
@@ -12,10 +25,8 @@ if (hasInterface) then {
 	   ██║   ██║         ██║  ██║██║  ██║██████╔╝██║╚██████╔╝
 	   ╚═╝   ╚═╝         ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝ ╚═════╝
 */
-
 	tf_radio_channel_name = "Resistance";
 	tf_radio_channel_password = "2112";
-
 /*
 	██╗ ██████╗ ██████╗ ███╗   ██╗    ██████╗ ██████╗
 	██║██╔════╝██╔═══██╗████╗  ██║    ╚════██╗██╔══██╗
@@ -28,20 +39,6 @@ if (hasInterface) then {
 
 	if (_icon3D) then {
 		[] spawn RES_fnc_unconsciousIcon;
-	};
-};
-
-if (isServer) then {
-
-	private _loadSave = [false, true] select ("loadSave" call BIS_fnc_getParamValue);
-	private "_campaignID";
-
-	if (_loadSave) then {
-		_campaignID = profileNameSpace getVariable ["RES_CampaignID", ""];
-		[] call RES_fnc_loadServer;
-	} else {
-		_campaignID = str(round((random(100000)) + random 10000));
-		profileNameSpace setVariable ["RES_CampaignID", _campaignID];
 	};
 };
 
