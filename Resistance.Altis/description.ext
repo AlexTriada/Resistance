@@ -104,6 +104,13 @@ class CfgFunctions {
 */
 
 class Params {
+	class gameMode
+	{
+		title = $STR_RES_Params_gameMode;
+		values[] = {1, 2, 3, 4};
+		texts[] = {$STR_RES_Params_GvsWvsE, $STR_RES_Params_GvsWandE, $STR_RES_Params_GvsW, $STR_RES_Params_GvsE};
+		default = 1;
+	};
 	class loadSave {
 		title = $STR_RES_Params_loadSave; // Load last mission save
 		values[] = {1, 0};

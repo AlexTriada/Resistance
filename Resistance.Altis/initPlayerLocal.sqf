@@ -1,3 +1,7 @@
+#include "script_component.hpp"
+
+LOG("[Resistance] | Info | %1 Started")
+
 /*
 ██╗ ██████╗ ██████╗ ███╗   ██╗    ██████╗ ██████╗
 ██║██╔════╝██╔═══██╗████╗  ██║    ╚════██╗██╔══██╗
@@ -7,9 +11,12 @@
 ╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═════╝ ╚═════╝
 */
 if (hasInterface) then {
+
 	private _icon3D = [false, true] select ("icon3D" call BIS_fnc_getParamValue);
 
 	if (_icon3D) then {
 		[] spawn RES_fnc_unconsciousIcon;
 	};
 };
+
+LOG("[Resistance] | Info | %1 Finished")

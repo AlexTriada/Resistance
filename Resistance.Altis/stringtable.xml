@@ -64,6 +64,26 @@
 				<Original>Enable 3D icon on unconscious players</Original>
 				<Russian>Включить 3D иконки на раненых игроков</Russian>
 			</Key>
+			<Key ID = "STR_RES_Params_gameMode">
+				<Original>Game Mode</Original>
+				<Russian>Режим Игры</Russian>
+			</Key>
+			<Key ID = "STR_RES_Params_GvsWvsE">
+				<Original>GUER vs WEST vs EAST</Original>
+				<Russian>Все против всех</Russian>
+			</Key>
+			<Key ID = "STR_RES_Params_GvsWandE">
+				<Original>GUER vs WEST and EAST</Original>
+				<Russian>Запад вместе с Востоком против Повстанцев</Russian>
+			</Key>
+			<Key ID = "STR_RES_Params_GvsW">
+				<Original>GUER vs WEST</Original>
+				<Russian>Повстанцы против Запада</Russian>
+			</Key>
+			<Key ID = "STR_RES_Params_GvsE">
+				<Original>GUER vs EAST</Original>
+				<Russian>Повстанцы против Востока</Russian>
+			</Key>
 		</Container>
 	</Package>
 	<Package name = "dialogs">
