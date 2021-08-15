@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Project name="Resistance">
+    <Package name="Any">
+        <Container name="Params">
+            <Key ID="STR_RES_startNewGame">
+                <Original>Start New Game</Original>
+                <Russian>Начать новую игру</Russian>
+            </Key>
+        </Container>
+        <Container name="Base words">
+            <Key ID="STR_RES_yes">
+                <Original>Yes</Original>
+                <Russian>Да</Russian>
+            </Key>
+            <Key ID="STR_RES_no">
+                <Original>No</Original>
+                <Russian>Нет</Russian>
+            </Key>
+        </Container>
+    </Package>
 </Project>
