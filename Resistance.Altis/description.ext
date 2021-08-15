@@ -1,0 +1,11 @@
+#include "settings\missionInformation.cfg"
+
+class CfgFunctions
+{
+	#include "functions\functions.cfg"
+};
+
+class Params
+{
+	#include "settings\params.cfg"
+};
