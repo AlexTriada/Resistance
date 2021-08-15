@@ -1,0 +1,1 @@
+private _serverID = profileNameSpace getVariable ["ss_ServerID", nil];

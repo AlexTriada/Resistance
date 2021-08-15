@@ -1,9 +1,11 @@
-#define TITLE "Разведка"
-#define TEXT_INTEL "Вражеская база <marker name='Вражеская база'>161170</marker>"
+call Init_fnc_briefing;
 
-if !(isMultiplayer) then
+if (isMultiplayer) then
 {
-	{ deleteVehicle _x; } forEach (switchableUnits select { _x != player });
+	call Init_fnc_initMultiPlayer;
+}
+else
+{
+	call Init_fnc_initSinglePlayer;
 };
 
-player createDiaryRecord ["Diary", [TITLE, TEXT_INTEL]];
