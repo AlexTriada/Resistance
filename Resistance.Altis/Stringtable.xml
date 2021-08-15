@@ -6,6 +6,14 @@
                 <Original>Start New Game</Original>
                 <Russian>Начать новую игру</Russian>
             </Key>
+            <Key ID="STR_RES_trafficRate">
+                <Original>Rate of Civ Traffic</Original>
+                <Russian>Уровень трафика гражданских</Russian>
+            </Key>
+            <Key ID="STR_RES_maxUnits">
+                <Original>Maximum units</Original>
+                <Russian>Максимальное количество юнитов</Russian>
+            </Key>
         </Container>
         <Container name="Base words">
             <Key ID="STR_RES_yes">
@@ -15,6 +23,22 @@
             <Key ID="STR_RES_no">
                 <Original>No</Original>
                 <Russian>Нет</Russian>
+            </Key>
+            <Key ID="STR_RES_none">
+                <Original>None</Original>
+                <Russian>Отсутствует</Russian>
+            </Key>
+            <Key ID="STR_RES_low">
+                <Original>Low</Original>
+                <Russian>Низкий</Russian>
+            </Key>
+            <Key ID="STR_RES_medium">
+                <Original>Medium</Original>
+                <Russian>Средний</Russian>
+            </Key>
+            <Key ID="STR_RES_high">
+                <Original>High</Original>
+                <Russian>Высокий</Russian>
             </Key>
         </Container>
     </Package>
