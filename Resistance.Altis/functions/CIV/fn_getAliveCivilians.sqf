@@ -1,0 +1,1 @@
+allUnits select { alive _x && { side _x == civilian }}
