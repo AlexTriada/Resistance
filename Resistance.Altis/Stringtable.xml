@@ -42,4 +42,8 @@
             </Key>
         </Container>
     </Package>
+    <Package name="Altis"></Package>
+    <Package name="Stratis"></Package>
+    <Package name="Tanoa"></Package>
+    <Package name="Malden"></Package>
 </Project>

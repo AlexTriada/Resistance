@@ -1,8 +1,9 @@
-params ["_functionInfo", "_index"];
-_functionInfo params ["_time", "_handle", "_args", "_code", "_dogTime"];
+params ["_sleepDogID"];
+
+private _sleepDogs = missionNamespace getVariable ["sleepDogs", []];
+private _sleepDog = _sleepDogs select _sleepDogID;
+_sleepDog params ["_args", "_scriptName", "_handle"];
 
 terminate _handle;
 
-sleepDogs = deleteAt _index;
-
-[_args, _code, _dogTime] call BASE_fnc_spawnCycle;
+call compile (format ["%1 spawn %2;", _args, _scriptName]);
