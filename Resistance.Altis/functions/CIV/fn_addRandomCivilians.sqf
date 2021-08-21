@@ -1,16 +1,19 @@
-#define MILITARY_BUILDINGS_TYPES_CONFIG (missionConfigFile >> "Resistance" >> "Building" >> "militaryTypes")
-#define CIVILIAN_TYPES_CONFIG (missionConfigFile >> "Resistance" >> "Civilian" >> "types")
-#define MAX_DISTANCE_TO_PLAYER_CONFIG (missionConfigFile >> "Resistance" >> "Civilian" >> "maxDistanceToPlayer")
-#define MIN_DISTANCE_TO_PLAYER_CONFIG (missionConfigFile >> "Resistance" >> "Civilian" >> "minDistanceToPlayer")
-#define MIN_DISTANCE_TO_CIVILIAN_CONFIG (missionConfigFile >> "Resistance" >> "Civilian" >> "minDistanceToCivilian")
-#define CIV_GROUP_SIZE (missionConfigFile >> "Resistance" >> "Civilian" >> "groupSize")
+#define BUILDING_CFG missionConfigFile >> "Resistance" >> "Building"
+#define CIVILIAN_CFG missionConfigFile >> "Resistance" >> "Civilian"
 
-private _militaryBuildingTypes = MILITARY_BUILDINGS_TYPES_CONFIG call BIS_fnc_getCfgDataArray;
-private _civilianTypes = CIVILIAN_TYPES_CONFIG call BIS_fnc_getCfgDataArray;
-private _maxDistanceToPlayer = MAX_DISTANCE_TO_PLAYER_CONFIG call BIS_fnc_getCfgData;
-private _minDistanceToPlayer = MIN_DISTANCE_TO_PLAYER_CONFIG call BIS_fnc_getCfgData;
-private _minDistanceToCivilian = MIN_DISTANCE_TO_CIVILIAN_CONFIG call BIS_fnc_getCfgData;
-private _groupUnitsSize = CIV_GROUP_SIZE call BIS_fnc_getCfgData;
+#define MILITARY_BUILDINGS_TYPES_CFG BUILDING_CFG >> "militaryTypes"
+#define CIVILIAN_TYPES_CFG CIVILIAN_CFG >> "types"
+#define MAX_DISTANCE_TO_PLAYER_CFG CIVILIAN_CFG >> "maxDistanceToPlayer"
+#define MIN_DISTANCE_TO_PLAYER_CFG CIVILIAN_CFG >> "minDistanceToPlayer"
+#define MIN_DISTANCE_TO_CIVILIAN_CFG CIVILIAN_CFG >> "minDistanceToCivilian"
+#define CIV_GROUP_SIZE_CFG CIVILIAN_CFG >> "groupSize"
+
+private _militaryBuildingTypes = (MILITARY_BUILDINGS_TYPES_CFG) call BIS_fnc_getCfgDataArray;
+private _civilianTypes = (CIVILIAN_TYPES_CFG) call BIS_fnc_getCfgDataArray;
+private _maxDistanceToPlayer = (MAX_DISTANCE_TO_PLAYER_CFG) call BIS_fnc_getCfgData;
+private _minDistanceToPlayer = (MIN_DISTANCE_TO_PLAYER_CFG) call BIS_fnc_getCfgData;
+private _minDistanceToCivilian = (MIN_DISTANCE_TO_CIVILIAN_CFG) call BIS_fnc_getCfgData;
+private _groupUnitsSize = (CIV_GROUP_SIZE_CFG) call BIS_fnc_getCfgData;
 
 private _aliveCivilians = call Civ_fnc_getAliveCivilians;
 private _headlessClients = entities "HeadlessClient_F";

@@ -7,4 +7,4 @@ call Civ_fnc_addRandomCivilians;
 
 sleep SLEEP_TIME;
 
-_this spawn Civ_fnc_ambientCivilians;
+_this spawn Civ_fnc_createAmbientCivilianCycle;

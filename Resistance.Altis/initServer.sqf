@@ -11,4 +11,4 @@ else
 	call Init_fnc_loadSavedGame;
 };
 
-[] spawn Civ_fnc_ambientCivilians;
+[] spawn Civ_fnc_createAmbientCivilianCycle;
