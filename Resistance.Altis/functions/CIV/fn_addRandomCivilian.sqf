@@ -108,7 +108,7 @@ private _createCivilian =
 
 	_civilian setPosATL _position;
 
-	[_civilian] spawn Civ_fnc_initCivilian;
+	// [_civilian] spawn Civ_fnc_initCivilian;
 
 	// if (_civilian == leader _civilian) then
 	// {

@@ -1,10 +1,13 @@
 #define SLEEP_TIME 5
 
-[_this, _fnc_scriptName, _thisScript, SLEEP_TIME] call Base_fnc_updateSleepDog;
+private _sleepDog = [_this, _fnc_scriptName, _thisScript, SLEEP_TIME] call Base_fnc_initSleepDog;
 
-call Civ_fnc_deleteAwayCivilians;
-call Civ_fnc_addRandomCivilians;
+while {true} do
+{
+	[_sleepDog, SLEEP_TIME] call Base_fnc_updateSleepDog;
 
-sleep SLEEP_TIME;
+	call Civ_fnc_deleteAwayCivilians;
+	call Civ_fnc_addRandomCivilian;
 
-_this spawn Civ_fnc_createAmbientCivilianCycle;
+	sleep SLEEP_TIME;
+};
