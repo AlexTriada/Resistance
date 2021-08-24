@@ -14,6 +14,26 @@
                 <Original>Maximum units</Original>
                 <Russian>Максимальное количество юнитов</Russian>
             </Key>
+            <Key ID="STR_RES_gameMode">
+                <Original>Game mode</Original>
+                <Russian>Противник</Russian>
+            </Key>
+            <Key ID="STR_RES_vsAll">
+                <Original>Vs All</Original>
+                <Russian>Синяя и Красная сторона</Russian>
+            </Key>
+            <Key ID="STR_RES_vsBlue">
+                <Original>Vs Blue</Original>
+                <Russian>Синяя сторона</Russian>
+            </Key>
+            <Key ID="STR_RES_vsRed">
+                <Original>Vs Red</Original>
+                <Russian>Красная сторона</Russian>
+            </Key>
+            <Key ID="STR_RES_distanceSPWN">
+                <Original>Spawn Distance</Original>
+                <Russian>Радиус симуляции</Russian>
+            </Key>
         </Container>
         <Container name="Base words">
             <Key ID="STR_RES_yes">

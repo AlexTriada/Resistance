@@ -21,5 +21,5 @@ _unit disableAI "AUTOTARGET";
 
 [_unit, "NoVoice"] remoteExec ["setSpeaker", 0, _unit];
 
-_unit addEventHandler ["HandleDamage", Civ_fnc_hCivilianDamage];
-_unit addEventHandler ["killed", Civ_fnc_hCivilianKilled}];
+// _unit addEventHandler ["HandleDamage", Civ_fnc_hCivilianDamage];
+// _unit addEventHandler ["killed", Civ_fnc_hCivilianKilled}];
