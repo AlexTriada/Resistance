@@ -1,3 +1,5 @@
 params ["_sleepDog", "_sleepTime"];
 
-_sleepDog set [3, time + (_sleepTime * 2)];
+private _dogTime = _sleepTime call Base_fnc_getSleepDogTime;
+
+_sleepDog set [3, _dogTime];

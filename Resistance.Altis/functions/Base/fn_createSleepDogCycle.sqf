@@ -1,14 +1,28 @@
 missionNamespace setVariable ["sleepDogs", []];
 private _sleepDogs = missionNamespace getVariable "sleepDogs";
+private ["_i", "_sleepDog"];
 
 while { true } do
 {
 	sleep 1;
 
+	_i = 0;
+
+	while { _i < count _sleepDogs } do
 	{
-		if (time > _x #3) then
+		_sleepDog = _sleepDogs # _i;
+		_sleepDog params ["_args", "_scriptName", "_handle", "_dogTime"];
+
+		if (time > _dogTime) then
 		{
-			[_forEachIndex] spawn Base_fnc_restartFunction;
+			terminate _handle;
+			_sleepDogs deleteAt _i;
+
+			call compile format ['%1 spawn %2', _args, _scriptName];
+
+			continue;
 		};
-	} forEach _sleepDogs;
+
+		_i = _i + 1;
+	};
 };
