@@ -13,4 +13,7 @@ else
 	call Save_fnc_loadGame;
 };
 
-[] spawn Civ_fnc_createAmbientCivilianCycle;
+if ("RandomCivilians" call BIS_fnc_getParamValue == 1) then
+{
+	[] spawn Civ_fnc_createAmbientCivilianCycle;
+};

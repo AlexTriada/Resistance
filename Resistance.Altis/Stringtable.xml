@@ -2,9 +2,17 @@
 <Project name="Resistance">
     <Package name="Any">
         <Container name="Params">
+            <Key ID="STR_RES_paramsTitle">
+                <Original>Resistance Campain Parameters</Original>
+                <Russian>Настройки игры</Russian>
+            </Key>
             <Key ID="STR_RES_startNewGame">
                 <Original>Start New Game</Original>
                 <Russian>Начать новую игру</Russian>
+            </Key>
+            <Key ID="STR_RES_randomCivilians">
+                <Original>Random civilians</Original>
+                <Russian>Случайные гражданские</Russian>
             </Key>
             <Key ID="STR_RES_trafficRate">
                 <Original>Rate of Civ Traffic</Original>
@@ -20,15 +28,15 @@
             </Key>
             <Key ID="STR_RES_vsAll">
                 <Original>Vs All</Original>
-                <Russian>Синяя и Красная сторона</Russian>
+                <Russian>Синие и Красные</Russian>
             </Key>
             <Key ID="STR_RES_vsBlue">
                 <Original>Vs Blue</Original>
-                <Russian>Синяя сторона</Russian>
+                <Russian>Синие</Russian>
             </Key>
             <Key ID="STR_RES_vsRed">
                 <Original>Vs Red</Original>
-                <Russian>Красная сторона</Russian>
+                <Russian>Красные</Russian>
             </Key>
             <Key ID="STR_RES_distanceSPWN">
                 <Original>Spawn Distance</Original>
@@ -59,6 +67,14 @@
             <Key ID="STR_RES_high">
                 <Original>High</Original>
                 <Russian>Высокий</Russian>
+            </Key>
+            <Key ID="STR_RES_on">
+                <Original>On</Original>
+                <Russian>Вкл</Russian>
+            </Key>
+            <Key ID="STR_RES_off">
+                <Original>Off</Original>
+                <Russian>Выкл</Russian>
             </Key>
         </Container>
     </Package>
