@@ -1,28 +1,32 @@
 missionNamespace setVariable ["sleepDogs", []];
-private _sleepDogs = missionNamespace getVariable "sleepDogs";
-private ["_i", "_sleepDog"];
 
-while { true } do
+[] spawn
 {
-	sleep 1;
+	private _sleepDogs = missionNamespace getVariable "sleepDogs";
+	private ["_i", "_sleepDog"];
 
-	_i = 0;
-
-	while { _i < count _sleepDogs } do
+	while { true } do
 	{
-		_sleepDog = _sleepDogs # _i;
-		_sleepDog params ["_args", "_scriptName", "_handle", "_dogTime"];
+		sleep 1;
 
-		if (time > _dogTime) then
+		_i = 0;
+
+		while { _i < count _sleepDogs } do
 		{
-			terminate _handle;
-			_sleepDogs deleteAt _i;
+			_sleepDog = _sleepDogs # _i;
+			_sleepDog params ["_args", "_scriptName", "_handle", "_dogTime"];
 
-			call compile format ['%1 spawn %2', _args, _scriptName];
+			if (time > _dogTime) then
+			{
+				terminate _handle;
+				_sleepDogs deleteAt _i;
 
-			continue;
+				call compile format ['%1 spawn %2', _args, _scriptName];
+
+				continue;
+			};
+
+			_i = _i + 1;
 		};
-
-		_i = _i + 1;
 	};
 };

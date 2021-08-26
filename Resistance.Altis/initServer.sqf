@@ -1,6 +1,4 @@
-[] spawn Base_fnc_createSleepDogCycle;
-
-sleep 1;
+[] call Base_fnc_createSleepDogCycle;
 
 if ("NewGame" call BIS_fnc_getParamValue == 1) then
 {
