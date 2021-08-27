@@ -1,5 +1,6 @@
 #include "settings\missionInformation.cfg"
 #include "settings\missionSettings.cfg"
+#include "dialogs\dialogs.cfg"
 #include "settings\resistance.cfg"
 
 class CfgFunctions
