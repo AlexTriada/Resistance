@@ -1,1 +1,1 @@
-// call Init_fnc_syncDestroyedObjects;
+// call RES_fnc_syncDestroyedObjects;

@@ -15,7 +15,7 @@ private _minDistanceToPlayer = (MIN_DISTANCE_TO_PLAYER_CFG) call BIS_fnc_getCfgD
 private _minDistanceToCivilian = (MIN_DISTANCE_TO_CIVILIAN_CFG) call BIS_fnc_getCfgData;
 private _groupUnitsSize = (CIV_GROUP_SIZE_CFG) call BIS_fnc_getCfgData;
 
-private _aliveCivilians = call Civ_fnc_getAliveCivilians;
+private _aliveCivilians = call RES_fnc_getAliveCivilians;
 private _headlessClients = entities "HeadlessClient_F";
 private _players = allPlayers - _headlessClients;
 private _trafficRate = missionNamespace getVariable ["trafficRate", 0];
@@ -42,8 +42,8 @@ private _isCorrectCivilBuilding =
 
 	!((typeOf _building) in _militaryBuildingTypes)
 	&& { count (_building buildingPos -1) > 0
-	&& { [_building, _players, _minDistanceToPlayer] call Base_fnc_isFarFromObjects
-	&& { [_building, _aliveCivilians, _minDistanceToCivilian] call Base_fnc_isFarFromObjects }}}
+	&& { [_building, _players, _minDistanceToPlayer] call RES_fnc_isFarFromObjects
+	&& { [_building, _aliveCivilians, _minDistanceToCivilian] call RES_fnc_isFarFromObjects }}}
 };
 
 
@@ -104,18 +104,18 @@ private _createCivilian =
 	private _type = selectRandom _civilianTypes;
 	private _civilGroup = call _getCivilGroup;
 
-	private _civilian = [_civilGroup, _type, [0, 0, 0], [], 0, "NONE"] call Base_fnc_createUnit;
+	private _civilian = [_civilGroup, _type, [0, 0, 0], [], 0, "NONE"] call RES_fnc_createUnit;
 
 	_civilian setPosATL _position;
 
-	// [_civilian] spawn Civ_fnc_initCivilian;
+	// [_civilian] spawn RES_fnc_initCivilian;
 
 	// if (_civilian == leader _civilian) then
 	// {
 	// 	[_civilian, "ambientCiv", "SAFE", "SPAWNED", "NOFOLLOW", "NOVEH2", "NOSHARE", "DoRelax"]
 	// 		execVM "scripts\UPSMON.sqf"
 	// };
-	//TODO delete UPSMON
+	// TODO delete UPSMON
 
 	_civilian
 };

@@ -8,5 +8,5 @@ _unit setSkill _skill;
 _unit disableAI "TARGET";
 _unit disableAI "AUTOTARGET";
 
-// _unit addEventHandler ["HandleDamage", Civ_fnc_hCivilianDamage];
-// _unit addEventHandler ["killed", Civ_fnc_hCivilianKilled}];
+_unit addEventHandler ["HandleDamage", RES_fnc_hCivilianDamage];
+_unit addEventHandler ["killed", RES_fnc_hCivilianKilled];

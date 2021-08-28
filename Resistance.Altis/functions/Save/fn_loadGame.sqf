@@ -13,7 +13,7 @@ private ["_classCfg", "_classPropertiesCfgs"];
 	{
 		_classPropertyCfg = _x;
 		_variableName = configName _classPropertyCfg;
-		_variableValue = [_variableName] call Save_fnc_loadVariable;
+		_variableValue = [_variableName] call RES_fnc_loadVariable;
 
 		missionNamespace setVariable [_variableName, _variableValue];
 

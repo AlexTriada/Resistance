@@ -7,29 +7,30 @@ My ARMA3 CTI mission
 [x] - save/load system
 [x] - config mission settings
 [x] - random civilians around players
-[ ] - incognito system with roadblock and patrol integration
+[ ] - save/load buildings and structures
 [ ] - deploy/move HQ
 [ ] - respawn at flag
 [ ] - various tasks
 [ ] - JIP working tasks
 [ ] - combat menu
 [ ] - enemy roadblocks
+[ ] - incognito system with roadblock and patrol integration
 [ ] - side minefields
 [ ] - spawn/despawn system with saving
 [ ] - AI garrisons
 [ ] - headless clients support and balancing
 [ ] - counterattacks with QRF support
-[ ] - full attacks with arty support
+[ ] - full attacks with arty support and airdrops
 [ ] - side military support
 [ ] - limited arsenal
 [ ] - commander menu or options
+[ ] - high command
 [ ] - AI enemy artillery
 [ ] - air and land enemy drones
 [ ] - land patrols, snipers, anti-air defence
-[ ] - sea patrols
 [ ] - create roadblocks
 [ ] - create secrets
-[ ] - building system
+[ ] - build system
 [ ] - money implementation
 [ ] - market
 [ ] - fast moving players with squads
@@ -38,6 +39,8 @@ My ARMA3 CTI mission
 [ ] - car customization
 [ ] - military tablet stylization
 [ ] - civil traffic on the roads
+[ ] - sea patrols
+[ ] - save players map markers and lines
 [ ] - PvP mode
 [ ] - single player mode
 [ ] - optimization

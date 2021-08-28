@@ -13,7 +13,7 @@ private ["_classCfg", "_classPropertiesCfgs"];
 	{
 		_classPropertyCfg = _x;
 		_variableName = configName _classPropertyCfg;
-		[_variableName] call Save_fnc_saveVariable;
+		[_variableName] call RES_fnc_saveVariable;
 
 	} forEach _classPropertiesCfgs;
 

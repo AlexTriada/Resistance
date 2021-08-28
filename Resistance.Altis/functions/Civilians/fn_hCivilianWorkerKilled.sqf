@@ -7,10 +7,10 @@ _this spawn
 
 	if (_unit == _killer) exitWith
 	{
-		[-1, -1, getPos _unit] remoteExec ["A3A_fnc_citySupportChange", 2]; 
+		[-1, -1, getPos _unit] remoteExec ["A3A_fnc_citySupportChange", 2];
 	};
 
-	private _players = call Base_fnc_getAllPLayers;
+	private _players = call RES_fnc_getAllPLayers;
 
 	if (_killer in _players) then
 	{
