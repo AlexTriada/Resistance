@@ -7,7 +7,8 @@ My ARMA3 CTI mission
 [x] - save/load system
 [x] - config mission settings
 [x] - random civilians around players
-[ ] - save/load buildings and structures
+[x] - enable Zeus for admins
+[x] - save/load buildings and structures
 [ ] - deploy/move HQ
 [ ] - respawn at flag
 [ ] - various tasks

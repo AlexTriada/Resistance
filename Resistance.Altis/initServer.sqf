@@ -15,3 +15,10 @@ if ("RandomCivilians" call BIS_fnc_getParamValue == 1) then
 {
 	[] spawn RES_fnc_createAmbientCivilianCycle;
 };
+
+if ("SaveDestruction" call BIS_fnc_getParamValue == 1) then
+{
+	call RES_fnc_loadRuins;
+};
+
+addMissionEventHandler ["BuildingChanged", RES_fnc_buildingChanged];

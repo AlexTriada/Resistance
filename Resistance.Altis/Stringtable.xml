@@ -42,6 +42,10 @@
                 <Original>Spawn Distance</Original>
                 <Russian>Радиус симуляции</Russian>
             </Key>
+            <Key ID="STR_RES_saveDestruction">
+                <Original>Save Building Destruction</Original>
+                <Russian>Сохранять разрушения</Russian>
+            </Key>
         </Container>
         <Container name="Base words">
             <Key ID="STR_RES_yes">
