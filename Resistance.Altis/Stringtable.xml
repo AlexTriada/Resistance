@@ -46,6 +46,10 @@
                 <Original>Save Building Destruction</Original>
                 <Russian>Сохранять разрушения</Russian>
             </Key>
+            <Key ID="STR_RES_debugParam">
+                <Original>Debug</Original>
+                <Russian>Отладка</Russian>
+            </Key>
         </Container>
         <Container name="Base words">
             <Key ID="STR_RES_yes">

@@ -1,12 +1,10 @@
 params ["_ruins"];
 
-private ["_building", "_ruinPosW"];
+private ["_building", "_ruinPosition"];
 
 {
-	_ruinPosW = _x #2;
-	_building = [_ruinPosW #0, _ruinPosW #1] nearestObject (_x #0);
+	_ruinPosition = _x #2;
+	_building = [_ruinPosition #0, _ruinPosition #1] nearestObject (_x #0);
 	_building hideObject true;
 	_building enableSimulation false;
-
-	diag_log (["hide building", _building] joinString " | ");
 } forEach _ruins;

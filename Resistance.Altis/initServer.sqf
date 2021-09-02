@@ -1,3 +1,8 @@
+if ("Debug" call BIS_fnc_getParamValue == 1) then
+{
+	[missionNamespace, "Debug", { diag_log (_this joinString " | "); }] call BIS_fnc_addScriptedEventHandler;
+};
+
 [] call RES_fnc_createSleepDogCycle;
 
 if ("NewGame" call BIS_fnc_getParamValue == 1) then
@@ -23,4 +28,3 @@ if ("SaveDestruction" call BIS_fnc_getParamValue == 1) then
 };
 
 addMissionEventHandler ["BuildingChanged", RES_fnc_hBuildingChanged];
-addMissionEventHandler ["EntityKilled", RES_fnc_hEntityKilled];
