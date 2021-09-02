@@ -19,6 +19,8 @@ if ("RandomCivilians" call BIS_fnc_getParamValue == 1) then
 if ("SaveDestruction" call BIS_fnc_getParamValue == 1) then
 {
 	call RES_fnc_loadRuins;
+	call RES_fnc_loadDestruction;
 };
 
-addMissionEventHandler ["BuildingChanged", RES_fnc_buildingChanged];
+addMissionEventHandler ["BuildingChanged", RES_fnc_hBuildingChanged];
+addMissionEventHandler ["EntityKilled", RES_fnc_hEntityKilled];

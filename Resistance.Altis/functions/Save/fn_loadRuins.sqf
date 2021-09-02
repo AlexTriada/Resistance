@@ -1,18 +1,24 @@
 private _ruins = missionNamespace getVariable "buildings";
 
-private ["_terrainObject", "_ruinType", "_posWorld", "_vectorWorld"];
+private ["_buildingID", "_ruinType", "_ruinPosW", "_ruinVectorUpW", "_ruinVectorDirW", "_building"];
+
+[_ruins] remoteExec ["RES_fnc_hideObject", 0, true];
 
 {
-	_terrainObject = _x #0;
+	_buildingID = _x #0;
 	_ruinType = _x #1;
-	_posWorld = _x #2;
-	_vectorWorld = _x #3;
+	_ruinPosW = _x #2;
+	_ruinVectorUpW = _x #3;
+	_ruinVectorDirW = _x #4;
 
-	hideObjectGlobal _terrainObject;
-	_terrainObject enableSimulationGlobal false;
+	private _ruin = _ruinType createVehicle [0, 0, 0];
 
-	_buildObject = _ruinType createVehicle [0, 0, 0];
-	_buildObject setVectorDir _vectorWorld;
-	_buildObject setPosWorld _posWorld;
+	diag_log (["load ruin", _ruin] joinString " | ");
+
+	_ruin setVectorUp _ruinVectorUpW;
+	_ruin setVectorDir _ruinVectorDirW;
+	_ruin setPosWorld _ruinPosW;
+
+	_ruin setVariable ["buildingID", _buildingID];
 
 } forEach _ruins;
