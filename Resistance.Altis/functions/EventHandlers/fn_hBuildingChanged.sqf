@@ -3,8 +3,6 @@
 #define RUINS_VAR_NAME "buildings"
 #define BUILDING_ID_VAR_NAME "buildingID"
 
-params ["_previousObject", "_newObject", "_isRuin"];
-
 _this spawn
 {
 	params ["_previousObject", "_newObject", "_isRuin"];
