@@ -1,15 +1,18 @@
+#define NEW_GAME true
+
 if ("Debug" call BIS_fnc_getParamValue == 1) then
 {
-	[missionNamespace, "Debug", { diag_log (_this joinString " | "); }] call BIS_fnc_addScriptedEventHandler;
+	[missionNamespace, "Log", { diag_log (_this joinString " | "); }] call BIS_fnc_addScriptedEventHandler;
 };
 
-[] call RES_fnc_createSleepDogCycle;
+missionNamespace setVariable ["sleepDogs", []];
+[] spawn RES_fnc_createSleepDogCycle;
 
 if ("NewGame" call BIS_fnc_getParamValue == 1) then
 {
 	call RES_fnc_startNewGame;
 
-	call RES_fnc_saveGame;
+	[NEW_GAME] spawn RES_fnc_saveGame;
 }
 else
 {
@@ -19,11 +22,6 @@ else
 if ("RandomCivilians" call BIS_fnc_getParamValue == 1) then
 {
 	[] spawn RES_fnc_createAmbientCivilianCycle;
-};
-
-if ("SaveDestruction" call BIS_fnc_getParamValue == 1) then
-{
-	call RES_fnc_loadRuins;
 };
 
 addMissionEventHandler ["BuildingChanged", RES_fnc_hBuildingChanged];

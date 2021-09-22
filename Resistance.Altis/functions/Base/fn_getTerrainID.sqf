@@ -1,12 +1,14 @@
-private _object = param [0, objNull];
+params ["_object"];
 
 if (isNull _object) exitWith { -1 };
 
-private _objectStr = str _object;
-private _startID = (_objectStr find "#") + 2;
+private _strings = (str _object) splitString ' ';
 
-if (_startID < 0) exitWith { -1 };
+private _result = switch (count _strings) do
+{
+	case 2: { _strings #0 };
+	case 3: { _strings #1 };
+	default { '-1:' };
+};
 
-private _length = (_objectStr find ":") - _startID;
-
-parseNumber (_objectStr select [_startID, _length])
+parseNumber (_result select [0, (count _result) - 1])

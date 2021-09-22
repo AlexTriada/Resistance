@@ -1,34 +1,88 @@
-#define SLEEP_TIME 30
-#define RUINS_RECORD [_buildingID, _ruinType, _ruinPosition, _ruinVectorUp, _ruinVectorDir]
-#define RUINS_VAR_NAME "buildings"
-#define BUILDING_ID_VAR_NAME "buildingID"
+#define RUIN_SLEEP_TIME 5
+#define DAMAGED_SLEEP_TIME 0
+
+#define BUILDING 'building'
+
+#define IS_TERRAIN 'isTerrain'
+#define IS_EDEN 'isEden'
+
+#define DAMAGED_OBJECT 'damagedObject'
+
+params ['_previousObject', '_newObject', '_isRuin'];
+
+if (isObjectHidden _newObject) exitWith {};
+if (isObjectHidden _previousObject) exitWith { _previousObject setDamage [0, false]; };
+if (isNull _previousObject) exitWith {};
+if (isNull _newObject) exitWith {};
+
+private ['_building'];
+
+_building = _previousObject getVariable [BUILDING, _previousObject];
+_building setVariable [DAMAGED_OBJECT, _newObject];
+_previousObject setVariable [BUILDING, _building];
+_newObject setVariable [BUILDING, _building];
 
 _this spawn
 {
-	params ["_previousObject", "_newObject", "_isRuin"];
+	scopeName 'main';
 
-	if (!_isRuin) exitWith {};
+	params ['_previousObject', '_newObject', '_isRuin'];
 
-	private _ruinType = typeOf _newObject;
-	private _ruinPosition = getPosWorld _newObject;
-	private _ruinVectorUp = vectorUp _newObject;
-	private _ruinVectorDir = vectorDir _newObject;
+	if !(isNull _previousObject) then
+	{
+		_previousObject hideObjectGlobal true;
+		_previousObject allowDamage false;
+	};
 
-	private _buildingID = [_previousObject] call RES_fnc_getTerrainID;
-	private _ruins = missionNamespace getVariable RUINS_VAR_NAME;
-	_ruins pushBack RUINS_RECORD;
+	private ['_createdObject', '_position', '_hitPointDamages', '_building'];
 
-	sleep SLEEP_TIME;
+	toFixed 20;
 
-	private _ruin = createVehicle [_ruinType, [0, 0, 0], [], 0, "CAN_COLLIDE"];
+	if (_isRuin) then
+	{
+		sleep RUIN_SLEEP_TIME;
 
-	_previousObject hideObjectGlobal true;
-	_previousObject setDamage [0, false];
-	_previousObject enableSimulationGlobal false;
+		_building = _previousObject getVariable
+			[BUILDING, (nearestObjects [_previousObject, [], 5]) #1];
+	}
+	else
+	{
+		sleep DAMAGED_SLEEP_TIME;
 
-	_ruin setVectorUp _ruinVectorUp;
-	_ruin setVectorDir _ruinVectorDir;
-	_ruin setPosWorld _ruinPosition;
+		if (damage _newObject >= 1) then
+		{
+			sleep RUIN_SLEEP_TIME;
 
-	_ruin setVariable [BUILDING_ID_VAR_NAME, _buildingID];
+			if (_previousObject getVariable [IS_TERRAIN, true]) then
+			{
+				sleep DAMAGED_SLEEP_TIME;
+
+				_previousObject hideObjectGlobal true;
+				_previousObject enableSimulationGlobal false;
+				_previousObject setDamage [0, false];
+			}
+			else
+			{
+				deleteVehicle _previousObject;
+			};
+
+			breakOut "main";
+		};
+
+		_building = _previousObject getVariable [BUILDING, _previousObject];
+	};
+
+	_building setVariable [IS_EDEN, [_building] call RES_fnc_isEdenObject];
+
+	_createdObject = [_newObject, _isRuin] call RES_fnc_createClone;
+
+	_building setVariable [DAMAGED_OBJECT, _createdObject];
+	_createdObject setVariable [BUILDING, _building];
+
+	toFixed -1;
+
+	if (isNull _previousObject) exitWIth {};
+	if (_previousObject getVariable [IS_EDEN, false]) exitWith {};
+
+	deleteVehicle _previousObject;
 };

@@ -20,3 +20,8 @@ private ["_classCfg", "_classPropertiesCfgs"];
 	} forEach _classPropertiesCfgs;
 
 } forEach _classesCfgs;
+
+if ("SaveDestruction" call BIS_fnc_getParamValue == 1) then
+{
+	[] spawn RES_fnc_loadDamage;
+};
