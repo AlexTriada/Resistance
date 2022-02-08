@@ -1,14 +1,28 @@
+/* ---------------------------------------------------------------------------------------------- */
+/*                                Макросы и директивы препроцессора                               */
+/* ---------------------------------------------------------------------------------------------- */
+
 #define BUILDING 'building'
 #define DAMAGED_OBJECT 'damagedObject'
 #define DAMAGED_OBJECTS 'damagedObjects'
 #define DAMAGED_BUILDINGS 'damagedBuildings'
 
-waitUntil { sleep 0.1; BIS_fnc_init };
+/* ---------------------------------------------------------------------------------------------- */
+/*                                   Подготовка исходных данных                                   */
+/* ---------------------------------------------------------------------------------------------- */
+
+waitUntil { sleep 0.1; !(isNil BIS_fnc_init) };
 
 toFixed 20;
 
 private _damagedTerrainObjects = missionNamespace getVariable [DAMAGED_OBJECTS, []];
 private _damagedTerrainBuildings = missionNamespace getVariable [DAMAGED_BUILDINGS, []];
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                          Начало работы                                         */
+/* ---------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------ Обрабатываем объекты ------------------------------------ */
 
 private ["_object", "_objectID", "_damage", "_allHitPointsDamage"];
 
@@ -23,6 +37,8 @@ private ["_object", "_objectID", "_damage", "_allHitPointsDamage"];
 	[_object, _damage, _allHitPointsDamage] call RES_fnc_setDamage;
 
 } forEach _damagedTerrainObjects;
+
+/* ------------------------------------- Обрабатываем здания ------------------------------------ */
 
 private ["_building", "_buildingID", "_type", "_position", "_vectorUp", "_vectorDir", "_createdObject"];
 

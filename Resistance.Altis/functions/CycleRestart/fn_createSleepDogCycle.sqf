@@ -17,7 +17,7 @@ while { true } do
 			terminate _handle;
 			_sleepDogs deleteAt _i;
 
-			call compile format ['%1 spawn %2', _args, _scriptName];
+			_args spawn _scriptName;
 
 			continue;
 		};

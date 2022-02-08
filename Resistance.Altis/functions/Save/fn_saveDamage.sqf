@@ -1,27 +1,33 @@
+/* ---------------------------------------------------------------------------------------------- */
+/*                                Макросы и директивы препроцессора                               */
+/* ---------------------------------------------------------------------------------------------- */
+
 #define TYPES_TO_SAVE 	['BUILDING', 'HOUSE', 'LIGHTHOUSE', 'CHURCH', 'CHAPEL', 'VIEW-TOWER', 'POWER LINES', 'FUELSTATION', 'FENCE', 'WALL']
 #define DAMAGED_OBJECT 'damagedObject'
 #define DAMAGED_OBJECTS 'damagedObjects'
 #define DAMAGED_BUILDINGS 'damagedBuildings'
 
-toFixed 20;
-
-private ['_object', '_damage', '_allHitPointsDamage', '_damagedObject'];
-
-private _isNotDamaged =
-{
-	_damage == 0
-	&& { _allHitPointsDamage isEqualTo []
-	|| { (_allHitPointsDamage #2) findIf { _x != 0 } == -1 }}
-};
+/* ---------------------------------------------------------------------------------------------- */
+/*                                   Подготовка исходных данных                                   */
+/* ---------------------------------------------------------------------------------------------- */
 
 private _halfWorld = worldSize / 2;
 private _terrainObjects = nearestTerrainObjects [[_halfWorld, _halfWorld], TYPES_TO_SAVE, worldSize];
 
+/* ---------------------------------------------------------------------------------------------- */
+/*                                          Начало работы                                         */
+/* ---------------------------------------------------------------------------------------------- */
+
+toFixed 20;
+
 private _damagedTerrainObjects = [];
 private _damagedTerrainBuildings = [];
 
-private _saveObject =
+private "_object";
+private "_damagedObject";
+
 {
+	_object = _x;
 	_damagedObject = _object getVariable DAMAGED_OBJECT;
 
 	if (isNil '_damagedObject') then
@@ -31,7 +37,14 @@ private _saveObject =
 		_damage = damage _object;
 		_allHitPointsDamage = getAllHitPointsDamage _object;
 
-		if ([_object] call _isNotDamaged) exitWith {};
+		private _damage = 0;
+		private _allHitPointsDamage = [];
+
+		private _isNotDamaged =	_damage == 0
+			&& { count _allHitPointsDamage == 0
+			|| { (_allHitPointsDamage #2) findIf { _x != 0 } == -1 }};
+
+		if _isNotDamaged exitWith {};
 
 		_damagedTerrainObjects pushBack
 		[
@@ -54,12 +67,6 @@ private _saveObject =
 			getAllHitPointsDamage _damagedObject  	// 6
 		];
 	};
-};
-
-{
-	_object = _x;
-	call _saveObject;
-
 } forEach _terrainObjects;
 
 private _edenObjects = [];
@@ -70,9 +77,7 @@ private _edenObjects = [];
 	{
 		_object = _x;
 		call _saveObject
-
 	} forEach _edenObjects;
-
 } forEach TYPES_TO_SAVE;
 
 missionNamespace setVariable [DAMAGED_OBJECTS, _damagedTerrainObjects];

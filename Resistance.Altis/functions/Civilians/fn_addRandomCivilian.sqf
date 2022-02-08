@@ -1,12 +1,21 @@
-#define BUILDING_CFG missionConfigFile >> "Resistance" >> "Building"
-#define CIVILIAN_CFG missionConfigFile >> "Resistance" >> "Civilian"
+/* ---------------------------------------------------------------------------------------------- */
+/*                                      Макросы препроцессора                                     */
+/* ---------------------------------------------------------------------------------------------- */
 
-#define MILITARY_BUILDINGS_TYPES_CFG BUILDING_CFG >> "militaryTypes"
+#define MILITARY_BUILDINGS_TYPES_CFG missionConfigFile >> "Resistance" >> "Building" >> "militaryTypes"
+
+#define CIVILIAN_CFG missionConfigFile >> "Resistance" >> "Civilian"
 #define CIVILIAN_TYPES_CFG CIVILIAN_CFG >> "types"
 #define MAX_DISTANCE_TO_PLAYER_CFG CIVILIAN_CFG >> "maxDistanceToPlayer"
 #define MIN_DISTANCE_TO_PLAYER_CFG CIVILIAN_CFG >> "minDistanceToPlayer"
 #define MIN_DISTANCE_TO_CIVILIAN_CFG CIVILIAN_CFG >> "minDistanceToCivilian"
 #define CIV_GROUP_SIZE_CFG CIVILIAN_CFG >> "groupSize"
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                         Исходные данные                                        */
+/* ---------------------------------------------------------------------------------------------- */
+
+/* -------------------------------- получаем настройки из конфига ------------------------------- */
 
 private _militaryBuildingTypes = (MILITARY_BUILDINGS_TYPES_CFG) call BIS_fnc_getCfgDataArray;
 private _civilianTypes = (CIVILIAN_TYPES_CFG) call BIS_fnc_getCfgDataArray;
@@ -15,117 +24,97 @@ private _minDistanceToPlayer = (MIN_DISTANCE_TO_PLAYER_CFG) call BIS_fnc_getCfgD
 private _minDistanceToCivilian = (MIN_DISTANCE_TO_CIVILIAN_CFG) call BIS_fnc_getCfgData;
 private _groupUnitsSize = (CIV_GROUP_SIZE_CFG) call BIS_fnc_getCfgData;
 
-private _aliveCivilians = call RES_fnc_getAliveCivilians;
-private _headlessClients = entities "HeadlessClient_F";
-private _players = allPlayers - _headlessClients;
+/* ------------------------- получаем настройки из глобальных переменных ------------------------ */
+
 private _trafficRate = missionNamespace getVariable ["trafficRate", 0];
 private _maxUnits = missionNamespace getVariable ["maxUnits", 140];
 
-/* --------------------------------------- Private Methods -------------------------------------- */
+/* --------------------- получаем необходимые текущие данные для вычислений --------------------- */
 
-private _isEnoughCivilians =
+private _aliveCivilians = call RES_fnc_getAliveCivilians;
+private _headlessClients = entities "HeadlessClient_F";
+private _players = allPlayers - _headlessClients;
+
+/* ---------------------------------------------------------------------------------------------- */
+/*                                        Главная процедура                                       */
+/* ---------------------------------------------------------------------------------------------- */
+
+/* --------------------------- подсчитываем количество активных юнитов -------------------------- */
+
+private _allActiveUnitsCount =
 {
-	private _allActiveUnitsCount =
-	{
-		local _x && {
-		simulationEnabled _x && {
-		alive _x }}
-	} count allUnits;
+	local _x && {
+	simulationEnabled _x && {
+	alive _x }}
+} count allUnits;
 
-	count _aliveCivilians >= _trafficRate
-	|| { _allActiveUnitsCount >= _maxUnits }
-};
+/* --------------------- проверяем, достаточно ли юнитов или можно добавить --------------------- */
 
-private _isCorrectCivilBuilding =
+private _isEnoughCivilians = count _aliveCivilians >= _trafficRate
+	|| { _allActiveUnitsCount >= _maxUnits };
+
+/* ----------------------- если достаточно юнитов то выходим из процедуры ----------------------- */
+
+if _isEnoughCivilians exitWith {};
+
+/* --------------------- ищем здания, подходящие для спауна гражданских лиц --------------------- */
+
+private _buildings = [];
+private _nearestBuildings = [];
 {
-	params ["_building"];
+	_nearestBuildings = nearestTerrainObjects [_x, ["House"], _maxDistanceToPlayer];
 
-	!((typeOf _building) in _militaryBuildingTypes)
-	&& { count (_building buildingPos -1) > 0
-	&& { [_building, _players, _minDistanceToPlayer] call RES_fnc_isFarFromObjects
-	&& { [_building, _aliveCivilians, _minDistanceToCivilian] call RES_fnc_isFarFromObjects }}}
-};
+	if (count _nearestBuildings == 0) then { continue; };
 
-
-private _findPositionForNewCivilian =
-{
-	private _nearPlayerBuildings = [];
-	private _civilBuildings = [];
-
-	{
-		_nearPlayerBuildings = nearestTerrainObjects [_x, ["House"], _maxDistanceToPlayer];
-
-		if (count _nearPlayerBuildings == 0) then { continue; };
-
-		_correctPlayerCivilBuildings = _nearPlayerBuildings select { [_x] call _isCorrectCivilBuilding };
-
-		if (count _correctPlayerCivilBuildings == 0) then { continue; };
-
-		{ _civilBuildings pushBack _x; } forEach _correctPlayerCivilBuildings;
-	} forEach _players;
-
-	if (count _civilBuildings == 0) exitWith { [] };
-
-	private _building = selectRandom _civilBuildings;
-
-	selectRandom (_building buildingPos -1)
-};
-
-private _getCivilGroup =
-{
-	private _civilGroups = [];
-
-	{
-		_civilGroups pushBackUnique (group _x);
-	} forEach _aliveCivilians;
-
-	private "_group";
-
-	{
-		_group = _x;
-
-		if (count (units _x) < _groupUnitsSize) then { break; };
-	} forEach _civilGroups;
-
-	if (isNil "_group") then
-	{
-		createGroup civilian
-	}
-	else
-	{
-		_group
+	_nearestBuildings = _nearestBuildings select 
+	{ 
+		!((typeOf _x) in _militaryBuildingTypes)
+		&& { count (_x buildingPos -1) > 0
+		&& { [_x, _players, _minDistanceToPlayer] call RES_fnc_isFarFromObjects
+		&& { [_x, _aliveCivilians, _minDistanceToCivilian] call RES_fnc_isFarFromObjects }}}
 	};
-};
 
-private _createCivilian =
+	if (count _nearestBuildings == 0) then { continue; };
+
+	{ _buildings pushBack _x; } forEach _nearestBuildings;
+} forEach _players;
+
+/* ---------------------------- если нет зданий для спауна то выходим --------------------------- */
+
+if (count _buildings == 0) exitWith {};
+
+/* ------------------------------ ищем позицию для спауна в здании ------------------------------ */
+
+private _building = selectRandom _buildings;
+private _positionInBuilding = selectRandom (_building buildingPos -1);
+
+/* ----------------------- если нет позиций для спауна в здании то выходим ---------------------- */
+
+if (count _positionInBuilding == 0) exitWith {};
+
+/* -------------------------- выбираем случайный тип гражданского лица -------------------------- */
+
+private _type = selectRandom _civilianTypes;
+
+/* --------------------------- создаём массив из групп гражданских лиц -------------------------- */
+
+private _civilGroups = [];
 {
-	params ["_position"];
+	_civilGroups pushBackUnique (group _x);
+} forEach _aliveCivilians;
 
-	private _type = selectRandom _civilianTypes;
-	private _civilGroup = call _getCivilGroup;
+/* ----------------------- выбираем группу, в которую добавим гражданского ---------------------- */
 
-	private _civilian = [_civilGroup, _type, [0, 0, 0], [], 0, "NONE"] call RES_fnc_createUnit;
+private _civilGroup = grpNull;
+{
+	_civilGroup = _x;
 
-	_civilian setPosATL _position;
+	if (count (units _x) < _groupUnitsSize) then { break; };
+} forEach _civilGroups;
 
-	// [_civilian] spawn RES_fnc_initCivilian;
+if (isNull _civilGroup) then { _civilGroup = createGroup civilian; };
 
-	// if (_civilian == leader _civilian) then
-	// {
-	// 	[_civilian, "ambientCiv", "SAFE", "SPAWNED", "NOFOLLOW", "NOVEH2", "NOSHARE", "DoRelax"]
-	// 		execVM "scripts\UPSMON.sqf"
-	// };
-	// TODO delete UPSMON
+/* ------------------------------------ создаём гражданского ------------------------------------ */
 
-	_civilian
-};
-
-/* -------------------------------------------- Main -------------------------------------------- */
-
-if (call _isEnoughCivilians) exitWith {};
-
-private _civilianPosition = call _findPositionForNewCivilian;
-
-if (count _civilianPosition == 0) exitWith {};
-
-[_civilianPosition] call _createCivilian;
+private _civilian = [_civilGroup, _type, [0, 0, 0], [], 0, "NONE"] call RES_fnc_createUnit;
+_civilian setPosATL _positionInBuilding;
